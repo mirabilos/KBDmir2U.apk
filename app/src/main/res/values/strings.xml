@@ -97,11 +97,6 @@
     <!-- Menu item for launching Input method picker -->
     <string name="selectInputMethod">Select input method</string>
 
-    <!-- Preferences item for enabling to send user statistics to Google -->
-    <string name="prefs_enable_log">Enable user feedback</string>
-    <!-- Description for enabling to send user statistics to Google -->
-    <string name="prefs_description_log">Help improve this input method editor by automatically sending usage statistics and crash reports to Google.</string>
-
     <string name="pref_screen_feedback_title">Key feedback settings</string>
         
     <string name="pref_screen_view_title">Theme and label settings</string>
