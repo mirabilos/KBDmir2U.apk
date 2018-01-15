@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="org.pocketworkstation.pckeyboard" android:versionName="v1.39.3" android:versionCode="1039003">
+        package="org.pocketworkstation.pckeyboard">
 
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.READ_USER_DICTIONARY" />
@@ -8,14 +9,21 @@
     <uses-feature android:name="android.hardware.faketouch" android:required="false" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
 
+    <!-- removed in gradle branch -->
     <uses-sdk android:targetSdkVersion="19" android:minSdkVersion="8"></uses-sdk>
 
+    <!-- gradle removes backupAgent..killAfterRestore, adds next two -->
     <application android:label="@string/english_ime_name"
             android:allowBackup="true"
+
             android:backupAgent="LatinIMEBackupAgent"
             android:restoreAnyVersion="true"
             android:hardwareAccelerated="false"
             android:killAfterRestore="false"
+
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+
             android:icon="@drawable/icon">
 
         <service android:name="LatinIME"
