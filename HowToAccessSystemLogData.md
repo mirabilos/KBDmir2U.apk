@@ -1,6 +1,6 @@
 # Introduction #
 
-This page is intended for users who have encountered a crash bug that I can't reproduce, where I need log information from the device it happens on to figure out what's going on. See the [FAQ entry](http://code.google.com/p/hackerskeyboard/wiki/FrequentlyAskedQuestions#It_crashes._Please_fix.) for more detail.
+This page is intended for users who have encountered a crash bug that I can't reproduce, where I need log information from the device it happens on to figure out what's going on. See the [FAQ entry](https://github.com/mirabilos/KBDmir2U.apk/wiki/FrequentlyAskedQuestions#user-content-it-crashes-please-fix) for more detail.
 
 # Getting log information from the phone #
 

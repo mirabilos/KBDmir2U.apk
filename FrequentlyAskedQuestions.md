@@ -62,17 +62,6 @@ You can configure the gesture used for this in the keyboard's "Gesture and key a
 
 For the future, I do plan to add support for a dedicated "close keyboard" key, but this needs to be part of the general user-customizable layout support ([issue 13](https://github.com/mirabilos/KBDmir2U.apk/issues/13)) - there just isn't enough room in the current layouts to add this by default for everyone.
 
-## Where can I get a completion dictionary for my language? ##
-
-Several languages are available as add-on dictionary packages on the Play Store: https://play.google.com/store/apps/developer?id=Klaus+Weidner
-
-Additional dictionary packages are on the project download page: https://code.google.com/p/hackerskeyboard/downloads/list?q=label%3ADictionary
-
-Hacker's Keyboard is also able to use dictionaries from AnySoftKeyboard language packs, including [Arabic](https://play.google.com/store/apps/details?id=com.anysoftkeyboard.languagepack.arabic) and [Greek](https://play.google.com/store/apps/details?id=com.anysoftkeyboard.languagepack.greek): https://play.google.com/store/search?q=anysoftkeyboard+language&c=apps
-
-The dictionary should be available for use immediately after installing the package. The "Input language selection" setting menu shows "Dictionary available" for each languages where it found a usable dictionary.
-
-
 ## Where is the "|" (pipe) or "@" key? ##
 
 Many non-English layouts have more than two characters assigned to each key, typically accessed by using the AltGr key. On this keyboard, the additional characters are accessible by long-pressing keys in the usual locations. For example, on a German keyboard, long-press "<" to show a pop-up mini keyboard which includes "|". On a French AZERTY keyboard, long-press "à" or "é" to get "@".

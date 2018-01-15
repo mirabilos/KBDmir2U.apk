@@ -35,11 +35,7 @@ To install, get **[Hacker's Keyboard](https://f-droid.org/packages/org.pocketwor
 
 ## Additional resources ##
 
-See the **ReleaseNotes** for changes in the Play Store released versions, and follow the project on **[Google+](https://plus.google.com/100683221734778417816)** for news and updates including pre-release versions.
-
-Having problems? See the **UsersGuide** and **FrequentlyAskedQuestions**, and check the [issue tracker](https://github.com/klausw/hackerskeyboard/issues) for known bugs or filing new ones.
-
-Comments, requests, or contributions? Join the [discussion group](http://groups.google.com/group/hackerskeyboard/).
+Having problems? See the **UsersGuide** and **FrequentlyAskedQuestions**, and check the [upstream issue tracker](https://github.com/klausw/hackerskeyboard/issues) for known bugs but please don’t file new ones.
 
 Application developers: see KeyboardSupportInApplications if you want to enable the additional keys in your Android application, the same method also works for hardware USB or Bluetooth keyboards.
 
