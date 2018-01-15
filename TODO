@@ -1,0 +1,20 @@
+hint_mode hide (später)
+shift_lock_modifiers (yes?)
+caps_lock shift-lock
+
+prefs_feedback{
+	sound_on_keypress no
+	popup_on_keypress no (später)
+} pref_screen_feedback_title
+
+prefs_actions{
+	swipe (down=close, or no swiping at all)
+	vol_{up,down} (ignore)
+} pref_screen_actions_title
+
+chording no
+slide_keys yes(probably)
+
+cat altchar_settings: popup_content, long_press_duration obsolete
+
+[…]
