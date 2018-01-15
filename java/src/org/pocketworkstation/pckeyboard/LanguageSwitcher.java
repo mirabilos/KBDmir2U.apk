@@ -16,13 +16,13 @@
 
 package org.pocketworkstation.pckeyboard;
 
-import java.util.Locale;
-
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
+
+import java.util.Locale;
 
 /**
  * Keeps track of list of selected input languages and the current
@@ -218,11 +218,11 @@ public class LanguageSwitcher {
         SharedPreferencesCompat.apply(editor);
     }
 
-    static String toTitleCase(String s) {
+    static String toTitleCase(String s, Locale locale) {
         if (s.length() == 0) {
             return s;
         }
 
-        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
+        return s.toUpperCase(locale).charAt(0) + s.substring(1);
     }
 }

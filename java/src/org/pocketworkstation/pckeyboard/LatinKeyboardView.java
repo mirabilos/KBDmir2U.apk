@@ -248,6 +248,29 @@ public class LatinKeyboardView extends LatinKeyboardBaseView {
         return true;
     }
 
+    @Override
+    protected CharSequence adjustCase(CharSequence label) {
+        Keyboard keyboard = getKeyboard();
+        if (keyboard.isShifted()
+                && keyboard instanceof LatinKeyboard
+                && ((LatinKeyboard) keyboard).isAlphaKeyboard()
+                && !TextUtils.isEmpty(label) && label.length() < 3
+                && Character.isLowerCase(label.charAt(0))) {
+            return label.toString().toUpperCase(getKeyboardLocale());
+        }
+        return label;
+    }
+
+    public boolean setShiftLocked(boolean shiftLocked) {
+        Keyboard keyboard = getKeyboard();
+        if (keyboard instanceof LatinKeyboard) {
+            ((LatinKeyboard)keyboard).setShiftLocked(shiftLocked);
+            invalidateAllKeys();
+            return true;
+        }
+        return false;
+    }
+
     /**
      * This function checks to see if we need to handle any sudden jumps in the pointer location
      * that could be due to a multi-touch being treated as a move by the firmware or hardware.

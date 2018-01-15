@@ -119,7 +119,7 @@ public class InputLanguageSelection extends PreferenceActivity {
                 return "български език (Phonetic)";
             }
         } else {
-            return LanguageSwitcher.toTitleCase(l.getDisplayName(l));
+            return LanguageSwitcher.toTitleCase(l.getDisplayName(l), l);
         }
     }
     

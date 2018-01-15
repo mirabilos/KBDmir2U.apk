@@ -275,6 +275,7 @@ public class Suggest implements Dictionary.WordCallback {
                             mNextLettersFrequencies);
                 }
                 char currentChar = wordComposer.getTypedWord().charAt(0);
+                // TODO: Must pay attention to locale when changing case.
                 char currentCharUpper = Character.toUpperCase(currentChar);
                 int count = 0;
                 int bigramSuggestionSize = mBigramSuggestions.size();
@@ -467,6 +468,7 @@ public class Suggest implements Dictionary.WordCallback {
         StringBuilder sb = poolSize > 0 ? (StringBuilder) mStringPool.remove(poolSize - 1) 
                 : new StringBuilder(getApproxMaxWordLength());
         sb.setLength(0);
+        // TODO: Must pay attention to locale when changing case.
         if (mIsAllUpperCase) {
             sb.append(new String(word, offset, length).toUpperCase());
         } else if (mIsFirstCharCapitalized) {

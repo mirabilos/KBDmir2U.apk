@@ -807,6 +807,22 @@ public class LatinKeyboardBaseView extends View implements PointerTracker.UIProx
         return mKeyDetector.isProximityCorrectionEnabled();
     }
 
+    protected Locale getKeyboardLocale() {
+        if (mKeyboard instanceof LatinKeyboard) {
+            return ((LatinKeyboard)mKeyboard).getInputLocale();
+        } else {
+            return getContext().getResources().getConfiguration().locale;
+        }
+    }
+
+    protected CharSequence adjustCase(CharSequence label) {
+        if (mKeyboard.isShifted() && label != null && label.length() < 3
+                && Character.isLowerCase(label.charAt(0))) {
+            return label.toString().toUpperCase(getKeyboardLocale());
+        }
+        return label;
+    }
+
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // Round up a little
