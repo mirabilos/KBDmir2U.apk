@@ -57,15 +57,6 @@
             android:title="@string/title_key_layout_options"
             android:key="layout_settings">
 
-    <ListPreference
-            android:key="settings_key"
-            android:title="@string/prefs_settings_key"
-            android:persistent="true"
-            android:entryValues="@array/settings_key_modes_values"
-            android:entries="@array/settings_key_modes"
-            android:defaultValue="@string/settings_key_mode_auto"
-            />
-
     <PreferenceScreen
             android:title="@string/language_selection_title"
             android:summary="@string/language_selection_summary">

@@ -22,12 +22,4 @@
     <string name="word_separators">.\u0009\u0020,;:!?\n()[]*&amp;@{}/&lt;&gt;_+=|\u0022</string>
     <!-- Symbols that are sentence separators, for purposes of making it hug the last sentence. -->
     <string name="sentence_separators">.,!?);:</string>
-
-    <!-- Option values to show/hide the settings key in onscreen keyboard -->
-    <!-- Automatically decide to show or hide the settings key -->
-    <string name="settings_key_mode_auto" translatable="false">0</string>
-    <!-- Always show the settings key -->
-    <string name="settings_key_mode_always_show" translatable="false">1</string>
-    <!-- Always hide the settings key -->
-    <string name="settings_key_mode_always_hide" translatable="false">2</string>
 </resources>

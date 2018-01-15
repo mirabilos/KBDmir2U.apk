@@ -38,12 +38,10 @@ public class LatinIMESettings extends PreferenceActivity
         implements SharedPreferences.OnSharedPreferenceChangeListener,
         DialogInterface.OnDismissListener {
 
-    /* package */ static final String PREF_SETTINGS_KEY = "settings_key";
     static final String INPUT_CONNECTION_INFO = "input_connection_info";    
 
     private static final String TAG = "LatinIMESettings";
 
-    private ListPreference mSettingsKeyPreference;
     private Preference mInputConnectionInfo;
 
     private boolean mOkClicked = false;
@@ -54,7 +52,6 @@ public class LatinIMESettings extends PreferenceActivity
         // Use setFlagSecure(Context) to disable screenshots on the Activities
         //Keyboard.setFlagSecure(this); //TODO: make this a preference
         addPreferencesFromResource(R.xml.prefs);
-        mSettingsKeyPreference = (ListPreference) findPreference(PREF_SETTINGS_KEY);
         mInputConnectionInfo = (Preference) findPreference(INPUT_CONNECTION_INFO);
 
         SharedPreferences prefs = getPreferenceManager().getSharedPreferences();
@@ -162,9 +159,6 @@ public class LatinIMESettings extends PreferenceActivity
 
     private void updateSummaries() {
         Resources res = getResources();
-        mSettingsKeyPreference.setSummary(
-                res.getStringArray(R.array.settings_key_modes)
-                [mSettingsKeyPreference.findIndexOfValue(mSettingsKeyPreference.getValue())]);
 
         mInputConnectionInfo.setSummary(String.format("%s type=%s",
                 LatinIME.sKeyboardSettings.editorPackageName,

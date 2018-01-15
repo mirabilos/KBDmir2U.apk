@@ -57,27 +57,6 @@
     <!-- Description for hit_correction in landscape -->
     <string name="hit_correction_land_summary">Enable input error correction</string>
     
-    <!-- Option to show/hide the settings key -->
-    <string name="prefs_settings_key">Show settings key</string>
-    <!-- Array of the settings key mode values -->
-    <string-array name="settings_key_modes_values" translatable="false">
-        <item>@string/settings_key_mode_auto</item>
-        <item>@string/settings_key_mode_always_show</item>
-        <item>@string/settings_key_mode_always_hide</item>
-    </string-array>
-    <!-- Option to automatically decide to show/hide the settings key -->
-    <string name="settings_key_mode_auto_name">Automatic</string>
-    <!-- Option to always show the settings key -->
-    <string name="settings_key_mode_always_show_name">Always show</string>
-    <!-- Option to always hide the settings key -->
-    <string name="settings_key_mode_always_hide_name">Always hide</string>
-    <!-- Array of the settings key modes -->
-    <string-array name="settings_key_modes">
-        <item>@string/settings_key_mode_auto_name</item>
-        <item>@string/settings_key_mode_always_show_name</item>
-        <item>@string/settings_key_mode_always_hide_name</item>
-    </string-array>
-
     <!-- Tip to long press on keys -->
     <string name="tip_long_press">Hold a key down to see accents (ø, ö, etc.)</string>
     <!-- Tip to dismiss keyboard -->
