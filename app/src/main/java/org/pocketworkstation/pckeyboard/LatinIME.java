@@ -506,7 +506,6 @@ public class LatinIME extends InputMethodService implements
                 .getBoolean(R.bool.default_quick_fixes));
 
         updateAutoTextEnabled(saveLocale);
-        updateCorrectionMode();
         mWordSeparators = mResources.getString(R.string.word_separators);
         mSentenceSeparators = mResources
                 .getString(R.string.sentence_separators);
@@ -758,8 +757,6 @@ public class LatinIME extends InputMethodService implements
         mPredictionOnPref = (mCorrectionMode > 0 || mShowSuggestions);
         setCandidatesViewShownInternal(isCandidateStripVisible()
                 || mCompletionOn, false /* needsInputViewShown */);
-
-        updateCorrectionMode();
 
         inputView.setPreviewEnabled(mPopupOn);
         inputView.setProximityCorrectionEnabled(true);
@@ -1300,10 +1297,6 @@ public class LatinIME extends InputMethodService implements
                 && lastOne.charAt(0) == ASCII_SPACE) {
             ic.deleteSurroundingText(1, 0);
         }
-    }
-
-    public boolean addWordToDictionary(String word) {
-        return true;
     }
 
     private boolean isAlphabet(int code) {
@@ -3058,23 +3051,6 @@ public class LatinIME extends InputMethodService implements
         return mPopupOn;
     }
 
-    private void updateCorrectionMode() {
-        mAutoCorrectOn = (mAutoCorrectEnabled || mQuickFixes)
-                && !mInputTypeNoAutoCorrect && false;
-        mCorrectionMode = (mAutoCorrectOn && mAutoCorrectEnabled) ? Suggest.CORRECTION_FULL
-                : (mAutoCorrectOn ? Suggest.CORRECTION_BASIC
-                        : Suggest.CORRECTION_NONE);
-        mCorrectionMode = (mBigramSuggestionEnabled && mAutoCorrectOn && mAutoCorrectEnabled) ? Suggest.CORRECTION_FULL_BIGRAM
-                : mCorrectionMode;
-        if (suggestionsDisabled()) {
-            mAutoCorrectOn = false;
-            mCorrectionMode = Suggest.CORRECTION_NONE;
-        }
-        if (mSuggest != null) {
-            mSuggest.setCorrectionMode(mCorrectionMode);
-        }
-    }
-
     private void updateAutoTextEnabled(Locale systemLocale) {
         if (mSuggest == null)
             return;
@@ -3121,7 +3097,6 @@ public class LatinIME extends InputMethodService implements
                 & mShowSuggestions;
         // mBigramSuggestionEnabled = sp.getBoolean(
         // PREF_BIGRAM_SUGGESTIONS, true) & mShowSuggestions;
-        updateCorrectionMode();
         updateAutoTextEnabled(mResources.getConfiguration().locale);
         mLanguageSwitcher.loadLocales(sp);
         mAutoCapActive = mAutoCapPref && mLanguageSwitcher.allowAutoCap();
