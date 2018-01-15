@@ -16,8 +16,6 @@
 
 package org.pocketworkstation.pckeyboard;
 
-import org.pocketworkstation.pckeyboard.Dictionary.DataType;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import java.util.List;
@@ -59,9 +57,6 @@ public class LatinImeLogger implements SharedPreferences.OnSharedPreferenceChang
     }
 
     public static void onStartSuggestion(CharSequence previousWords) {
-    }
-
-    public static void onAddSuggestedWord(String word, int typeId, DataType dataType) {
     }
 
     public static void onSetKeyboard(Keyboard kb) {

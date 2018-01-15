@@ -251,9 +251,6 @@
     <!-- Add to dictionary hint -->
     <string name="hint_add_to_dictionary">\u2190 Touch again to save</string>
     
-    <!-- Inform the user that a particular language has an available dictionary -->
-    <string name="has_dictionary">Dictionary available</string>
-
     <!-- Preferences item for enabling to send user statistics to Google -->
     <string name="prefs_enable_log">Enable user feedback</string>
     <!-- Description for enabling to send user statistics to Google -->

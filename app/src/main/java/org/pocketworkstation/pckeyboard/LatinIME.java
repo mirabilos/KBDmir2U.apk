@@ -126,10 +126,8 @@ public class LatinIME extends InputMethodService implements
     static final String PREF_VOL_UP = "pref_vol_up";
     static final String PREF_VOL_DOWN = "pref_vol_down";
 
-    private static final int MSG_UPDATE_SUGGESTIONS = 0;
     private static final int MSG_START_TUTORIAL = 1;
     private static final int MSG_UPDATE_SHIFT_STATE = 2;
-    private static final int MSG_UPDATE_OLD_SUGGESTIONS = 4;
 
     // How many continuous deletes at which to start deleting at a higher speed.
     private static final int DELETE_ACCELERATE_AT = 20;
@@ -154,11 +152,6 @@ public class LatinIME extends InputMethodService implements
 
     /* package */KeyboardSwitcher mKeyboardSwitcher;
 
-    private UserDictionary mUserDictionary;
-    private UserBigramDictionary mUserBigramDictionary;
-    //private ContactsDictionary mContactsDictionary;
-    private AutoDictionary mAutoDictionary;
-
     private Resources mResources;
 
     private String mInputLocale;
@@ -173,7 +166,6 @@ public class LatinIME extends InputMethodService implements
     private boolean mPredictionOnForMode;
     private boolean mPredictionOnPref;    
     private boolean mCompletionOn;
-    private boolean mHasDictionary;
     private boolean mAutoSpace;
     private boolean mJustAddedAutoSpace;
     private boolean mAutoCorrectEnabled;
@@ -328,12 +320,6 @@ public class LatinIME extends InputMethodService implements
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-            case MSG_UPDATE_SUGGESTIONS:
-                updateSuggestions();
-                break;
-            case MSG_UPDATE_OLD_SUGGESTIONS:
-                setOldSuggestions();
-                break;
             case MSG_START_TUTORIAL:
                 if (mTutorial == null) {
                     if (mKeyboardSwitcher.getInputView().isShown()) {
@@ -503,48 +489,6 @@ public class LatinIME extends InputMethodService implements
         return !(mSuggestionsInLandscape || isPortrait());
     }
 
-    /**
-     * Loads a dictionary or multiple separated dictionary
-     *
-     * @return returns array of dictionary resource ids
-     */
-    /* package */static int[] getDictionary(Resources res) {
-        String packageName = LatinIME.class.getPackage().getName();
-        XmlResourceParser xrp = res.getXml(R.xml.dictionary);
-        ArrayList<Integer> dictionaries = new ArrayList<Integer>();
-
-        try {
-            int current = xrp.getEventType();
-            while (current != XmlResourceParser.END_DOCUMENT) {
-                if (current == XmlResourceParser.START_TAG) {
-                    String tag = xrp.getName();
-                    if (tag != null) {
-                        if (tag.equals("part")) {
-                            String dictFileName = xrp.getAttributeValue(null,
-                                    "name");
-                            dictionaries.add(res.getIdentifier(dictFileName,
-                                    "raw", packageName));
-                        }
-                    }
-                }
-                xrp.next();
-                current = xrp.getEventType();
-            }
-        } catch (XmlPullParserException e) {
-            Log.e(TAG, "Dictionary XML parsing failure");
-        } catch (IOException e) {
-            Log.e(TAG, "Dictionary XML IOException");
-        }
-
-        int count = dictionaries.size();
-        int[] dict = new int[count];
-        for (int i = 0; i < count; i++) {
-            dict[i] = dictionaries.get(i);
-        }
-
-        return dict;
-    }
-
     private void initSuggest(String locale) {
         mInputLocale = locale;
 
@@ -561,30 +505,7 @@ public class LatinIME extends InputMethodService implements
         mQuickFixes = sp.getBoolean(PREF_QUICK_FIXES, getResources()
                 .getBoolean(R.bool.default_quick_fixes));
 
-        int[] dictionaries = getDictionary(orig);
-        mSuggest = new Suggest(this, dictionaries);
         updateAutoTextEnabled(saveLocale);
-        if (mUserDictionary != null)
-            mUserDictionary.close();
-        mUserDictionary = new UserDictionary(this, mInputLocale);
-        //if (mContactsDictionary == null) {
-        //    mContactsDictionary = new ContactsDictionary(this,
-        //            Suggest.DIC_CONTACTS);
-        //}
-        if (mAutoDictionary != null) {
-            mAutoDictionary.close();
-        }
-        mAutoDictionary = new AutoDictionary(this, this, mInputLocale,
-                Suggest.DIC_AUTO);
-        if (mUserBigramDictionary != null) {
-            mUserBigramDictionary.close();
-        }
-        mUserBigramDictionary = new UserBigramDictionary(this, this,
-                mInputLocale, Suggest.DIC_USER);
-        mSuggest.setUserBigramDictionary(mUserBigramDictionary);
-        mSuggest.setUserDictionary(mUserDictionary);
-        //mSuggest.setContactsDictionary(mContactsDictionary);
-        mSuggest.setAutoDictionary(mAutoDictionary);
         updateCorrectionMode();
         mWordSeparators = mResources.getString(R.string.word_separators);
         mSentenceSeparators = mResources
@@ -597,12 +518,6 @@ public class LatinIME extends InputMethodService implements
 
     @Override
     public void onDestroy() {
-        if (mUserDictionary != null) {
-            mUserDictionary.close();
-        }
-        //if (mContactsDictionary != null) {
-        //    mContactsDictionary.close();
-        //}
         unregisterReceiver(mReceiver);
         if (mNotificationReceiver != null) {
         	unregisterReceiver(mNotificationReceiver);
@@ -843,10 +758,6 @@ public class LatinIME extends InputMethodService implements
         mPredictionOnPref = (mCorrectionMode > 0 || mShowSuggestions);
         setCandidatesViewShownInternal(isCandidateStripVisible()
                 || mCompletionOn, false /* needsInputViewShown */);
-        updateSuggestions();
-
-        // If the dictionary is not big enough, don't auto correct
-        mHasDictionary = mSuggest.hasMainDictionary();
 
         updateCorrectionMode();
 
@@ -880,11 +791,6 @@ public class LatinIME extends InputMethodService implements
 
             mLastSelectionStart = et.startOffset + et.selectionStart;
             mLastSelectionEnd = et.startOffset + et.selectionEnd;
-
-            // Then look for possible corrections in a delayed fashion
-            if (!TextUtils.isEmpty(et.text) && isCursorTouchingWord()) {
-                postUpdateOldSuggestions();
-            }
         }
     }
 
@@ -898,18 +804,11 @@ public class LatinIME extends InputMethodService implements
         if (mKeyboardSwitcher.getInputView() != null) {
             mKeyboardSwitcher.getInputView().closing();
         }
-        if (mAutoDictionary != null)
-            mAutoDictionary.flushPendingWrites();
-        if (mUserBigramDictionary != null)
-            mUserBigramDictionary.flushPendingWrites();
     }
 
     @Override
     public void onFinishInputView(boolean finishingInput) {
         super.onFinishInputView(finishingInput);
-        // Remove penging messages related to update suggestions
-        mHandler.removeMessages(MSG_UPDATE_SUGGESTIONS);
-        mHandler.removeMessages(MSG_UPDATE_OLD_SUGGESTIONS);
     }
 
     @Override
@@ -937,7 +836,6 @@ public class LatinIME extends InputMethodService implements
                 && (newSelStart != candidatesEnd || newSelEnd != candidatesEnd) && mLastSelectionStart != newSelStart)) {
             mComposing.setLength(0);
             mPredicting = false;
-            postUpdateSuggestions();
             TextEntryState.reset();
             InputConnection ic = getCurrentInputConnection();
             if (ic != null) {
@@ -974,7 +872,7 @@ public class LatinIME extends InputMethodService implements
                         && (newSelStart < newSelEnd - 1 || (!mPredicting))) {
                     if (isCursorTouchingWord()
                             || mLastSelectionStart < mLastSelectionEnd) {
-                        postUpdateOldSuggestions();
+					/* nothing */;
                     } else {
                         abortCorrection(false);
                         // Show the punctuation suggestions list if the current
@@ -1249,10 +1147,7 @@ public class LatinIME extends InputMethodService implements
                 } else {
                     TextEntryState.acceptedTyped(mComposing);
                 }
-                addToDictionaries(mComposing,
-                        AutoDictionary.FREQUENCY_FOR_TYPED);
             }
-            updateSuggestions();
         }
     }
 
@@ -1408,11 +1303,6 @@ public class LatinIME extends InputMethodService implements
     }
 
     public boolean addWordToDictionary(String word) {
-        mUserDictionary.addWord(word, 128);
-        // Suggestion strip should be updated after the operation of adding word
-        // to the
-        // user dictionary
-        postUpdateSuggestions();
         return true;
     }
 
@@ -2069,7 +1959,6 @@ public class LatinIME extends InputMethodService implements
                 if (mComposing.length() == 0) {
                     mPredicting = false;
                 }
-                postUpdateSuggestions();
             } else {
                 ic.deleteSurroundingText(1, 0);
             }
@@ -2255,7 +2144,6 @@ public class LatinIME extends InputMethodService implements
                 }
                 ic.setComposingText(mComposing, 1);
             }
-            postUpdateSuggestions();
         } else {
             sendModifiableKeyChar((char) primaryCode);
         }
@@ -2267,14 +2155,6 @@ public class LatinIME extends InputMethodService implements
     }
 
     private void handleSeparator(int primaryCode) {
-
-        // Should dismiss the "Touch again to save" message when handling
-        // separator
-        if (mCandidateView != null
-                && mCandidateView.dismissAddToDictionaryHint()) {
-            postUpdateSuggestions();
-        }
-
         boolean pickedDefault = false;
         // Handle separator
         InputConnection ic = getCurrentInputConnection();
@@ -2294,7 +2174,7 @@ public class LatinIME extends InputMethodService implements
                     && (mJustRevertedSeparator == null
                             || mJustRevertedSeparator.length() == 0
                             || mJustRevertedSeparator.charAt(0) != primaryCode)) {
-                pickedDefault = pickDefaultSuggestion();
+                pickedDefault = false;
                 // Picked the suggestion by the space key. We consider this
                 // as "added an auto space" in autocomplete mode, but as manually
                 // typed space in "quick fixes" mode.
@@ -2368,18 +2248,6 @@ public class LatinIME extends InputMethodService implements
         mWordHistory.add(entry);
     }
 
-    private void postUpdateSuggestions() {
-        mHandler.removeMessages(MSG_UPDATE_SUGGESTIONS);
-        mHandler.sendMessageDelayed(mHandler
-                .obtainMessage(MSG_UPDATE_SUGGESTIONS), 100);
-    }
-
-    private void postUpdateOldSuggestions() {
-        mHandler.removeMessages(MSG_UPDATE_OLD_SUGGESTIONS);
-        mHandler.sendMessageDelayed(mHandler
-                .obtainMessage(MSG_UPDATE_OLD_SUGGESTIONS), 300);
-    }
-
     private boolean isPredictionOn() {
         return mPredictionOnForMode && isPredictionWanted();
     }
@@ -2405,7 +2273,6 @@ public class LatinIME extends InputMethodService implements
                 }
                 setCandidatesViewShown(true);
                 updateInputViewShown();
-                postUpdateSuggestions();
             }
         });
     }
@@ -2427,22 +2294,6 @@ public class LatinIME extends InputMethodService implements
             mCandidateView.setSuggestions(suggestions, completions,
                     typedWordValid, haveMinimalSuggestion);
         }
-    }
-
-    private void updateSuggestions() {
-        LatinKeyboardView inputView = mKeyboardSwitcher.getInputView();
-        ((LatinKeyboard) inputView.getKeyboard()).setPreferredLetters(null);
-
-        // Check if we have a suggestion engine attached.
-        if ((mSuggest == null || !isPredictionOn())) {
-            return;
-        }
-        
-        if (!mPredicting) {
-            setNextSuggestions();
-            return;
-        }
-        showSuggestions(mWord);
     }
 
     private List<CharSequence> getTypedSuggestions(WordComposer word) {
@@ -2510,24 +2361,6 @@ public class LatinIME extends InputMethodService implements
         setCandidatesViewShown(isCandidateStripVisible() || mCompletionOn);
     }
 
-    private boolean pickDefaultSuggestion() {
-        // Complete any pending candidate query first
-        if (mHandler.hasMessages(MSG_UPDATE_SUGGESTIONS)) {
-            mHandler.removeMessages(MSG_UPDATE_SUGGESTIONS);
-            updateSuggestions();
-        }
-        if (mBestWord != null && mBestWord.length() > 0) {
-            TextEntryState.acceptedDefault(mWord.getTypedWord(), mBestWord);
-            mJustAccepted = true;
-            pickSuggestion(mBestWord, false);
-            // Add the word to the auto dictionary if it's not a known word
-            addToDictionaries(mBestWord, AutoDictionary.FREQUENCY_FOR_TYPED);
-            return true;
-
-        }
-        return false;
-    }
-
     public void pickSuggestionManually(int index, CharSequence suggestion) {
         List<CharSequence> suggestions = mCandidateView.getSuggestions();
 
@@ -2572,12 +2405,6 @@ public class LatinIME extends InputMethodService implements
         }
         mJustAccepted = true;
         pickSuggestion(suggestion, correcting);
-        // Add the word to the auto dictionary if it's not a known word
-        if (index == 0) {
-            addToDictionaries(suggestion, AutoDictionary.FREQUENCY_FOR_PICKED);
-        } else {
-            addToBigramDictionary(suggestion, 1);
-        }
         LatinImeLogger.logOnManualSuggestion(mComposing.toString(), suggestion
                 .toString(), index, suggestions);
         TextEntryState.acceptedSuggestion(mComposing.toString(), suggestion);
@@ -2604,7 +2431,6 @@ public class LatinIME extends InputMethodService implements
             // In case the cursor position doesn't change, make sure we show the
             // suggestions again.
             clearSuggestions();
-            postUpdateOldSuggestions();
         }
         if (showingAddToDictionaryHint) {
             mCandidateView.showAddToDictionaryHint(suggestion);
@@ -2701,74 +2527,8 @@ public class LatinIME extends InputMethodService implements
         return false;
     }
 
-    private void setOldSuggestions() {
-        if (mCandidateView != null
-                && mCandidateView.isShowingAddToDictionaryHint()) {
-            return;
-        }
-        InputConnection ic = getCurrentInputConnection();
-        if (ic == null)
-            return;
-        if (!mPredicting) {
-            // Extract the selected or touching text
-            EditingUtil.SelectedWord touching = EditingUtil
-                    .getWordAtCursorOrSelection(ic, mLastSelectionStart,
-                            mLastSelectionEnd, mWordSeparators);
-
-            abortCorrection(true);
-            setNextSuggestions(); // Show the punctuation suggestions list
-        } else {
-            abortCorrection(true);
-        }
-    }
-
     private void setNextSuggestions() {
         setSuggestions(mSuggestPuncList, false, false, false);
-    }
-
-    private void addToDictionaries(CharSequence suggestion, int frequencyDelta) {
-        checkAddToDictionary(suggestion, frequencyDelta, false);
-    }
-
-    private void addToBigramDictionary(CharSequence suggestion,
-            int frequencyDelta) {
-        checkAddToDictionary(suggestion, frequencyDelta, true);
-    }
-
-    /**
-     * Adds to the UserBigramDictionary and/or AutoDictionary
-     *
-     * @param addToBigramDictionary
-     *            true if it should be added to bigram dictionary if possible
-     */
-    private void checkAddToDictionary(CharSequence suggestion,
-            int frequencyDelta, boolean addToBigramDictionary) {
-        if (suggestion == null || suggestion.length() < 1)
-            return;
-        // Only auto-add to dictionary if auto-correct is ON. Otherwise we'll be
-        // adding words in situations where the user or application really
-        // didn't
-        // want corrections enabled or learned.
-        if (!(mCorrectionMode == Suggest.CORRECTION_FULL || mCorrectionMode == Suggest.CORRECTION_FULL_BIGRAM)) {
-            return;
-        }
-        if (suggestion != null) {
-            if (!addToBigramDictionary
-                    && mAutoDictionary.isValidWord(suggestion)
-                    || (!mSuggest.isValidWord(suggestion.toString()) && !mSuggest
-                            .isValidWord(suggestion.toString().toLowerCase()))) {
-                mAutoDictionary.addWord(suggestion.toString(), frequencyDelta);
-            }
-
-            if (mUserBigramDictionary != null) {
-                CharSequence prevWord = EditingUtil.getPreviousWord(
-                        getCurrentInputConnection(), mSentenceSeparators);
-                if (!TextUtils.isEmpty(prevWord)) {
-                    mUserBigramDictionary.addBigrams(prevWord.toString(),
-                            suggestion.toString());
-                }
-            }
-        }
     }
 
     private boolean isCursorTouchingWord() {
@@ -2811,7 +2571,6 @@ public class LatinIME extends InputMethodService implements
             ic.deleteSurroundingText(toDelete, 0);
             ic.setComposingText(mComposing, 1);
             TextEntryState.backspace();
-            postUpdateSuggestions();
         } else {
             sendDownUpKeyEvents(KeyEvent.KEYCODE_DEL);
             mJustRevertedSeparator = null;
@@ -3291,12 +3050,6 @@ public class LatinIME extends InputMethodService implements
         mTutorial = null;
     }
 
-    /* package */void promoteToUserDictionary(String word, int frequency) {
-        if (mUserDictionary.isValidWord(word))
-            return;
-        mUserDictionary.addWord(word, frequency);
-    }
-
     /* package */WordComposer getCurrentWord() {
         return mWord;
     }
@@ -3306,10 +3059,8 @@ public class LatinIME extends InputMethodService implements
     }
 
     private void updateCorrectionMode() {
-        mHasDictionary = mSuggest != null ? mSuggest.hasMainDictionary()
-                : false;
         mAutoCorrectOn = (mAutoCorrectEnabled || mQuickFixes)
-                && !mInputTypeNoAutoCorrect && mHasDictionary;
+                && !mInputTypeNoAutoCorrect && false;
         mCorrectionMode = (mAutoCorrectOn && mAutoCorrectEnabled) ? Suggest.CORRECTION_FULL
                 : (mAutoCorrectOn ? Suggest.CORRECTION_BASIC
                         : Suggest.CORRECTION_NONE);
