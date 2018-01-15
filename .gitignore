@@ -5,8 +5,8 @@ java/gen/
 java/hackerskeyboard.iml
 java/libs/*/
 java/local.properties
-java/private.properties
 java/obj/
+java/private.properties
 out/
 tests/gen/
 tests/tests.iml
