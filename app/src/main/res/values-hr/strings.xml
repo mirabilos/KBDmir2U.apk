@@ -83,39 +83,16 @@
     <string name="label_phone_key" msgid="4275497665515080551">"123"</string>
     <string name="label_alpha_key" msgid="8864943487292437456">"ABC"</string>
     <string name="label_alt_key" msgid="2846315350346694811">"ALT"</string>
-    <string name="voice_warning_title" msgid="4419354150908395008">"Glasovni ulaz"</string>
-    <string name="voice_warning_locale_not_supported" msgid="637923019716442333">"Vaš jezik trenutno nije podržan za glasovni unos, ali radi za engleski."</string>
-    <string name="voice_warning_may_not_understand" msgid="4611518823070986445">"Glasovni unos je pokusna značajka koja koristi Googleovo umreženo prepoznavanje govora."</string>
-    <string name="voice_warning_how_to_turn_off" msgid="5652369578498701761">"Za isključivanje glasovnog unosa idite na postavke tipkovnice."</string>
-    <string name="voice_hint_dialog_message" msgid="6892342981545727994">"Da biste koristili glasovni unos pritisnite gumb mikrofona ili kliznite prstom preko tipkovnice na zaslonu."</string>
-    <string name="voice_listening" msgid="467518160751321844">"Govorite sad"</string>
-    <string name="voice_working" msgid="6666937792815731889">"Obrada"</string>
-    <string name="voice_initializing" msgid="661962047129906646"></string>
-    <string name="voice_error" msgid="5140896300312186162">"Pogreška. Pokušajte ponovo."</string>
-    <string name="voice_network_error" msgid="6649556447401862563">"Spajanje nije bilo moguće"</string>
-    <string name="voice_too_much_speech" msgid="5746973620134227376">"Pogreška, predugi govor."</string>
-    <string name="voice_audio_error" msgid="5072707727016414454">"Problem sa zvukom"</string>
-    <string name="voice_server_error" msgid="7807129913977261644">"Pogreška na poslužitelju"</string>
-    <string name="voice_speech_timeout" msgid="8461817525075498795">"Nije se čuo govor"</string>
-    <string name="voice_no_match" msgid="4285117547030179174">"Nisu pronađeni rezultati"</string>
-    <string name="voice_not_installed" msgid="5552450909753842415">"Glasovno pretraživanje nije instalirano"</string>
-    <string name="voice_swipe_hint" msgid="6943546180310682021"><b>"Savjet:"</b>" Prijeđite preko tipkovnice pa govorite"</string>
-    <string name="voice_punctuation_hint" msgid="1611389463237317754"><b>"Savjet:"</b>" Sljedeći put pokušajte izgovoriti znakove interpunkcije poput \"točka, \"zarez\" ili \"upitnik\"."</string>
     <string name="cancel" msgid="6830980399865683324">"Odustani"</string>
     <string name="ok" msgid="7898366843681727667">"U redu"</string>
-    <string name="voice_input" msgid="2466640768843347841">"Glasovni ulaz"</string>
-  <string-array name="voice_input_modes">
     <item msgid="1349082139076086774">"Na glavnoj tipkovnici"</item>
     <item msgid="8529385602829095903">"Na tipkovnici sa simbolima"</item>
     <item msgid="7283103513488381103">"Isključeno"</item>
   </string-array>
-  <string-array name="voice_input_modes_summary">
     <item msgid="554248625705084903">"Mikrofon na glavnoj tipkovnici"</item>
     <item msgid="6907837061058876770">"Mikrofon na tipkovnici sa simbolima"</item>
     <item msgid="3664304608587798036">"Glasovni unos je onemogućen"</item>
   </string-array>
-    <string name="auto_submit" msgid="9151008027068358518">"Automatski pošalji nakon glasovnog unosa"</string>
-    <string name="auto_submit_summary" msgid="4961875269610384226">"Automatski se pritišće \"Enter\" kad pretražujete ili idete na sljedeće polje."</string>
     <string name="open_the_keyboard" msgid="2215920976029260466"><font size="17"><b>"Otvaranje tipkovnice"\n</b></font><font size="3">\n</font>"Dodirnite bilo koje tekstualno polje"</string>
     <string name="close_the_keyboard" msgid="6251022259044940103"><font size="17"><b>"Zatvaranje tipkovnice"\n</b></font><font size="3">\n</font>"Pritisnite tipku \"Natrag\"."</string>
     <string name="touch_and_hold" msgid="6154166367273010534"><font size="17"><b>"Dodirnite i držite tipku da biste vidjeli opcije"\n</b></font><font size="3">\n</font>"Pristup interpunkciji i naglascima."</string>
@@ -136,5 +113,4 @@
     <string name="prefs_enable_recorrection_summary" msgid="1056068922330206170">"Dodirnite unesene riječi radi ispravka"</string>
     <string name="keyboard_layout" msgid="437433231038683666">"Tema tipkovnice"</string>
     <string name="subtype_mode_keyboard" msgid="2242090416595003881">"tipkovnica"</string>
-    <string name="subtype_mode_voice" msgid="4394113125441627771">"glas"</string>
 </resources>

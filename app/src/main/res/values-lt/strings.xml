@@ -83,39 +83,16 @@
     <string name="label_phone_key" msgid="4275497665515080551">"123"</string>
     <string name="label_alpha_key" msgid="8864943487292437456">"ABC"</string>
     <string name="label_alt_key" msgid="2846315350346694811">"ALT"</string>
-    <string name="voice_warning_title" msgid="4419354150908395008">"Balso įvestis"</string>
-    <string name="voice_warning_locale_not_supported" msgid="637923019716442333">"Šiuo metu balso įvestis jūsų kompiuteryje nepalaikoma, bet ji veikia anglų k."</string>
-    <string name="voice_warning_may_not_understand" msgid="4611518823070986445">"Balso įvestis – tai eksperimentinė funkcija, naudojanti „Google“ tinklo kalbos atpažinimą."</string>
-    <string name="voice_warning_how_to_turn_off" msgid="5652369578498701761">"Jei norite išjungti balso įvestį, eikite į klaviatūros nustatymus."</string>
-    <string name="voice_hint_dialog_message" msgid="6892342981545727994">"Jei norite naudoti balso įvestį, paspauskite mikrofono mygtuką arba pirštu slyskite ekranine klaviatūra."</string>
-    <string name="voice_listening" msgid="467518160751321844">"Kalbėkite dabar"</string>
-    <string name="voice_working" msgid="6666937792815731889">"Veikia"</string>
-    <string name="voice_initializing" msgid="661962047129906646"></string>
-    <string name="voice_error" msgid="5140896300312186162">"Klaida. Bandykite dar kartą."</string>
-    <string name="voice_network_error" msgid="6649556447401862563">"Nepavyko prijungti"</string>
-    <string name="voice_too_much_speech" msgid="5746973620134227376">"Klaida, per daug kalbos."</string>
-    <string name="voice_audio_error" msgid="5072707727016414454">"Problema su garsu"</string>
-    <string name="voice_server_error" msgid="7807129913977261644">"Serverio klaida"</string>
-    <string name="voice_speech_timeout" msgid="8461817525075498795">"Negirdima jokia kalba"</string>
-    <string name="voice_no_match" msgid="4285117547030179174">"Atitikmenų nerasta"</string>
-    <string name="voice_not_installed" msgid="5552450909753842415">"Balso paieška neįdiegta"</string>
-    <string name="voice_swipe_hint" msgid="6943546180310682021"><b>"Užuomina:"</b>" perbraukite klaviatūra, kad galėtumėte kalbėti"</string>
-    <string name="voice_punctuation_hint" msgid="1611389463237317754"><b>"Užuomina:"</b>" kitą kartą pabandykite sakyti skyrybos ženklų pavadinimus, pvz., „taškas“, „kablelis“ arba „klaustukas“."</string>
     <string name="cancel" msgid="6830980399865683324">"Atšaukti"</string>
     <string name="ok" msgid="7898366843681727667">"Gerai"</string>
-    <string name="voice_input" msgid="2466640768843347841">"Balso įvestis"</string>
-  <string-array name="voice_input_modes">
     <item msgid="1349082139076086774">"Pagrindinėje klaviatūroje"</item>
     <item msgid="8529385602829095903">"Simbolių klaviatūroje"</item>
     <item msgid="7283103513488381103">"Išjungta"</item>
   </string-array>
-  <string-array name="voice_input_modes_summary">
     <item msgid="554248625705084903">"Pagrindinės klaviatūros mikrofonas"</item>
     <item msgid="6907837061058876770">"Mikrofonas simbolių klaviatūroje"</item>
     <item msgid="3664304608587798036">"Balso įvestis išjungta"</item>
   </string-array>
-    <string name="auto_submit" msgid="9151008027068358518">"Automatiškai pateikti po balso"</string>
-    <string name="auto_submit_summary" msgid="4961875269610384226">"Automatiškai spausti „Įvesti“ ieškant ar einant į kitą lauką."</string>
     <string name="open_the_keyboard" msgid="2215920976029260466"><font size="17"><b>"Atidarykite klaviatūrą"\n</b></font><font size="3">\n</font>"Palieskite bet kurį teksto lauką."</string>
     <string name="close_the_keyboard" msgid="6251022259044940103"><font size="17"><b>"Uždarykite klaviatūrą"\n</b></font><font size="3">\n</font>"Paspauskite klavišą „Atgal“."</string>
     <string name="touch_and_hold" msgid="6154166367273010534"><font size="17"><b>"Palieskite ir laikykite klavišą, kad pamatytumėte parinktis"\n</b></font><font size="3">\n</font>"Pasiekite skyrybos ženklus ir kirčius."</string>
@@ -136,5 +113,4 @@
     <string name="prefs_enable_recorrection_summary" msgid="1056068922330206170">"Jei norite ištaisyti įvestus žodžius, palieskite juos"</string>
     <string name="keyboard_layout" msgid="437433231038683666">"Klaviatūros tema"</string>
     <string name="subtype_mode_keyboard" msgid="2242090416595003881">"klaviatūra"</string>
-    <string name="subtype_mode_voice" msgid="4394113125441627771">"Voice"</string>
 </resources>

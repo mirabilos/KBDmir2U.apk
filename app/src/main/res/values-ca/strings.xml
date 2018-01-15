@@ -83,39 +83,16 @@
     <string name="label_phone_key" msgid="4275497665515080551">"123"</string>
     <string name="label_alpha_key" msgid="8864943487292437456">"ABC"</string>
     <string name="label_alt_key" msgid="2846315350346694811">"ALT"</string>
-    <string name="voice_warning_title" msgid="4419354150908395008">"Entrada de veu"</string>
-    <string name="voice_warning_locale_not_supported" msgid="637923019716442333">"Actualment, l\'entrada de veu no és compatible amb el vostre idioma, però funciona en anglès."</string>
-    <string name="voice_warning_may_not_understand" msgid="4611518823070986445">"L\'entrada de veu és una funció experimental que utilitza el reconeixement de la parla en xarxa de Google."</string>
-    <string name="voice_warning_how_to_turn_off" msgid="5652369578498701761">"Per desactivar l\'entada de veu, aneu a la configuració del teclat."</string>
-    <string name="voice_hint_dialog_message" msgid="6892342981545727994">"Per utilitzar l\'entrada de veu, premeu el botó del micròfon o feu lliscar el dit pel teclat en pantalla."</string>
-    <string name="voice_listening" msgid="467518160751321844">"Parleu ara"</string>
-    <string name="voice_working" msgid="6666937792815731889">"S\'està treballant"</string>
-    <string name="voice_initializing" msgid="661962047129906646"></string>
-    <string name="voice_error" msgid="5140896300312186162">"Error. Torneu-ho a provar."</string>
-    <string name="voice_network_error" msgid="6649556447401862563">"No s\'ha pogut connectar"</string>
-    <string name="voice_too_much_speech" msgid="5746973620134227376">"Error; s\'ha parlat massa."</string>
-    <string name="voice_audio_error" msgid="5072707727016414454">"Problema d\'àudio"</string>
-    <string name="voice_server_error" msgid="7807129913977261644">"Error del servidor"</string>
-    <string name="voice_speech_timeout" msgid="8461817525075498795">"No s\'escolten paraules"</string>
-    <string name="voice_no_match" msgid="4285117547030179174">"No hi ha resultats"</string>
-    <string name="voice_not_installed" msgid="5552450909753842415">"Cerca per veu no instal·lada"</string>
-    <string name="voice_swipe_hint" msgid="6943546180310682021"><b>"Consell:"</b>" Feu lliscar el dit pel teclat per parlar"</string>
-    <string name="voice_punctuation_hint" msgid="1611389463237317754"><b>"Suggeriment:"</b>" La propera vegada, proveu de dir la puntuació, com ara \"punt\", \"coma\" o \"interrogant\"."</string>
     <string name="cancel" msgid="6830980399865683324">"Cancel·la"</string>
     <string name="ok" msgid="7898366843681727667">"D\'acord"</string>
-    <string name="voice_input" msgid="2466640768843347841">"Entrada de veu"</string>
-  <string-array name="voice_input_modes">
     <item msgid="1349082139076086774">"Al teclat principal"</item>
     <item msgid="8529385602829095903">"Al teclat de símbols"</item>
     <item msgid="7283103513488381103">"Desactivat"</item>
   </string-array>
-  <string-array name="voice_input_modes_summary">
     <item msgid="554248625705084903">"Micròfon al teclat principal"</item>
     <item msgid="6907837061058876770">"Micròfon al teclat de símbols"</item>
     <item msgid="3664304608587798036">"L\'entrada de veu està desactivada"</item>
   </string-array>
-    <string name="auto_submit" msgid="9151008027068358518">"Enviament automàtic després de la veu"</string>
-    <string name="auto_submit_summary" msgid="4961875269610384226">"Prem automàticament Retorn en cercar o en anar al camp següent."</string>
     <string name="open_the_keyboard" msgid="2215920976029260466"><font size="17"><b>"Obrir el teclat"\n</b></font><font size="3">\n</font>"Toqueu qualsevol camp de text."</string>
     <string name="close_the_keyboard" msgid="6251022259044940103"><font size="17"><b>"Tancar el teclat"\n</b></font><font size="3">\n</font>"Premeu la tecla Enrere."</string>
     <string name="touch_and_hold" msgid="6154166367273010534"><font size="17"><b>"Manteniu premuda una tecla per veure les opcions"\n</b></font><font size="3">\n</font>"Accediu a la puntuació i als accents."</string>
@@ -136,5 +113,4 @@
     <string name="prefs_enable_recorrection_summary" msgid="1056068922330206170">"Toca les paraules introduïdes per corregir-les"</string>
     <string name="keyboard_layout" msgid="437433231038683666">"Tema del teclat"</string>
     <string name="subtype_mode_keyboard" msgid="2242090416595003881">"teclat"</string>
-    <string name="subtype_mode_voice" msgid="4394113125441627771">"veu"</string>
 </resources>

@@ -83,39 +83,16 @@
     <string name="label_phone_key" msgid="4275497665515080551">"123"</string>
     <string name="label_alpha_key" msgid="8864943487292437456">"ABC"</string>
     <string name="label_alt_key" msgid="2846315350346694811">"ALT"</string>
-    <string name="voice_warning_title" msgid="4419354150908395008">"Röstindata"</string>
-    <string name="voice_warning_locale_not_supported" msgid="637923019716442333">"Röstindata stöds inte på ditt språk än, men tjänsten fungerar på engelska."</string>
-    <string name="voice_warning_may_not_understand" msgid="4611518823070986445">"Röstinmatning är en funktion på experimentstadiet som använder Googles nätverks taligenkänning."</string>
-    <string name="voice_warning_how_to_turn_off" msgid="5652369578498701761">"Om du vill stänga av röstindata öppnar du inställningarna för tangentbordet."</string>
-    <string name="voice_hint_dialog_message" msgid="6892342981545727994">"Om du vill använda röstinmatning trycker du på mikrofonknappen eller drar fingret över tangentbordet på skärmen."</string>
-    <string name="voice_listening" msgid="467518160751321844">"Tala nu"</string>
-    <string name="voice_working" msgid="6666937792815731889">"Fungerar"</string>
-    <string name="voice_initializing" msgid="661962047129906646"></string>
-    <string name="voice_error" msgid="5140896300312186162">"Fel. Försök igen."</string>
-    <string name="voice_network_error" msgid="6649556447401862563">"Det gick inte att ansluta"</string>
-    <string name="voice_too_much_speech" msgid="5746973620134227376">"Fel, för mycket tal."</string>
-    <string name="voice_audio_error" msgid="5072707727016414454">"Ljudproblem"</string>
-    <string name="voice_server_error" msgid="7807129913977261644">"Serverfel"</string>
-    <string name="voice_speech_timeout" msgid="8461817525075498795">"Hörde inget tal"</string>
-    <string name="voice_no_match" msgid="4285117547030179174">"Inga träffar hittades"</string>
-    <string name="voice_not_installed" msgid="5552450909753842415">"Voice Search är inte installerat"</string>
-    <string name="voice_swipe_hint" msgid="6943546180310682021"><b>"Tips!"</b>" Dra över tangentbordet om du vill tala"</string>
-    <string name="voice_punctuation_hint" msgid="1611389463237317754"><b>"Tips!"</b>" Nästa gång testar du att säga skiljetecknen, som \"punkt\", \"komma\" eller \"frågetecken\"."</string>
     <string name="cancel" msgid="6830980399865683324">"Avbryt"</string>
     <string name="ok" msgid="7898366843681727667">"OK"</string>
-    <string name="voice_input" msgid="2466640768843347841">"Röstindata"</string>
-  <string-array name="voice_input_modes">
     <item msgid="1349082139076086774">"På huvudtangentbordet"</item>
     <item msgid="8529385602829095903">"På symboltangentbordet"</item>
     <item msgid="7283103513488381103">"Av"</item>
   </string-array>
-  <string-array name="voice_input_modes_summary">
     <item msgid="554248625705084903">"Mikrofon på huvudtangentbordet"</item>
     <item msgid="6907837061058876770">"Mikrofon på symboltangentbordet"</item>
     <item msgid="3664304608587798036">"Röstindata är inaktiverat"</item>
   </string-array>
-    <string name="auto_submit" msgid="9151008027068358518">"Skicka automatiskt efter röst"</string>
-    <string name="auto_submit_summary" msgid="4961875269610384226">"Tryck automatiskt på retur vid sökning eller när du fortsätter till nästa fält."</string>
     <string name="open_the_keyboard" msgid="2215920976029260466"><font size="17"><b>"Öppna tangentbordet"\n</b></font><font size="3">\n</font>"Tryck på ett textfält."</string>
     <string name="close_the_keyboard" msgid="6251022259044940103"><font size="17"><b>"Stäng tangentbordet"\n</b></font><font size="3">\n</font>"Tryck på Tillbaka."</string>
     <string name="touch_and_hold" msgid="6154166367273010534"><font size="17"><b>"Tryck länge på en tangent om du vill se alternativ"\n</b></font><font size="3">\n</font>"Använda skiljetecken och accenter."</string>
@@ -136,5 +113,4 @@
     <string name="prefs_enable_recorrection_summary" msgid="1056068922330206170">"Tryck på skrivna ord om du vill korrigera dem"</string>
     <string name="keyboard_layout" msgid="437433231038683666">"Tangentbordstema"</string>
     <string name="subtype_mode_keyboard" msgid="2242090416595003881">"tangentbord"</string>
-    <string name="subtype_mode_voice" msgid="4394113125441627771">"röst"</string>
 </resources>

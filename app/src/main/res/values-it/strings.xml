@@ -83,39 +83,16 @@
     <string name="label_phone_key" msgid="4275497665515080551">"123"</string>
     <string name="label_alpha_key" msgid="8864943487292437456">"ABC"</string>
     <string name="label_alt_key" msgid="2846315350346694811">"ALT"</string>
-    <string name="voice_warning_title" msgid="4419354150908395008">"Comandi vocali"</string>
-    <string name="voice_warning_locale_not_supported" msgid="637923019716442333">"I comandi vocali non sono attualmente supportati per la tua lingua ma funzionano in inglese."</string>
-    <string name="voice_warning_may_not_understand" msgid="4611518823070986445">"I comandi vocali sono una funzione sperimentale che utilizza il riconoscimento vocale in rete di Google."</string>
-    <string name="voice_warning_how_to_turn_off" msgid="5652369578498701761">"Per disattivare i comandi vocali, vai alle impostazioni della tastiera."</string>
-    <string name="voice_hint_dialog_message" msgid="6892342981545727994">"Per utilizzare i comandi vocali, premi il pulsante del microfono o fai scorrere il dito sulla tastiera sullo schermo."</string>
-    <string name="voice_listening" msgid="467518160751321844">"Parla ora"</string>
-    <string name="voice_working" msgid="6666937792815731889">"Elaborazione in corso"</string>
-    <string name="voice_initializing" msgid="661962047129906646"></string>
-    <string name="voice_error" msgid="5140896300312186162">"Errore. Riprova più tardi."</string>
-    <string name="voice_network_error" msgid="6649556447401862563">"Impossibile connettersi."</string>
-    <string name="voice_too_much_speech" msgid="5746973620134227376">"Errore: conversazione troppo lunga."</string>
-    <string name="voice_audio_error" msgid="5072707727016414454">"Problema audio"</string>
-    <string name="voice_server_error" msgid="7807129913977261644">"Errore del server"</string>
-    <string name="voice_speech_timeout" msgid="8461817525075498795">"Nessuna frase vocale rilevata"</string>
-    <string name="voice_no_match" msgid="4285117547030179174">"Nessuna corrispondenza trovata"</string>
-    <string name="voice_not_installed" msgid="5552450909753842415">"Ricerca vocale non installata"</string>
-    <string name="voice_swipe_hint" msgid="6943546180310682021"><b>"Suggerimento."</b>" Fai scorrere il dito sulla tastiera per parlare"</string>
-    <string name="voice_punctuation_hint" msgid="1611389463237317754"><b>"Suggerimento."</b>" La prossima volta, prova a pronunciare termini relativi alla punteggiatura come \"punto\", \"virgola\" o \"punto di domanda\"."</string>
     <string name="cancel" msgid="6830980399865683324">"Annulla"</string>
     <string name="ok" msgid="7898366843681727667">"OK"</string>
-    <string name="voice_input" msgid="2466640768843347841">"Comandi vocali"</string>
-  <string-array name="voice_input_modes">
     <item msgid="1349082139076086774">"Su tastiera principale"</item>
     <item msgid="8529385602829095903">"Su tastiera simboli"</item>
     <item msgid="7283103513488381103">"Non attivi"</item>
   </string-array>
-  <string-array name="voice_input_modes_summary">
     <item msgid="554248625705084903">"Microfono su tastiera principale"</item>
     <item msgid="6907837061058876770">"Microfono su tastiera simboli"</item>
     <item msgid="3664304608587798036">"Comandi vocali disabilitati"</item>
   </string-array>
-    <string name="auto_submit" msgid="9151008027068358518">"Invia automaticamente dopo comando vocale"</string>
-    <string name="auto_submit_summary" msgid="4961875269610384226">"Premi automaticamente \"Invio\" durante una ricerca o un passaggio al campo successivo."</string>
     <string name="open_the_keyboard" msgid="2215920976029260466"><font size="17"><b>"Apertura tastiera"\n</b></font><font size="3">\n</font>"Tocca qualsiasi campo di testo."</string>
     <string name="close_the_keyboard" msgid="6251022259044940103"><font size="17"><b>"Chiusura tastiera"\n</b></font><font size="3">\n</font>"Premi il tasto Indietro."</string>
     <string name="touch_and_hold" msgid="6154166367273010534"><font size="17"><b>"Tocca e tieni premuto un pulsante per le opzioni"\n</b></font><font size="3">\n</font>"Accesso a punteggiatura e accenti."</string>
@@ -136,5 +113,4 @@
     <string name="prefs_enable_recorrection_summary" msgid="1056068922330206170">"Tocca le parole inserite per correggerle"</string>
     <string name="keyboard_layout" msgid="437433231038683666">"Tema della tastiera"</string>
     <string name="subtype_mode_keyboard" msgid="2242090416595003881">"tastiera"</string>
-    <string name="subtype_mode_voice" msgid="4394113125441627771">"vocale"</string>
 </resources>

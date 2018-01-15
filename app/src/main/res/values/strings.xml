@@ -210,109 +210,11 @@
 
     <!-- Voice related labels -->
 
-    <!-- Title of the warning dialog that shows when a user initiates voice input for
-         the first time. -->
-    <string name="voice_warning_title">Voice input</string>
-    
-    <!-- Message that gets put at the top of the warning dialog if the user is attempting to use
-         voice input in a currently unsupported locale. Voice input will work for such a user,
-         but it will only recognize them in English. -->
-    <string name="voice_warning_locale_not_supported">Voice input is not currently supported for your language, but does work in English.</string>
-    
-    <!-- Message of the warning dialog that shows when a user initiates voice input for
-         the first time, or turns it on in settings. -->
-    <string name="voice_warning_may_not_understand">Voice input is an experimental feature using Google\'s networked speech recognition.</string>
-    
-    <!-- An additional part of the warning dialog for voice input that only shows when the user
-         actually initiates voice input, rather than just turning it on in settings. -->
-    <string name="voice_warning_how_to_turn_off">To turn off voice input, go to keyboard settings.</string>
-    
-    <!-- Message to show when user clicks the swiping hint (which says
-        "Swipe across keyboard to speak"). Also shown when enabling settings. -->
-    <string name="voice_hint_dialog_message">To use voice input, press the microphone button or slide your finger across the on-screen keyboard.</string>
-    
-    <!-- Short message to tell the user the system is ready for them to speak. -->
-    <string name="voice_listening">Speak now</string>
-
-    <!-- Short message shown after the user finishes speaking. -->
-    <string name="voice_working">Working</string>
-
-    <!-- Short message shown before the user should speak. -->
-    <string name="voice_initializing"></string>
-
-    <!-- Short message shown when a generic error occurs. -->
-    <string name="voice_error">Error. Please try again.</string>
-
-    <!-- Short message shown for a network error. -->
-    <string name="voice_network_error">Couldn\'t connect</string>
-    
-    <!-- Short message shown for a network error where the utterance was really long,
-         in which case we should suggest that the user speak less. -->
-    <string name="voice_too_much_speech">Error, too much speech.</string>
-
-    <!-- Short message shown for an audio error. -->
-    <string name="voice_audio_error">Audio problem</string>
-
-    <!-- Short message shown for an error with the voice server. -->
-    <string name="voice_server_error">Server error</string>
-
-    <!-- Short message shown when no speech is heard. -->
-    <string name="voice_speech_timeout">No speech heard</string>
-
-    <!-- Short message shown when the server couldn't parse any speech. -->
-    <string name="voice_no_match">No matches found</string>
-
-    <!-- Short message shown when the user initiates voice and voice
-	search is not installed. -->
-    <string name="voice_not_installed">Voice search not installed</string>
-
-    <!-- Short hint shown in candidate view to explain voice input. -->
-    <string name="voice_swipe_hint"><b>Hint:</b> Swipe across keyboard to speak</string>
-
-    <!-- Short hint shown in candidate view to explain that user can speak punctuation. -->
-    <string name="voice_punctuation_hint"><b>Hint:</b> Next time, try speaking punctuation like \"period\", \"comma\", or \"question mark\".</string>
-
     <!-- Label on button to stop recognition. Must be short to fit on button. -->
     <string name="cancel">Cancel</string>
 
     <!-- Label on button when an error occurs -->
     <string name="ok">OK</string>
-
-    <!-- Preferences item for enabling speech input -->
-    <string name="voice_input">Voice input</string>
-
-    <!-- Array of Voice Input modes -->
-    <string-array name="voice_input_modes">
-        <item>On main keyboard</item>
-        <item>On symbols keyboard</item>
-        <item>Off</item>
-    </string-array>
-
-    <!-- Don't translate -->
-    <string name="voice_mode_main" translatable="false">0</string>
-    <!-- Don't translate -->
-    <string name="voice_mode_symbols" translatable="false">1</string>
-    <!-- Don't translate -->
-    <string name="voice_mode_off"  translatable="false">2</string>
-
-    <string-array name="voice_input_modes_values" translatable="false">
-        <item>@string/voice_mode_main</item>
-        <item>@string/voice_mode_symbols</item>
-        <item>@string/voice_mode_off</item>
-    </string-array>
-
-    <!-- Array of Voice Input modes summary -->
-    <string-array name="voice_input_modes_summary">
-        <item>Mic on main keyboard</item>
-        <item>Mic on symbols keyboard</item>
-        <item>Voice input is disabled</item>
-    </string-array>
-
-    <!-- Press the "enter" key after the user speaks. Option on settings.-->
-    <string name="auto_submit">Auto submit after voice</string>
-
-    <!-- Press the "enter" key after the user speaks. Summary of option in settings.-->
-    <string name="auto_submit_summary">Automatically press enter when searching or going to the next field.</string>
 
     <!-- IME Tutorial screen (ROMAN) --><skip />
     <!-- appears above image showing the user to click on a TextView to show the IME -->
@@ -391,7 +293,6 @@
     </string-array>
 
     <string name="subtype_mode_keyboard">keyboard</string>
-    <string name="subtype_mode_voice">voice</string>
 
     <string name="title_keyboard_mode_portrait">Keyboard mode, portrait</string>
     <string name="title_keyboard_mode_landscape">Keyboard mode, landscape</string>
@@ -565,7 +466,6 @@
         <item>Toggle extension row</item>
         <item>Launch Settings</item>
         <item>Toggle suggestions</item>
-        <item>Voice input</item>
         <item>Switch keyboard layout</item>
         <item>Increase height</item>
         <item>Decrease height</item>
@@ -578,7 +478,6 @@
         <item>extension</item>
         <item>settings</item>
         <item>suggestions</item>
-        <item>voice_input</item>
         <item>full_mode</item>
         <item>height_up</item>
         <item>height_down</item>
@@ -612,7 +511,6 @@
     </string-array>
     <string name="default_popup_content">1</string>
 
-    <string name="voice_not_enabled_warning">Voice input is not available in this version.</string>
     <string name="recorrect_warning">FYI: recorrection does not work correctly on pre-Gingerbread devices due to missing operating system support.</string>
     <string name="no_market_warning">Unable to launch Market.</string>
     <!-- Title for Latin keyboard debug settings activity / dialog -->

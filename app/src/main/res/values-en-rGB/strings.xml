@@ -85,39 +85,15 @@
     <string name="label_phone_key" msgid="4275497665515080551">"123"</string>
     <string name="label_alpha_key" msgid="8864943487292437456">"ABC"</string>
     <string name="label_alt_key" msgid="2846315350346694811">"ALT"</string>
-    <string name="voice_warning_title" msgid="4419354150908395008">"Voice input"</string>
-    <string name="voice_warning_locale_not_supported" msgid="637923019716442333">"Voice input is not currently supported for your language, but does work in English."</string>
-    <string name="voice_warning_may_not_understand" msgid="4611518823070986445">"Voice input is an experimental feature using Google\'s networked speech recognition."</string>
-    <string name="voice_warning_how_to_turn_off" msgid="5652369578498701761">"To turn off voice input, go to keyboard settings."</string>
-    <string name="voice_hint_dialog_message" msgid="6892342981545727994">"To use voice input, press the microphone button or slide your finger across the on-screen keyboard."</string>
-    <string name="voice_listening" msgid="467518160751321844">"Speak now"</string>
-    <string name="voice_working" msgid="6666937792815731889">"Working"</string>
-    <string name="voice_initializing" msgid="661962047129906646"></string>
-    <string name="voice_error" msgid="5140896300312186162">"Error: Please try again."</string>
-    <string name="voice_network_error" msgid="6649556447401862563">"Couldn\'t connect"</string>
-    <string name="voice_too_much_speech" msgid="5746973620134227376">"Error, too much speech."</string>
-    <string name="voice_audio_error" msgid="5072707727016414454">"Audio problem"</string>
-    <string name="voice_server_error" msgid="7807129913977261644">"Server error"</string>
-    <string name="voice_speech_timeout" msgid="8461817525075498795">"No speech heard"</string>
-    <string name="voice_no_match" msgid="4285117547030179174">"No matches found"</string>
-    <string name="voice_not_installed" msgid="5552450909753842415">"Voice search not installed"</string>
-    <string name="voice_swipe_hint" msgid="6943546180310682021"><b>"Hint:"</b>" Swipe across keyboard to speak"</string>
-    <string name="voice_punctuation_hint" msgid="1611389463237317754"><b>"Hint:"</b>" Next time, try speaking punctuation marks, like \"full stop\", \"comma\" or \"question mark\"."</string>
     <string name="cancel" msgid="6830980399865683324">"Cancel"</string>
     <string name="ok" msgid="7898366843681727667">"OK"</string>
-    <string name="voice_input" msgid="2466640768843347841">"Voice input"</string>
-  <string-array name="voice_input_modes">
     <item msgid="1349082139076086774">"On main keyboard"</item>
     <item msgid="8529385602829095903">"On symbols keyboard"</item>
     <item msgid="7283103513488381103">"Off"</item>
   </string-array>
-  <string-array name="voice_input_modes_summary">
     <item msgid="554248625705084903">"Mic on main keyboard"</item>
     <item msgid="6907837061058876770">"Mic on symbols keyboard"</item>
-    <item msgid="3664304608587798036">"Voice input is disabled"</item>
   </string-array>
-    <string name="auto_submit" msgid="9151008027068358518">"Auto-submit after voice"</string>
-    <string name="auto_submit_summary" msgid="4961875269610384226">"Automatically press enter when searching or going to the next field."</string>
     <string name="open_the_keyboard" msgid="2215920976029260466"><font size="17"><b>"Open the keyboard"\n</b></font><font size="3">\n</font>"Touch any text field."</string>
     <string name="close_the_keyboard" msgid="6251022259044940103"><font size="17"><b>"Close the keyboard"\n</b></font><font size="3">\n</font>"Press the Back key."</string>
     <string name="touch_and_hold" msgid="6154166367273010534"><font size="17"><b>"Touch &amp; hold a key for options"\n</b></font><font size="3">\n</font>"Access punctuation and accents."</string>
@@ -138,6 +114,5 @@
     <string name="prefs_enable_recorrection_summary" msgid="1056068922330206170">"Touch words entered to correct them"</string>
     <string name="keyboard_layout" msgid="437433231038683666">"Keyboard Theme"</string>
     <string name="subtype_mode_keyboard" msgid="2242090416595003881">"keyboard"</string>
-    <string name="subtype_mode_voice" msgid="4394113125441627771">"voice"</string>
     <string name="title_hint_mode">Labelled alternative keys</string>
 </resources>

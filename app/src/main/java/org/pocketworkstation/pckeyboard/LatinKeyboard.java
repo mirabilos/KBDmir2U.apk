@@ -73,10 +73,6 @@ public class LatinKeyboard extends Keyboard {
     private final Resources mRes;
     private final Context mContext;
     private int mMode;
-    // Whether this keyboard has voice icon on it
-    private boolean mHasVoiceButton;
-    // Whether voice icon is enabled at all
-    private boolean mVoiceEnabled;
     private final boolean mIsAlphaKeyboard;
     private final boolean mIsAlphaFullKeyboard;
     private final boolean mIsFnFullKeyboard;
@@ -269,12 +265,6 @@ public class LatinKeyboard extends Keyboard {
         drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
     }
 
-    public void setVoiceMode(boolean hasVoiceButton, boolean hasVoice) {
-        mHasVoiceButton = hasVoiceButton;
-        mVoiceEnabled = hasVoice;
-        updateDynamicKeys();
-    }
-
     private void updateDynamicKeys() {
         update123Key();
         updateF1Key();
@@ -283,15 +273,9 @@ public class LatinKeyboard extends Keyboard {
     private void update123Key() {
         // Update KEYCODE_MODE_CHANGE key only on alphabet mode, not on symbol mode.
         if (m123Key != null && mIsAlphaKeyboard) {
-            if (mVoiceEnabled && !mHasVoiceButton) {
-                m123Key.icon = m123MicIcon;
-                m123Key.iconPreview = m123MicPreviewIcon;
-                m123Key.label = null;
-            } else {
                 m123Key.icon = null;
                 m123Key.iconPreview = null;
                 m123Key.label = m123Label;
-            }
         }
     }
 
@@ -306,49 +290,16 @@ public class LatinKeyboard extends Keyboard {
             } else if (mMode == KeyboardSwitcher.MODE_EMAIL) {
                 setNonMicF1Key(mF1Key, "@", R.xml.popup_at);
             } else {
-                if (mVoiceEnabled && mHasVoiceButton) {
-                    setMicF1Key(mF1Key);
-                } else {
                     setNonMicF1Key(mF1Key, ",", R.xml.popup_comma);
-                }
             }
         } else if (mIsAlphaFullKeyboard) {
-        	if (mVoiceEnabled && mHasVoiceButton) {
-        		setMicF1Key(mF1Key);
-        	} else {
         		setSettingsF1Key(mF1Key);
-        	}
         } else if (mIsFnFullKeyboard) {
-    		setMicF1Key(mF1Key);        	
+		//XXX TODO nope
+        		setSettingsF1Key(mF1Key);
         } else {  // Symbols keyboard
-            if (mVoiceEnabled && mHasVoiceButton) {
-                setMicF1Key(mF1Key);
-            } else {
                 setNonMicF1Key(mF1Key, ",", R.xml.popup_comma);
-            }
         }
-    }
-
-    private void setMicF1Key(Key key) {
-        // HACK: draw mMicIcon and mHintIcon at the same time
-        final Drawable micWithSettingsHintDrawable = new BitmapDrawable(mRes,
-                drawSynthesizedSettingsHintImage(key.width, key.height, mMicIcon, mHintIcon));
-
-        if (key.popupResId == 0) {
-            key.popupResId = R.xml.popup_mic;
-        } else {
-            key.modifier = true;
-            if (key.label != null) {
-                key.popupCharacters = (key.popupCharacters == null) ?
-                        key.label + key.shiftLabel.toString() :
-                            key.label + key.shiftLabel.toString() + key.popupCharacters.toString();
-            }
-        }
-        key.label = null;
-        key.shiftLabel = null;
-        key.codes = new int[] { LatinKeyboardView.KEYCODE_VOICE };
-        key.icon = micWithSettingsHintDrawable;
-        key.iconPreview = mMicPreviewIcon;
     }
 
     private void setSettingsF1Key(Key key) {
@@ -361,7 +312,7 @@ public class LatinKeyboard extends Keyboard {
     	key.label = null;
     	key.icon = settingsHintDrawable;
     	key.codes = new int[] { LatinKeyboardView.KEYCODE_OPTIONS };
-    	key.popupResId = R.xml.popup_mic;
+    	key.popupResId = R.xml.popup_smileys; //XXX was popup_mic
     	key.iconPreview = mSettingsPreviewIcon;
     }
     

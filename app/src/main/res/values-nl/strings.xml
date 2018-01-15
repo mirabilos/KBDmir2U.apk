@@ -83,39 +83,16 @@
     <string name="label_phone_key" msgid="4275497665515080551">"123"</string>
     <string name="label_alpha_key" msgid="8864943487292437456">"ABC"</string>
     <string name="label_alt_key" msgid="2846315350346694811">"Alt"</string>
-    <string name="voice_warning_title" msgid="4419354150908395008">"Spraakinvoer"</string>
-    <string name="voice_warning_locale_not_supported" msgid="637923019716442333">"Spraakinvoer wordt momenteel niet ondersteund in uw taal, maar is wel beschikbaar in het Engels."</string>
-    <string name="voice_warning_may_not_understand" msgid="4611518823070986445">"Spraakinvoer is een experimentele functie met de spraakherkenning van het Google-netwerk."</string>
-    <string name="voice_warning_how_to_turn_off" msgid="5652369578498701761">"Als u spraakinvoer wilt uitschakelen, gaat u naar de toetsenbordinstellingen."</string>
-    <string name="voice_hint_dialog_message" msgid="6892342981545727994">"Als u spraakinvoer gebruikt, drukt u op de microfoonknop of schuift u uw vinger over het schermtoetsenbord."</string>
-    <string name="voice_listening" msgid="467518160751321844">"Nu spreken"</string>
-    <string name="voice_working" msgid="6666937792815731889">"Wordt uitgevoerd"</string>
-    <string name="voice_initializing" msgid="661962047129906646"></string>
-    <string name="voice_error" msgid="5140896300312186162">"Fout. Probeer het opnieuw."</string>
-    <string name="voice_network_error" msgid="6649556447401862563">"Kan geen verbinding maken"</string>
-    <string name="voice_too_much_speech" msgid="5746973620134227376">"Fout, te lange spraakinvoer."</string>
-    <string name="voice_audio_error" msgid="5072707727016414454">"Audioprobleem"</string>
-    <string name="voice_server_error" msgid="7807129913977261644">"Serverfout"</string>
-    <string name="voice_speech_timeout" msgid="8461817525075498795">"Geen spraak te horen"</string>
-    <string name="voice_no_match" msgid="4285117547030179174">"Geen resultaten gevonden"</string>
-    <string name="voice_not_installed" msgid="5552450909753842415">"Spraakgestuurd zoeken is niet geïnstalleerd"</string>
-    <string name="voice_swipe_hint" msgid="6943546180310682021"><b>"Hint:"</b>" schuif over het toetsenbord om te spreken"</string>
-    <string name="voice_punctuation_hint" msgid="1611389463237317754"><b>"Hint:"</b>" spreek de volgende keer interpunctie uit, zoals \'period\' (punt), \'comma\' (komma) of \'question mark\' (vraagteken)."</string>
     <string name="cancel" msgid="6830980399865683324">"Annuleren"</string>
     <string name="ok" msgid="7898366843681727667">"OK"</string>
-    <string name="voice_input" msgid="2466640768843347841">"Spraakinvoer"</string>
-  <string-array name="voice_input_modes">
     <item msgid="1349082139076086774">"Op hoofdtoetsenbord"</item>
     <item msgid="8529385602829095903">"Op toetsenbord voor symbolen"</item>
     <item msgid="7283103513488381103">"Uit"</item>
   </string-array>
-  <string-array name="voice_input_modes_summary">
     <item msgid="554248625705084903">"Microfoon op hoofdtoetsenbord"</item>
     <item msgid="6907837061058876770">"Microfoon op toetsenbord voor symbolen"</item>
     <item msgid="3664304608587798036">"Spraakinvoer is uitgeschakeld"</item>
   </string-array>
-    <string name="auto_submit" msgid="9151008027068358518">"Automatisch verzenden na spraak"</string>
-    <string name="auto_submit_summary" msgid="4961875269610384226">"Drukt automatisch op Enter tijdens het zoeken of wanneer u naar het volgende veld wilt gaan."</string>
     <string name="open_the_keyboard" msgid="2215920976029260466"><font size="17"><b>"Het toetsenbord openen"\n</b></font><font size="3">\n</font>"Raak een tekstveld aan."</string>
     <string name="close_the_keyboard" msgid="6251022259044940103"><font size="17"><b>"Het toetsenbord sluiten"\n</b></font><font size="3">\n</font>"Druk op de terugtoets."</string>
     <string name="touch_and_hold" msgid="6154166367273010534"><font size="17"><b>"Een toets blijven aanraken voor opties"\n</b></font><font size="3">\n</font>"Toegang tot interpunctie en diakritische tekens."</string>
@@ -136,5 +113,4 @@
     <string name="prefs_enable_recorrection_summary" msgid="1056068922330206170">"Raak ingevoerde woorden aan om ze te corrigeren"</string>
     <string name="keyboard_layout" msgid="437433231038683666">"Toetsenbordthema"</string>
     <string name="subtype_mode_keyboard" msgid="2242090416595003881">"toetsenbord"</string>
-    <string name="subtype_mode_voice" msgid="4394113125441627771">"spraak"</string>
 </resources>

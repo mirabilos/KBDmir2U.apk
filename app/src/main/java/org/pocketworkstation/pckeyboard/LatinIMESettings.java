@@ -40,25 +40,18 @@ public class LatinIMESettings extends PreferenceActivity
 
     private static final String QUICK_FIXES_KEY = "quick_fixes";
     private static final String PREDICTION_SETTINGS_KEY = "prediction_settings";
-    private static final String VOICE_SETTINGS_KEY = "voice_mode";
     /* package */ static final String PREF_SETTINGS_KEY = "settings_key";
     static final String INPUT_CONNECTION_INFO = "input_connection_info";    
 
     private static final String TAG = "LatinIMESettings";
 
-    // Dialog ids
-    private static final int VOICE_INPUT_CONFIRM_DIALOG = 0;
-
     private CheckBoxPreference mQuickFixes;
-    private ListPreference mVoicePreference;
     private ListPreference mSettingsKeyPreference;
     private ListPreference mKeyboardModePortraitPreference;
     private ListPreference mKeyboardModeLandscapePreference;
     private Preference mInputConnectionInfo;
-    private boolean mVoiceOn;
 
     private boolean mOkClicked = false;
-    private String mVoiceModeOff;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -67,7 +60,6 @@ public class LatinIMESettings extends PreferenceActivity
         //Keyboard.setFlagSecure(this); //TODO: make this a preference
         addPreferencesFromResource(R.xml.prefs);
         mQuickFixes = (CheckBoxPreference) findPreference(QUICK_FIXES_KEY);
-        mVoicePreference = (ListPreference) findPreference(VOICE_SETTINGS_KEY);
         mSettingsKeyPreference = (ListPreference) findPreference(PREF_SETTINGS_KEY);
         mInputConnectionInfo = (Preference) findPreference(INPUT_CONNECTION_INFO);
 
@@ -77,9 +69,6 @@ public class LatinIMESettings extends PreferenceActivity
         
         SharedPreferences prefs = getPreferenceManager().getSharedPreferences();
         prefs.registerOnSharedPreferenceChangeListener(this);
-
-        mVoiceModeOff = getString(R.string.voice_mode_off);
-        mVoiceOn = !(prefs.getString(VOICE_SETTINGS_KEY, mVoiceModeOff).equals(mVoiceModeOff));
     }
 
     @Override
@@ -118,15 +107,6 @@ public class LatinIMESettings extends PreferenceActivity
 
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
         (new BackupManager(this)).dataChanged();
-        // If turning on voice input, show dialog
-        if (key.equals(VOICE_SETTINGS_KEY) && !mVoiceOn) {
-            if (!prefs.getString(VOICE_SETTINGS_KEY, mVoiceModeOff)
-                    .equals(mVoiceModeOff)) {
-                showVoiceConfirmation();
-            }
-        }
-        mVoiceOn = !(prefs.getString(VOICE_SETTINGS_KEY, mVoiceModeOff).equals(mVoiceModeOff));
-        updateVoiceModeSummary();
         updateSummaries();
     }
 
@@ -223,17 +203,6 @@ public class LatinIMESettings extends PreferenceActivity
                 ));
     }
 
-    private void showVoiceConfirmation() {
-        mOkClicked = false;
-        showDialog(VOICE_INPUT_CONFIRM_DIALOG);
-    }
-
-    private void updateVoiceModeSummary() {
-        mVoicePreference.setSummary(
-                getResources().getStringArray(R.array.voice_input_modes_summary)
-                [mVoicePreference.findIndexOfValue(mVoicePreference.getValue())]);
-    }
-
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -244,13 +213,5 @@ public class LatinIMESettings extends PreferenceActivity
     }
 
     public void onDismiss(DialogInterface dialog) {
-        if (!mOkClicked) {
-            // This assumes that onPreferenceClick gets called first, and this if the user
-            // agreed after the warning, we set the mOkClicked value to true.
-            mVoicePreference.setValue(mVoiceModeOff);
-        }
-    }
-
-    private void updateVoicePreference() {
     }
 }

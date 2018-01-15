@@ -83,39 +83,16 @@
     <string name="label_phone_key" msgid="4275497665515080551">"123"</string>
     <string name="label_alpha_key" msgid="8864943487292437456">"ب ت ث"</string>
     <string name="label_alt_key" msgid="2846315350346694811">"ALT"</string>
-    <string name="voice_warning_title" msgid="4419354150908395008">"الإدخال الصوتي"</string>
-    <string name="voice_warning_locale_not_supported" msgid="637923019716442333">"الإدخال الصوتي غير معتمد حاليًا للغتك، ولكنه يعمل باللغة الإنجليزية."</string>
-    <string name="voice_warning_may_not_understand" msgid="4611518823070986445">"الإدخال الصوتي هو ميزة تجريبية تستخدم التعرف على الكلام المتصل في Google."</string>
-    <string name="voice_warning_how_to_turn_off" msgid="5652369578498701761">"لتشغيل الإدخال الصوتي، انتقل إلى إعدادات لوحة المفاتيح."</string>
-    <string name="voice_hint_dialog_message" msgid="6892342981545727994">"لاستخدام الإدخال الصوتي، اضغط على زر الميكروفون أو مرر إصبعك عبر لوحة المفاتيح على الشاشة."</string>
-    <string name="voice_listening" msgid="467518160751321844">"تحدث الآن"</string>
-    <string name="voice_working" msgid="6666937792815731889">"العمل"</string>
-    <string name="voice_initializing" msgid="661962047129906646"></string>
-    <string name="voice_error" msgid="5140896300312186162">"خطأ. الرجاء المحاولة مرة أخرى."</string>
-    <string name="voice_network_error" msgid="6649556447401862563">"تعذر الاتصال"</string>
-    <string name="voice_too_much_speech" msgid="5746973620134227376">"خطأ، كلام أكثر مما ينبغي."</string>
-    <string name="voice_audio_error" msgid="5072707727016414454">"مشكلة بالإعدادات الصوتية"</string>
-    <string name="voice_server_error" msgid="7807129913977261644">"خطأ في الخادم"</string>
-    <string name="voice_speech_timeout" msgid="8461817525075498795">"لم يتم سماع كلام"</string>
-    <string name="voice_no_match" msgid="4285117547030179174">"لم يتمّ العثور على أية تطابقات"</string>
-    <string name="voice_not_installed" msgid="5552450909753842415">"لم يتم تثبيت البحث الصوتي"</string>
-    <string name="voice_swipe_hint" msgid="6943546180310682021"><b>"تلميح:"</b>" مرر عبر لوحة المفاتيح للتحدث"</string>
-    <string name="voice_punctuation_hint" msgid="1611389463237317754"><b>"تلميح:"</b>" جرب في المرة التالية نطق الترقيم مثل \"نقطة\" أو \"فاصلة\" أو \"علامة استفهام\"."</string>
     <string name="cancel" msgid="6830980399865683324">"إلغاء"</string>
     <string name="ok" msgid="7898366843681727667">"موافق"</string>
-    <string name="voice_input" msgid="2466640768843347841">"الإدخال الصوتي"</string>
-  <string-array name="voice_input_modes">
     <item msgid="1349082139076086774">"في لوحة المفاتيح الرئيسية"</item>
     <item msgid="8529385602829095903">"على لوحة مفاتيح الرموز"</item>
     <item msgid="7283103513488381103">"إيقاف"</item>
   </string-array>
-  <string-array name="voice_input_modes_summary">
     <item msgid="554248625705084903">"الميكروفون في لوحة المفاتيح الرئيسية"</item>
     <item msgid="6907837061058876770">"الميكروفون على لوحة مفاتيح الرموز"</item>
     <item msgid="3664304608587798036">"تم تعطيل الإدخال الصوتي"</item>
   </string-array>
-    <string name="auto_submit" msgid="9151008027068358518">"إرسال تلقائي بعد الصوت"</string>
-    <string name="auto_submit_summary" msgid="4961875269610384226">"الضغط تلقائيًا على المفتاح enter عند البحث أو الانتقال إلى الحقل التالي."</string>
     <string name="open_the_keyboard" msgid="2215920976029260466"><font size="17"><b>"افتح لوحة المفاتيح"\n</b></font><font size="3">\n</font>"المس أي حقل نصي."</string>
     <string name="close_the_keyboard" msgid="6251022259044940103"><font size="17"><b>"إغلاق لوحة المفاتيح"\n</b></font><font size="3">\n</font>"اضغط على المفتاح \"رجوع\"."</string>
     <string name="touch_and_hold" msgid="6154166367273010534"><font size="17"><b>"المس أحد مفاتيح الخيارات مع الاستمرار"\n</b></font><font size="3">\n</font>"الدخول إلى الترقيم والحركات."</string>
@@ -136,5 +113,4 @@
     <string name="prefs_enable_recorrection_summary" msgid="1056068922330206170">"المس الكلمات المدخلة لتصحيحها"</string>
     <string name="keyboard_layout" msgid="437433231038683666">"مظهر لوحة المفاتيح"</string>
     <string name="subtype_mode_keyboard" msgid="2242090416595003881">"لوحة مفاتيح"</string>
-    <string name="subtype_mode_voice" msgid="4394113125441627771">"صوت"</string>
 </resources>
