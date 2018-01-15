@@ -30,7 +30,7 @@ import java.util.Locale;
  */
 public class LanguageSwitcher {
 
-    private static final String TAG = "HK/LanguageSwitcher";
+    private static final String TAG = "KBDmir2U/LanguageSwitcher";
     private Locale[] mLocales;
     private LatinIME mIme;
     private String[] mSelectedLanguageArray;

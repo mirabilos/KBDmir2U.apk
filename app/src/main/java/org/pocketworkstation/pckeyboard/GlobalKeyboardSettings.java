@@ -29,7 +29,7 @@ import android.util.Log;
  * @author klaus.weidner@gmail.com
  */
 public final class GlobalKeyboardSettings {
-    protected static final String TAG = "HK/Globals";
+    protected static final String TAG = "KBDmir2U/Globals";
 
     /* Simple prefs updated by this class */
     //

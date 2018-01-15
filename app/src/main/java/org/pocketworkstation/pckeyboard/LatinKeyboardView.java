@@ -37,7 +37,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class LatinKeyboardView extends LatinKeyboardBaseView {
-    static final String TAG = "HK/LatinKeyboardView";
+    static final String TAG = "KBDmir2U/LatinKeyboardView";
 
 	// The keycode list needs to stay in sync with the
 	// res/values/keycodes.xml file.

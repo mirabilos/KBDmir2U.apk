@@ -22,7 +22,7 @@ import android.os.Build;
 import android.util.Log;
 
 public class DeadAccentSequence extends ComposeSequence {
-    private static final String TAG = "HK/DeadAccent";
+    private static final String TAG = "KBDmir2U/DeadAccent";
 
     public DeadAccentSequence(ComposeSequencing user) {
         super(user);
