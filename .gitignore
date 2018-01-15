@@ -1,3 +1,7 @@
+#
+# Recommended .git/info/grafts points:
+#
+# 261ef244c74c782b8215f9826ffff8d1014bc57c 620f72ffd19395de56b165b69629994353eb106d
 .idea/
 captures/
 java/bin/
