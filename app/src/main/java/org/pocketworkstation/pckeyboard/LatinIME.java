@@ -273,7 +273,6 @@ public class LatinIME extends InputMethodService implements
 
     private ArrayList<WordAlternatives> mWordHistory = new ArrayList<WordAlternatives>();
     
-    private PluginManager mPluginManager;
     private NotificationReceiver mNotificationReceiver;
 
     public abstract static class WordAlternatives {
@@ -405,15 +404,6 @@ public class LatinIME extends InputMethodService implements
         sKeyboardSettings.initPrefs(prefs, res);
 
         updateKeyboardOptions();
-
-        PluginManager.getPluginDictionaries(getApplicationContext());
-        mPluginManager = new PluginManager(this);
-        final IntentFilter pFilter = new IntentFilter();
-        pFilter.addDataScheme("package");
-        pFilter.addAction("android.intent.action.PACKAGE_ADDED");
-        pFilter.addAction("android.intent.action.PACKAGE_REPLACED");
-        pFilter.addAction("android.intent.action.PACKAGE_REMOVED");
-        registerReceiver(mPluginManager, pFilter);
 
         LatinIMEUtil.GCUtils.getInstance().reset();
         boolean tryGC = true;
@@ -614,7 +604,6 @@ public class LatinIME extends InputMethodService implements
         //    mContactsDictionary.close();
         //}
         unregisterReceiver(mReceiver);
-        unregisterReceiver(mPluginManager);
         if (mNotificationReceiver != null) {
         	unregisterReceiver(mNotificationReceiver);
             mNotificationReceiver = null;
