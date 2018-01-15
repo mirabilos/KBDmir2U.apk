@@ -40,7 +40,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemClock;
-import android.os.Vibrator;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.speech.SpeechRecognizer;
@@ -94,8 +93,6 @@ public class LatinIME extends InputMethodService implements
     static Map<Integer, String> ESC_SEQUENCES;
     static Map<Integer, Integer> CTRL_SEQUENCES;
 
-    private static final String PREF_VIBRATE_ON = "vibrate_on";
-    static final String PREF_VIBRATE_LEN = "vibrate_len";
     private static final String PREF_SOUND_ON = "sound_on";
     private static final String PREF_POPUP_ON = "popup_on";
 
@@ -157,8 +154,6 @@ public class LatinIME extends InputMethodService implements
     // Saved shift state when leaving alphabet mode, or when applying multitouch shift
     private int mSavedShiftState;
     private boolean mPasswordText;
-    private boolean mVibrateOn;
-    private int mVibrateLen;
     private boolean mSoundOn;
     private boolean mPopupOn;
     private boolean mDeadKeysActive;
@@ -1860,8 +1855,6 @@ public class LatinIME extends InputMethodService implements
             mVolUpAction = sharedPreferences.getString(PREF_VOL_UP, res.getString(R.string.default_vol_up));
         } else if (PREF_VOL_DOWN.equals(key)) {
             mVolDownAction = sharedPreferences.getString(PREF_VOL_DOWN, res.getString(R.string.default_vol_down));
-        } else if (PREF_VIBRATE_LEN.equals(key)) {
-            mVibrateLen = getPrefInt(sharedPreferences, PREF_VIBRATE_LEN, getResources().getString(R.string.vibrate_duration_ms));
         }
 
         updateKeyboardOptions();
@@ -1942,8 +1935,7 @@ public class LatinIME extends InputMethodService implements
 
     public void onPress(int primaryCode) {
         InputConnection ic = getCurrentInputConnection();
-        if (mKeyboardSwitcher.isVibrateAndSoundFeedbackRequired()) {
-            vibrate();
+        if (mKeyboardSwitcher.isSoundFeedbackRequired()) {
             playKeyClick(primaryCode);
         }
         final boolean distinctMultiTouch = mKeyboardSwitcher
@@ -1989,7 +1981,6 @@ public class LatinIME extends InputMethodService implements
         // Reset any drag flags in the keyboard
         ((LatinKeyboard) mKeyboardSwitcher.getInputView().getKeyboard())
                 .keyReleased();
-        // vibrate();
         final boolean distinctMultiTouch = mKeyboardSwitcher
                 .hasDistinctMultitouch();
         InputConnection ic = getCurrentInputConnection();
@@ -2122,27 +2113,6 @@ public class LatinIME extends InputMethodService implements
         }
     }
 
-    private void vibrate() {
-        if (!mVibrateOn) {
-            return;
-        }
-        vibrate(mVibrateLen);
-    }
-
-    void vibrate(int len) {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (v != null) {
-            v.vibrate(len);
-            return;
-        }
-
-        if (mKeyboardSwitcher.getInputView() != null) {
-            mKeyboardSwitcher.getInputView().performHapticFeedback(
-                    HapticFeedbackConstants.KEYBOARD_TAP,
-                    HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
-        }
-    }
-    
     private void checkTutorial(String privateImeOptions) {
         if (privateImeOptions == null)
             return;
@@ -2193,8 +2163,6 @@ public class LatinIME extends InputMethodService implements
         // Get the settings preferences
         SharedPreferences sp = PreferenceManager
                 .getDefaultSharedPreferences(this);
-        mVibrateOn = sp.getBoolean(PREF_VIBRATE_ON, false);
-        mVibrateLen = getPrefInt(sp, PREF_VIBRATE_LEN, getResources().getString(R.string.vibrate_duration_ms));
         mSoundOn = sp.getBoolean(PREF_SOUND_ON, false);
         mPopupOn = sp.getBoolean(PREF_POPUP_ON, mResources
                 .getBoolean(R.bool.default_popup_preview));
@@ -2269,7 +2237,6 @@ public class LatinIME extends InputMethodService implements
         p.println("  mAutoSpace=" + mAutoSpace);
         p.println("  TextEntryState.state=" + TextEntryState.getState());
         p.println("  mSoundOn=" + mSoundOn);
-        p.println("  mVibrateOn=" + mVibrateOn);
         p.println("  mPopupOn=" + mPopupOn);
     }
 

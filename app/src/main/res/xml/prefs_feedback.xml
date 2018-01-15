@@ -20,23 +20,6 @@
         android:key="feedback_settings">
 
     <CheckBoxPreference
-            android:key="vibrate_on"
-            android:title="@string/vibrate_on_keypress"
-            android:persistent="true"
-            />
-
-    <org.pocketworkstation.pckeyboard.VibratePreference		
-            android:defaultValue="40"
-            hk:minValue="5"
-            hk:maxValue="200"
-            hk:logScale="true"
-            hk:displayFormat="%.0f ms"
-            android:key="vibrate_len"
-            android:title="@string/title_vibrate_len"
-            android:persistent="true"
-            />
-
-    <CheckBoxPreference
             android:key="sound_on"
             android:title="@string/sound_on_keypress"
             android:persistent="true" 

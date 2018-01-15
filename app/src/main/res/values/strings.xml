@@ -39,9 +39,6 @@
     <string name="title_swipe_gestures">Swipe gestures (experimental)</string>
     <string name="title_hardware_key_actions">Hardware key actions</string>
 
-    <!-- Option to provide vibrate/haptic feedback on keypress -->
-    <string name="vibrate_on_keypress">Vibrate on keypress</string>
-
     <!-- Option to play back sound on keypress in soft keyboard -->
     <string name="sound_on_keypress">Sound on keypress</string>
 
@@ -325,8 +322,6 @@
     <string name="title_top_row_scale">5th row height adjustment</string>
         
     <string name="title_label_scale">Key label scaling</string>
-
-    <string name="title_vibrate_len">Vibrate duration</string>
 
     <string name="title_click_volume">Key click volume</string>
     <string name="default_click_volume">0.2</string>

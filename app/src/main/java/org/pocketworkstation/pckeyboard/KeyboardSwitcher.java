@@ -507,7 +507,7 @@ public class KeyboardSwitcher implements
         return mAutoModeSwitchState == AUTO_MODE_SWITCH_STATE_CHORDING;
     }
 
-    public boolean isVibrateAndSoundFeedbackRequired() {
+    public boolean isSoundFeedbackRequired() {
         return mInputView != null && !mInputView.isInSlidingKeyInput();
     }
 
