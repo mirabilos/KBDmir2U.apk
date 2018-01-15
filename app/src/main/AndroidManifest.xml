@@ -12,7 +12,11 @@
     <!-- removed in gradle branch -->
     <uses-sdk android:targetSdkVersion="19" android:minSdkVersion="8"></uses-sdk>
 
-    <!-- gradle removes backupAgent..killAfterRestore, adds next two -->
+    <!-- gradle removes backupAgent..killAfterRestore, adds
+
+            android:theme="@style/AppTheme"
+
+         (XXX necessary?) and supportsRtl -->
     <application android:label="@string/english_ime_name"
             android:allowBackup="true"
 
@@ -22,7 +26,6 @@
             android:killAfterRestore="false"
 
             android:supportsRtl="true"
-            android:theme="@style/AppTheme"
 
             android:icon="@drawable/icon">
 
