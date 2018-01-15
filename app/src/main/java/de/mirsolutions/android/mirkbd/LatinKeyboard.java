@@ -41,7 +41,7 @@ import java.util.Locale;
 public class LatinKeyboard extends Keyboard {
 
     private static final boolean DEBUG_PREFERRED_LETTER = true;
-    private static final String TAG = "PCKeyboardLK";
+    private static final String TAG = "KBDmir2U/LK";
     private static final int OPACITY_FULLY_OPAQUE = 255;
     private static final int SPACE_LED_LENGTH_PERCENT = 80;
 
@@ -111,7 +111,7 @@ public class LatinKeyboard extends Keyboard {
     public LatinKeyboard(Context context, int xmlLayoutResId, int mode, float kbHeightPercent) {
         super(context, 0, xmlLayoutResId, mode, kbHeightPercent);
         final Resources res = context.getResources();
-        //Log.i("PCKeyboard", "keyHeight=" + this.getKeyHeight());
+        //Log.i(TAG, "keyHeight=" + this.getKeyHeight());
         //this.setKeyHeight(30); // is useless, see http://code.google.com/p/android/issues/detail?id=4532
         mContext = context;
         mMode = mode;
@@ -447,7 +447,7 @@ public class LatinKeyboard extends Keyboard {
 
             final boolean allowVariableTextSize = true;
             Locale locale = mLanguageSwitcher.getInputLocale();
-            //Log.i("PCKeyboard", "input locale: " + locale);
+            //Log.i(TAG, "input locale: " + locale);
             final String language = layoutSpaceBar(paint, locale,
                     mButtonArrowLeftIcon, mButtonArrowRightIcon, width, height,
                     getTextSizeFromTheme(android.R.style.TextAppearance_Small, 14),

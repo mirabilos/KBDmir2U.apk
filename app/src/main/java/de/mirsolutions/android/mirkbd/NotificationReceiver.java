@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 public class NotificationReceiver extends BroadcastReceiver {
-	static final String TAG = "PCKeyboard/Notification";
+	static final String TAG = "KBDmir2U/Notification";
     private LatinIME mIME;
 
 	NotificationReceiver(LatinIME ime) {

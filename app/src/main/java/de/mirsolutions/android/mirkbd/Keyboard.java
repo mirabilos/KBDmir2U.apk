@@ -821,7 +821,7 @@ public class Keyboard {
         mDefaultVerticalGap = 0;
         mDefaultHeight = defaultHeight; // may be zero, to be adjusted below
         mKeyboardHeight = Math.round(mDisplayHeight * kbHeightPercent / 100); 
-        //Log.i("PCKeyboard", "mDefaultHeight=" + mDefaultHeight + "(arg=" + defaultHeight + ")" + " kbHeight=" + mKeyboardHeight + " displayHeight="+mDisplayHeight+")");
+        //Log.i("KBDmir2U/Keyboard", "mDefaultHeight=" + mDefaultHeight + "(arg=" + defaultHeight + ")" + " kbHeight=" + mKeyboardHeight + " displayHeight="+mDisplayHeight+")");
         mKeys = new ArrayList<Key>();
         mModifierKeys = new ArrayList<Key>();
         loadKeyboard(context, context.getResources().getXml(xmlLayoutResId));
@@ -965,7 +965,7 @@ public class Keyboard {
 
                 newPopup.append(c);
             }
-            //Log.i("PCKeyboard", "popup for " + key.label + " '" + key.popupCharacters + "' => '"+ newPopup + "' length " + newPopup.length());
+            //Log.i("KBDmir2U/Keyboard", "popup for " + key.label + " '" + key.popupCharacters + "' => '"+ newPopup + "' length " + newPopup.length());
 
             key.popupCharacters = newPopup.toString();
         }
@@ -1228,7 +1228,7 @@ public class Keyboard {
         if (newWidth <= 0) return;  // view not initialized?
         if (mTotalWidth <= newWidth) return;  // it already fits
         float scale = (float) newWidth / mDisplayWidth;
-        Log.i("PCKeyboard", "Rescaling keyboard: " + mTotalWidth + " => " + newWidth);
+        Log.i("KBDmir2U/Keyboard", "Rescaling keyboard: " + mTotalWidth + " => " + newWidth);
         for (Key key : mKeys) {
             key.x = Math.round(key.realX * scale);
         }

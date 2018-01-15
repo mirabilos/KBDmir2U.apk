@@ -30,7 +30,7 @@ import java.util.Locale;
 
 public class KeyboardSwitcher implements
         SharedPreferences.OnSharedPreferenceChangeListener {
-    private static String TAG = "PCKeyboardKbSw";
+    private static String TAG = "KBDmir2U/KbSw";
 
     public static final int MODE_NONE = 0;
     public static final int MODE_TEXT = 1;

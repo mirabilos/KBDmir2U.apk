@@ -86,7 +86,7 @@ public class LatinIME extends InputMethodService implements
         ComposeSequencing,
         LatinKeyboardBaseView.OnKeyboardActionListener,
         SharedPreferences.OnSharedPreferenceChangeListener {
-    private static final String TAG = "PCKeyboardIME";
+    private static final String TAG = "KBDmir2U/IME";
     private static final boolean PERF_DEBUG = false;
     static final boolean DEBUG = false;
     static final boolean TRACE = false;
@@ -226,7 +226,7 @@ public class LatinIME extends InputMethodService implements
 
     @Override
     public void onCreate() {
-        Log.i("PCKeyboard", "onCreate(), os.version=" + System.getProperty("os.version"));
+        Log.i(TAG, "onCreate(), os.version=" + System.getProperty("os.version"));
         LatinImeLogger.init(this);
         KeyboardSwitcher.init(this);
         super.onCreate();
@@ -374,7 +374,7 @@ public class LatinIME extends InputMethodService implements
 
     @Override
     public void onConfigurationChanged(Configuration conf) {
-        Log.i("PCKeyboard", "onConfigurationChanged()");
+        Log.i(TAG, "onConfigurationChanged()");
         // If the system locale changes and is different from the saved
         // locale (mSystemLocale), then reload the input locale list from the
         // latin ime settings (shared prefs) and reset the input locale
@@ -442,7 +442,7 @@ public class LatinIME extends InputMethodService implements
         sKeyboardSettings.editorFieldId = attribute.fieldId;
         sKeyboardSettings.editorInputType = attribute.inputType;
 
-        //Log.i("PCKeyboard", "onStartInputView " + attribute + ", inputType= " + Integer.toHexString(attribute.inputType) + ", restarting=" + restarting);
+        //Log.i(TAG, "onStartInputView " + attribute + ", inputType= " + Integer.toHexString(attribute.inputType) + ", restarting=" + restarting);
         LatinKeyboardView inputView = mKeyboardSwitcher.getInputView();
         // In landscape mode, this method gets called without the input view
         // being created.
@@ -1726,7 +1726,7 @@ public class LatinIME extends InputMethodService implements
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
             String key) {
-        Log.i("PCKeyboard", "onSharedPreferenceChanged()");
+        Log.i(TAG, "onSharedPreferenceChanged()");
         boolean needReload = false;
         Resources res = getResources();
         
@@ -2182,7 +2182,7 @@ public class LatinIME extends InputMethodService implements
 
     static int getPrefInt(SharedPreferences prefs, String prefName, int defVal) {
         String prefVal = prefs.getString(prefName, Integer.toString(defVal));
-        //Log.i("PCKeyboard", "getPrefInt " + prefName + " = " + prefVal + ", default " + defVal);
+        //Log.i(TAG, "getPrefInt " + prefName + " = " + prefVal + ", default " + defVal);
         return getIntFromString(prefVal, defVal);
     }
 

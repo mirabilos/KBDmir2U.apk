@@ -37,7 +37,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 public class InputLanguageSelection extends PreferenceActivity {
-    private static final String TAG = "PCKeyboardILS";
+    private static final String TAG = "KBDmir2U/ILS";
     private ArrayList<Loc> mAvailableLanguages = new ArrayList<Loc>();
     private static final String[] BLACKLIST_LANGUAGES = {
         "ko", "ja", "zh"
