@@ -180,9 +180,6 @@ public class InputLanguageSelection extends PreferenceActivity {
             List<String> summaries = new ArrayList<String>(3);
             if (has5Row) summaries.add("5-row");           
             if (has4Row) summaries.add("4-row");           
-            if (hasDictionary(locale)) {
-            	summaries.add(getResources().getString(R.string.has_dictionary));
-            }
             if (!summaries.isEmpty()) {
             	StringBuilder summary = new StringBuilder();
             	for (int j = 0; j < summaries.size(); ++j) {
@@ -193,21 +190,6 @@ public class InputLanguageSelection extends PreferenceActivity {
             }
             parent.addPreference(pref);
         }
-    }
-
-    private boolean hasDictionary(Locale locale) {
-        Resources res = getResources();
-        Configuration conf = res.getConfiguration();
-        Locale saveLocale = conf.locale;
-        boolean haveDictionary = false;
-        conf.locale = locale;
-        res.updateConfiguration(conf, res.getDisplayMetrics());
-
-        int[] dictionaries = LatinIME.getDictionary(res);
-
-        conf.locale = saveLocale;
-        res.updateConfiguration(conf, res.getDisplayMetrics());
-        return haveDictionary;
     }
 
     private String get5Code(Locale locale) {

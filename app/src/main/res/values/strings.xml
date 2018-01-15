@@ -435,13 +435,11 @@
     </string-array>
     <string name="default_popup_content">1</string>
 
-    <string name="no_market_warning">Unable to launch Market.</string>
     <!-- Title for Latin keyboard debug settings activity / dialog -->
     <string name="english_ime_debug_settings" translatable="false">Debug settings</string>
     <string name="prefs_debug_mode" translatable="false">Debug Mode</string>
     <string name="main_setup_configure_imes">Enable keyboard</string>
     <string name="main_setup_set_ime">Set input method</string>
-    <string name="main_setup_get_dicts">Get dictionaries</string>
     <string name="main_setup_input_lang">Input languages</string>
     <string name="main_setup_settings">Settings</string>
     <string name="main_setup_test">Test</string>
@@ -472,11 +470,6 @@
           <p>&#8226; When typing, slide the space bar horizontally to switch between selected layouts.
         </blockquote>
 
-        <h3>Optional: Install completion dictionary packages:</h3>
-        <blockquote>
-          <p>&#8226; Press the <b>Get dictionaries</b> button above to do a Market search.</p>
-        </blockquote>
-        
         <h2>Additional information</h2>
         <p>Please refer to the <a href='https://github.com/mirabilos/KBDmir2U.apk/'>project web page</a> for more information, including the user's guide, issue tracker, and discussion group.</p>
       "]]>

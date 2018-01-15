@@ -33,9 +33,6 @@ import android.widget.Toast;
 import android.widget.TextView.BufferType;
 
 public class Main extends Activity {
-
-    private final static String MARKET_URI = "market://search?q=pub:\"Klaus Weidner\"";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,21 +68,6 @@ public class Main extends Activity {
         setup4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivityForResult(new Intent(that, InputLanguageSelection.class), 0);
-            }
-        });
-
-        final Button setup3 = (Button) findViewById(R.id.main_setup_btn_get_dicts);
-        setup3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent it = new Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_URI));
-                try {
-                	startActivity(it);
-                } catch (ActivityNotFoundException e) {
-                    Toast.makeText(getApplicationContext(),
-                            getResources().getString(
-                            		R.string.no_market_warning), Toast.LENGTH_LONG)
-                            .show();
-                }
             }
         });
 
