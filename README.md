@@ -23,7 +23,7 @@ from the F-Droid Store.
 
 Build instructions: https://github.com/mirabilos/KBDmir2U.apk/wiki/BuildingFromSource
 
-More information: https://github.com/mirabilos/KBDmir2U.apk/wiki/ProjectHome
+More information: https://github.com/mirabilos/KBDmir2U.apk/wiki/Home
 
 ## Additional resources ##
 
