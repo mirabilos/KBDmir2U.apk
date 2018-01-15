@@ -63,6 +63,8 @@ public class LatinIMESettings extends PreferenceActivity
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        // Use setFlagSecure(Context) to disable screenshots on the Activities
+        //Keyboard.setFlagSecure(this); //TODO: make this a preference
         addPreferencesFromResource(R.xml.prefs);
         mQuickFixes = (CheckBoxPreference) findPreference(QUICK_FIXES_KEY);
         mVoicePreference = (ListPreference) findPreference(VOICE_SETTINGS_KEY);

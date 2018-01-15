@@ -40,6 +40,8 @@ public class Main extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        // Use setFlagSecure(Context) to disable screenshots on the Activities
+        //Keyboard.setFlagSecure(this); //TODO: make this a preference
         String html = getString(R.string.main_body);
         html += "<p><i>Version: " + getString(R.string.auto_version) + "</i></p>";
         Spanned content = Html.fromHtml(html);
