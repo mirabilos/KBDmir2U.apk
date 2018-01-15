@@ -18,18 +18,22 @@ Latinoamérica), Swedish (Svenska), Tamil (தமிழ்), Thai (ไทย), T
 and Ukrainian (українська мова).
 
 To install, get **[Hacker's
-Keyboard](https://play.google.com/store/apps/details?id=org.pocketworkstation.pckeyboard)**
-from the Play Store, plus optional [dictionary
+Keyboard](https://f-droid.org/packages/org.pocketworkstation.pckeyboard/)**
+from the F-Droid Store, plus optional [dictionary
 packs](https://play.google.com/store/apps/developer?id=Klaus+Weidner).
+
+Build instructions: https://github.com/mirabilos/KBDmir2U.apk/wiki/BuildingFromSource
+
+More information: https://github.com/mirabilos/KBDmir2U.apk/wiki/ProjectHome
 
 ## Additional resources ##
 
-See the **[Release Notes](https://github.com/klausw/hackerskeyboard/wiki/ReleaseNotes)** for changes in the Play Store released versions, and follow the project on **[Google+](https://plus.google.com/100683221734778417816)** for news and updates including pre-release versions.
+See the **[Release Notes](https://github.com/mirabilos/KBDmir2U.apk/wiki/ReleaseNotes)** for changes in the Play Store released versions, and follow the project on **[Google+](https://plus.google.com/100683221734778417816)** for news and updates including pre-release versions.
 
-Having problems? See the **[User's Guide](https://github.com/klausw/hackerskeyboard/wiki/UsersGuide)** and **[FAQ](https://github.com/klausw/hackerskeyboard/wiki/FrequentlyAskedQuestions)**, and check the [issue tracker](https://github.com/klausw/hackerskeyboard/issues) for known bugs or filing new ones.
+Having problems? See the **[User's Guide](https://github.com/mirabilos/KBDmir2U.apk/wiki/UsersGuide)** and **[FAQ](https://github.com/mirabilos/KBDmir2U.apk/wiki/FrequentlyAskedQuestions)**, and check the [issue tracker](https://github.com/klausw/hackerskeyboard/issues) for known bugs or filing new ones.
 
 Comments, requests, or contributions? Join the [discussion group](http://groups.google.com/group/hackerskeyboard/).
 
-Application developers: see [the page about keyboard support in applications](https://github.com/klausw/hackerskeyboard/wiki/KeyboardSupportInApplications) if you want to enable the additional keys in your Android application, the same method also works for hardware USB or Bluetooth keyboards.
+Application developers: see [the page about keyboard support in applications](https://github.com/mirabilos/KBDmir2U.apk/wiki/KeyboardSupportInApplications) if you want to enable the additional keys in your Android application, the same method also works for hardware USB or Bluetooth keyboards.
 
 ![hk-5row-en-s.png](hk-5row-en-s.png)
