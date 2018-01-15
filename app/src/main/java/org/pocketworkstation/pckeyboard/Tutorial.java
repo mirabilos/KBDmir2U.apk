@@ -14,7 +14,7 @@
  * the License.
  */
 
-package org.pocketworkstation.pckeyboard;
+package de.mirsolutions.android.mirkbd;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

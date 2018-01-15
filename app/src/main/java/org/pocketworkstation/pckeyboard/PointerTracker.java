@@ -14,16 +14,16 @@
  * the License.
  */
 
-package org.pocketworkstation.pckeyboard;
+package de.mirsolutions.android.mirkbd;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.pocketworkstation.pckeyboard.LatinKeyboardBaseView.OnKeyboardActionListener;
-import org.pocketworkstation.pckeyboard.LatinKeyboardBaseView.UIHandler;
+import de.mirsolutions.android.mirkbd.LatinKeyboardBaseView.OnKeyboardActionListener;
+import de.mirsolutions.android.mirkbd.LatinKeyboardBaseView.UIHandler;
 
 import android.content.res.Resources;
-import org.pocketworkstation.pckeyboard.Keyboard.Key;
+import de.mirsolutions.android.mirkbd.Keyboard.Key;
 import android.util.Log;
 import android.view.MotionEvent;
 

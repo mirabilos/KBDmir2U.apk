@@ -10,6 +10,8 @@ To install, get **[Hacker's
 Keyboard](https://f-droid.org/packages/org.pocketworkstation.pckeyboard/)**
 from the F-Droid Store.
 
+[(later)](https://f-droid.org/packages/de.mirsolutions.android.mirkbd/)
+
 Build instructions: https://github.com/mirabilos/KBDmir2U.apk/wiki/BuildingFromSource
 
 More information: https://github.com/mirabilos/KBDmir2U.apk/wiki/Home

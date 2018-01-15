@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.pocketworkstation.pckeyboard;
+package de.mirsolutions.android.mirkbd;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -35,7 +35,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 
-import org.pocketworkstation.pckeyboard.Keyboard.Key;
+import de.mirsolutions.android.mirkbd.Keyboard.Key;
 
 import android.os.Handler;
 import android.os.Message;

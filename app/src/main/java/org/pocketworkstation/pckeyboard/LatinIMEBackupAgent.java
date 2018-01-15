@@ -14,7 +14,7 @@
  * the License.
  */
 
-package org.pocketworkstation.pckeyboard;
+package de.mirsolutions.android.mirkbd;
 
 import android.app.backup.BackupAgentHelper;
 import android.app.backup.SharedPreferencesBackupHelper;

@@ -14,9 +14,9 @@
  * the License.
  */
 
-package org.pocketworkstation.pckeyboard;
+package de.mirsolutions.android.mirkbd;
 
-import org.pocketworkstation.pckeyboard.Keyboard.Key;
+import de.mirsolutions.android.mirkbd.Keyboard.Key;
 
 import java.util.Arrays;
 

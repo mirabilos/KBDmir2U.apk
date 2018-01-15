@@ -14,7 +14,7 @@
  * the License.
  */
 
-package org.pocketworkstation.pckeyboard;
+package de.mirsolutions.android.mirkbd;
 
 import java.util.HashMap;
 import java.util.Map;

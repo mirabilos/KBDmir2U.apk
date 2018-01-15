@@ -14,7 +14,7 @@
  * under the Licence.
  */
 
-package org.pocketworkstation.pckeyboard;
+package de.mirsolutions.android.mirkbd;
 
 import java.text.Normalizer;
 

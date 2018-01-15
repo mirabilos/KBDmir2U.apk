@@ -14,10 +14,10 @@
  * the License.
  */
 
-package org.pocketworkstation.pckeyboard;
+package de.mirsolutions.android.mirkbd;
 
 import android.content.Context;
-import org.pocketworkstation.pckeyboard.Keyboard.Key;
+import de.mirsolutions.android.mirkbd.Keyboard.Key;
 import android.text.format.DateFormat;
 import android.util.Log;
 

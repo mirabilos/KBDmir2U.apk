@@ -14,9 +14,9 @@
  * the License.
  */
 
-package org.pocketworkstation.pckeyboard;
+package de.mirsolutions.android.mirkbd;
 
-import org.pocketworkstation.pckeyboard.LatinIMEUtil.RingCharBuffer;
+import de.mirsolutions.android.mirkbd.LatinIMEUtil.RingCharBuffer;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -336,7 +336,7 @@ public class LatinIME extends InputMethodService implements
     }
     
     private void setNotification(boolean visible) {
-    	final String ACTION = "org.pocketworkstation.pckeyboard.SHOW";
+    	final String ACTION = "de.mirsolutions.android.mirkbd.SHOW";
         final int ID = 1;
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);

@@ -14,7 +14,7 @@
  * the License.
  */
 
-package org.pocketworkstation.pckeyboard;
+package de.mirsolutions.android.mirkbd;
 
 class ModifierKeyState {
     private static final int RELEASING = 0;

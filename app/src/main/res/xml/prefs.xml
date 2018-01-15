@@ -23,7 +23,7 @@
             android:title="@string/title_keyboard_view_settings"
             android:key="graphics_settings">
 
-    <org.pocketworkstation.pckeyboard.SeekBarPreferenceString
+    <de.mirsolutions.android.mirkbd.SeekBarPreferenceString
             android:defaultValue="@string/default_height_portrait"
             hk:minValue="15"
             hk:maxValue="75"
@@ -34,7 +34,7 @@
             android:persistent="true"
             />
 
-    <org.pocketworkstation.pckeyboard.SeekBarPreferenceString
+    <de.mirsolutions.android.mirkbd.SeekBarPreferenceString
             android:defaultValue="@string/default_height_landscape"
             hk:minValue="15"
             hk:maxValue="75"
@@ -45,7 +45,7 @@
             android:persistent="true"
             />
 
-    <org.pocketworkstation.pckeyboard.AutoSummaryListPreference
+    <de.mirsolutions.android.mirkbd.AutoSummaryListPreference
             android:key="pref_keyboard_mode_portrait"
             android:title="@string/title_keyboard_mode_portrait"
             android:entryValues="@array/keyboard_mode_values"
@@ -54,7 +54,7 @@
             android:persistent="true"
             />
 
-    <org.pocketworkstation.pckeyboard.AutoSummaryListPreference
+    <de.mirsolutions.android.mirkbd.AutoSummaryListPreference
             android:key="pref_keyboard_mode_landscape"
             android:title="@string/title_keyboard_mode_landscape"
             android:entryValues="@array/keyboard_mode_values"
@@ -66,7 +66,7 @@
     <PreferenceScreen
             android:title="@string/pref_screen_view_title"
             android:summary="Configure theming and label display">
-        <intent android:action="org.pocketworkstation.pckeyboard.PREFS_VIEW"/>
+        <intent android:action="de.mirsolutions.android.mirkbd.PREFS_VIEW"/>
     </PreferenceScreen>
 
     </PreferenceCategory>
@@ -88,7 +88,7 @@
             android:title="@string/language_selection_title"
             android:summary="@string/language_selection_summary">
         <intent
-                android:action="org.pocketworkstation.pckeyboard.INPUT_LANGUAGE_SELECTION"/>
+                android:action="de.mirsolutions.android.mirkbd.INPUT_LANGUAGE_SELECTION"/>
     </PreferenceScreen>
     </PreferenceCategory>
 
@@ -118,16 +118,16 @@
             android:title="@string/pref_screen_feedback_title"
             android:summary="Configure key sound, preview popup etc.">
         <intent
-                android:action="org.pocketworkstation.pckeyboard.PREFS_FEEDBACK"/>
+                android:action="de.mirsolutions.android.mirkbd.PREFS_FEEDBACK"/>
     </PreferenceScreen>
 
     <PreferenceScreen
             android:title="@string/pref_screen_actions_title"
             android:summary="Configure actions for swipe gestures and hardware keys">
-        <intent android:action="org.pocketworkstation.pckeyboard.PREFS_ACTIONS"/>
+        <intent android:action="de.mirsolutions.android.mirkbd.PREFS_ACTIONS"/>
     </PreferenceScreen>
 
-    <org.pocketworkstation.pckeyboard.AutoSummaryListPreference
+    <de.mirsolutions.android.mirkbd.AutoSummaryListPreference
             android:key="pref_chording_ctrl_key"
             android:title="@string/title_chording_ctrl_key"
             android:persistent="true"
@@ -136,7 +136,7 @@
             android:defaultValue="@string/default_chording_ctrl_key"
             />
 
-    <org.pocketworkstation.pckeyboard.AutoSummaryListPreference
+    <de.mirsolutions.android.mirkbd.AutoSummaryListPreference
             android:key="pref_chording_alt_key"
             android:title="@string/title_chording_alt_key"
             android:persistent="true"
@@ -145,7 +145,7 @@
             android:defaultValue="@string/default_chording_alt_key"
             />
 
-    <org.pocketworkstation.pckeyboard.AutoSummaryListPreference
+    <de.mirsolutions.android.mirkbd.AutoSummaryListPreference
             android:key="pref_chording_meta_key"
             android:title="@string/title_chording_meta_key"
             android:persistent="true"
@@ -154,7 +154,7 @@
             android:defaultValue="@string/default_chording_meta_key"
             />
 
-    <org.pocketworkstation.pckeyboard.AutoSummaryListPreference
+    <de.mirsolutions.android.mirkbd.AutoSummaryListPreference
             android:key="pref_slide_keys_int"
             android:title="@string/title_slide_keys"
             android:persistent="true" 
@@ -168,7 +168,7 @@
             android:title="@string/title_long_press_alternate_keys"
             android:key="altchar_settings">
 
-    <org.pocketworkstation.pckeyboard.AutoSummaryListPreference
+    <de.mirsolutions.android.mirkbd.AutoSummaryListPreference
             android:key="pref_popup_content"
             android:title="@string/title_popup_content"
             android:persistent="true"
@@ -177,7 +177,7 @@
             android:defaultValue="@string/default_popup_content"
             />
 
-    <org.pocketworkstation.pckeyboard.SeekBarPreferenceString
+    <de.mirsolutions.android.mirkbd.SeekBarPreferenceString
             android:defaultValue="@string/default_long_press_duration"
             hk:minValue="100"
             hk:maxValue="2000"

@@ -1,4 +1,4 @@
-package org.pocketworkstation.pckeyboard;
+package de.mirsolutions.android.mirkbd;
 
 import java.util.Locale;
 

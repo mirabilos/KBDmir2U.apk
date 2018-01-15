@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     defaultConfig {
-        applicationId "org.pocketworkstation.pckeyboard"
+        applicationId "de.mirsolutions.android.mirkbd"
         minSdkVersion 8
         targetSdkVersion 19
         versionCode 1
-        versionName "1.0"
+        versionName "0~alpha"
     }
 }
 

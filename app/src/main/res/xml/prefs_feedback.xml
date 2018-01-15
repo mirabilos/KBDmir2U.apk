@@ -25,7 +25,7 @@
             android:persistent="true" 
             />
 
-    <org.pocketworkstation.pckeyboard.AutoSummaryListPreference
+    <de.mirsolutions.android.mirkbd.AutoSummaryListPreference
             android:key="pref_click_method"
             android:title="@string/title_click_method"
             android:entryValues="@array/click_method_values"
@@ -34,7 +34,7 @@
             android:persistent="true"
             />
     
-    <org.pocketworkstation.pckeyboard.SeekBarPreferenceString
+    <de.mirsolutions.android.mirkbd.SeekBarPreferenceString
             android:defaultValue="@string/default_click_volume"
             hk:minValue="0"
             hk:maxValue="1"
