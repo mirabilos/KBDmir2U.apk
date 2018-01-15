@@ -51,15 +51,6 @@ public class KeyboardSwitcher implements
     // Symbols keyboard layout without the settings key
     public static final int KEYBOARDMODE_SYMBOLS = R.id.mode_symbols;
 
-    public static final String DEFAULT_LAYOUT_ID = "0";
-    public static final String PREF_KEYBOARD_LAYOUT = "pref_keyboard_layout";
-    private static final int[] THEMES = new int[] {
-        R.layout.input_ics,
-        R.layout.input_gingerbread,
-        R.layout.input_stone_bold,
-        R.layout.input_trans_neon,
-    };
-
     // Tables which contains resource ids for each character theme color
     private static final int KBD_PHONE = R.xml.kbd_phone;
     private static final int KBD_PHONE_SYMBOLS = R.xml.kbd_phone_symbols;
@@ -105,8 +96,6 @@ public class KeyboardSwitcher implements
     private int mLastDisplayWidth;
     private LanguageSwitcher mLanguageSwitcher;
 
-    private int mLayoutId;
-
     private static final KeyboardSwitcher sInstance = new KeyboardSwitcher();
 
     public static KeyboardSwitcher getInstance() {
@@ -122,8 +111,6 @@ public class KeyboardSwitcher implements
 
         final SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(ims);
-        sInstance.mLayoutId = Integer.valueOf(prefs.getString(
-                PREF_KEYBOARD_LAYOUT, DEFAULT_LAYOUT_ID));
 
         prefs.registerOnSharedPreferenceChangeListener(sInstance);
 
@@ -178,8 +165,8 @@ public class KeyboardSwitcher implements
     private static class KeyboardId {
         // TODO: should have locale and portrait/landscape orientation?
         public final int mXml;
-        public final int mKeyboardMode;
         /** A KEYBOARDMODE_XXX value */
+        public final int mKeyboardMode;
         public final boolean mEnableShiftLock;
         public final float mKeyboardHeightPercent;
 
@@ -369,12 +356,12 @@ public class KeyboardSwitcher implements
         if (mInputView == null) return;
         mInputView.setAltIndicator(active);
     }
-    
+
     public void setMetaIndicator(boolean active) {
         if (mInputView == null) return;
         mInputView.setMetaIndicator(active);
     }
-    
+
     public void toggleShift() {
         //Log.i(TAG, "toggleShift isAlphabetMode=" + isAlphabetMode());
         if (isAlphabetMode())
@@ -490,38 +477,28 @@ public class KeyboardSwitcher implements
     }
 
     public void recreateInputView() {
-        changeLatinKeyboardView(mLayoutId, true);
-    }
-
-    private void changeLatinKeyboardView(int newLayout, boolean forceReset) {
-        if (mLayoutId != newLayout || mInputView == null || forceReset) {
-            if (mInputView != null) {
-                mInputView.closing();
-            }
-            if (THEMES.length <= newLayout) {
-                newLayout = Integer.valueOf(DEFAULT_LAYOUT_ID);
-            }
-
-            LatinIMEUtil.GCUtils.getInstance().reset();
-            boolean tryGC = true;
-            for (int i = 0; i < LatinIMEUtil.GCUtils.GC_TRY_LOOP_MAX && tryGC; ++i) {
-                try {
-                    mInputView = (LatinKeyboardView) mInputMethodService
-                            .getLayoutInflater().inflate(THEMES[newLayout],
-                                    null);
-                    tryGC = false;
-                } catch (OutOfMemoryError e) {
-                    tryGC = LatinIMEUtil.GCUtils.getInstance().tryGCOrWait(
-                            mLayoutId + "," + newLayout, e);
-                } catch (InflateException e) {
-                    tryGC = LatinIMEUtil.GCUtils.getInstance().tryGCOrWait(
-                            mLayoutId + "," + newLayout, e);
-                }
-            }
-            mInputView.setOnKeyboardActionListener(mInputMethodService);
-            mInputView.setPadding(0, 0, 0, 0);
-            mLayoutId = newLayout;
+        if (mInputView != null) {
+            mInputView.closing();
         }
+
+        LatinIMEUtil.GCUtils.getInstance().reset();
+        boolean tryGC = true;
+        for (int i = 0; i < LatinIMEUtil.GCUtils.GC_TRY_LOOP_MAX && tryGC; ++i) {
+            try {
+                mInputView = (LatinKeyboardView) mInputMethodService
+                        .getLayoutInflater().inflate(R.layout.input_ics,
+                                null);
+                tryGC = false;
+            } catch (OutOfMemoryError e) {
+                tryGC = LatinIMEUtil.GCUtils.getInstance().tryGCOrWait(
+                        "Layout", e);
+            } catch (InflateException e) {
+                tryGC = LatinIMEUtil.GCUtils.getInstance().tryGCOrWait(
+                        "Layout", e);
+            }
+        }
+        mInputView.setOnKeyboardActionListener(mInputMethodService);
+        mInputView.setPadding(0, 0, 0, 0);
         mInputMethodService.mHandler.post(new Runnable() {
             public void run() {
                 if (mInputView != null) {
@@ -530,14 +507,6 @@ public class KeyboardSwitcher implements
                 mInputMethodService.updateInputViewShown();
             }
         });
-    }
-
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-            String key) {
-        if (PREF_KEYBOARD_LAYOUT.equals(key)) {
-            changeLatinKeyboardView(Integer.valueOf(sharedPreferences
-                    .getString(key, DEFAULT_LAYOUT_ID)), true);
-        }
     }
 
     public void onAutoCompletionStateChanged(boolean isAutoCompletion) {
