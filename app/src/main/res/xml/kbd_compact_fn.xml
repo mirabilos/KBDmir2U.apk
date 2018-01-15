@@ -240,7 +240,6 @@
         <Key
             android:keyLabel=".com"
             android:keyOutputText=".com"
-            android:popupKeyboard="@xml/popup_domains"
             android:keyWidth="8.545454545%p"
             android:keyIcon="@drawable/hint_popup" />
         <Key

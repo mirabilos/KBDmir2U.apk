@@ -116,17 +116,6 @@
     <!-- Label on button when an error occurs -->
     <!-- string name="ok">OK</string -->
 
-    <!-- popular web domains for the locale - most popular, displayed on the keyboard -->
-    <string name="popular_domain_0">".com"</string>
-    <!-- popular web domains for the locale - item 1, displayed in the popup -->
-    <string name="popular_domain_1">".net"</string>
-    <!-- popular web domains for the locale - item 2, displayed in the popup -->
-    <string name="popular_domain_2">".org"</string>
-    <!-- popular web domains for the locale - item 3, displayed in the popup -->
-    <string name="popular_domain_3">".gov"</string>
-    <!-- popular web domains for the locale - item 4, displayed in the popup -->
-    <string name="popular_domain_4">".edu"</string>
-
     <!-- Menu item for launching Input method picker -->
     <string name="selectInputMethod">Select input method</string>
 
