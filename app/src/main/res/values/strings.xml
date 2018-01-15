@@ -60,15 +60,6 @@
     <!-- Description for hit_correction in landscape -->
     <string name="hit_correction_land_summary">Enable input error correction</string>
     
-    <!-- Option to enable auto capitalization of sentences -->
-    <string name="auto_cap">Auto-capitalization</string> 
-    <!-- Description for auto cap -->
-    <string name="auto_cap_summary">Capitalize the start of a sentence</string>
-    <!-- Option to enable auto punctuate -->
-    <string name="auto_punctuate">Auto-punctuate</string> 
-    <!-- Description for auto punctuate -->
-    <string name="auto_punctuate_summary"></string>
-    
     <!-- Option to show/hide the settings key -->
     <string name="prefs_settings_key">Show settings key</string>
     <!-- Array of the settings key mode values -->

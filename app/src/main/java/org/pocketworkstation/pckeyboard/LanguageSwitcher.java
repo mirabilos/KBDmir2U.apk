@@ -116,12 +116,6 @@ public class LanguageSwitcher {
         return mSelectedLanguageArray[mCurrentIndex];
     }
 
-    public boolean allowAutoCap() {
-        String lang = getInputLanguage();
-        if (lang.length() > 2) lang = lang.substring(0, 2);
-        return !InputLanguageSelection.NOCAPS_LANGUAGES.contains(lang);
-    }
-    
     public boolean allowDeadKeys() {
         String lang = getInputLanguage();
         if (lang.length() > 2) lang = lang.substring(0, 2);

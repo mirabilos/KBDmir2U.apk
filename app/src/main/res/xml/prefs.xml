@@ -97,13 +97,6 @@
             android:key="key_settings">
 
     <CheckBoxPreference
-            android:key="auto_cap"
-            android:title="@string/auto_cap"
-            android:persistent="true"
-            android:defaultValue="@bool/default_auto_cap"
-            />
-
-    <CheckBoxPreference
             android:key="pref_caps_lock"
             android:title="@string/title_caps_lock"
             android:persistent="true"

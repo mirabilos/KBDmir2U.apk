@@ -98,7 +98,6 @@ public class LatinIME extends InputMethodService implements
     static final String PREF_VIBRATE_LEN = "vibrate_len";
     private static final String PREF_SOUND_ON = "sound_on";
     private static final String PREF_POPUP_ON = "popup_on";
-    private static final String PREF_AUTO_CAP = "auto_cap";
 
     public static final String PREF_SELECTED_LANGUAGES = "selected_languages";
     public static final String PREF_INPUT_LANGUAGE = "input_language";
@@ -162,8 +161,6 @@ public class LatinIME extends InputMethodService implements
     private int mVibrateLen;
     private boolean mSoundOn;
     private boolean mPopupOn;
-    private boolean mAutoCapPref;
-    private boolean mAutoCapActive;
     private boolean mDeadKeysActive;
     private boolean mConnectbotTabHack;
     private boolean mFullscreenOverride;
@@ -787,13 +784,12 @@ public class LatinIME extends InputMethodService implements
             int oldState = getShiftState();
             boolean isShifted = mShiftKeyState.isChording();
             boolean isCapsLock = (oldState == Keyboard.SHIFT_CAPS_LOCKED || oldState == Keyboard.SHIFT_LOCKED);
-            boolean isCaps = isCapsLock || getCursorCapsMode(ic, attr) != 0;
-            //Log.i(TAG, "updateShiftKeyState isShifted=" + isShifted + " isCaps=" + isCaps + " isMomentary=" + mShiftKeyState.isMomentary() + " cursorCaps=" + getCursorCapsMode(ic, attr));
+            //Log.i(TAG, "updateShiftKeyState isShifted=" + isShifted + " isCapsLock=" + isCapsLock + " isMomentary=" + mShiftKeyState.isMomentary());
             int newState = Keyboard.SHIFT_OFF;
             if (isShifted) {
                 newState = (mSavedShiftState == Keyboard.SHIFT_LOCKED) ? Keyboard.SHIFT_CAPS : Keyboard.SHIFT_ON;
-            } else if (isCaps) {
-                newState = isCapsLock ? getCapsOrShiftLockState() : Keyboard.SHIFT_CAPS;
+            } else if (isCapsLock) {
+                newState = getCapsOrShiftLockState();
             }
             //Log.i(TAG, "updateShiftKeyState " + oldState + " -> " + newState);
             mKeyboardSwitcher.setShiftState(newState);
@@ -828,15 +824,6 @@ public class LatinIME extends InputMethodService implements
             }
         }
         return false;
-    }
-
-    private int getCursorCapsMode(InputConnection ic, EditorInfo attr) {
-        int caps = 0;
-        EditorInfo ei = getCurrentInputEditorInfo();
-        if (mAutoCapActive && ei != null && ei.inputType != EditorInfo.TYPE_NULL) {
-            caps = ic.getCursorCapsMode(attr.inputType);
-        }
-        return caps;
     }
 
     private void swapPunctuationAndSpace() {
@@ -1294,7 +1281,6 @@ public class LatinIME extends InputMethodService implements
             InputConnection ic = getCurrentInputConnection();
             ic.clearMetaKeyStates(KeyEvent.META_SHIFT_ON | KeyEvent.META_ALT_ON | KeyEvent.META_SYM_ON);
             //EditorInfo ei = getCurrentInputEditorInfo();
-            //Log.i(TAG, "capsmode=" + ic.getCursorCapsMode(ei.inputType));
             //sendModifiedKeyDownUp(KeyEvent.KEYCODE_0 + ch - '0');
             //return;
         }
@@ -1791,7 +1777,6 @@ public class LatinIME extends InputMethodService implements
         mKeyboardSwitcher.setKeyboardMode(currentKeyboardMode, 0);
         initSuggest(mLanguageSwitcher.getInputLanguage());
         mLanguageSwitcher.persist();
-        mAutoCapActive = mAutoCapPref && mLanguageSwitcher.allowAutoCap();
         mDeadKeysActive = mLanguageSwitcher.allowDeadKeys();
         updateShiftKeyState(getCurrentInputEditorInfo());
     }
@@ -2213,11 +2198,8 @@ public class LatinIME extends InputMethodService implements
         mSoundOn = sp.getBoolean(PREF_SOUND_ON, false);
         mPopupOn = sp.getBoolean(PREF_POPUP_ON, mResources
                 .getBoolean(R.bool.default_popup_preview));
-        mAutoCapPref = sp.getBoolean(PREF_AUTO_CAP, getResources().getBoolean(
-                R.bool.default_auto_cap));
 
         mLanguageSwitcher.loadLocales(sp);
-        mAutoCapActive = mAutoCapPref && mLanguageSwitcher.allowAutoCap();
         mDeadKeysActive = mLanguageSwitcher.allowDeadKeys();
     }
 
