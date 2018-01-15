@@ -115,7 +115,6 @@ public class LatinIME extends InputMethodService implements
     static final String PREF_VOL_UP = "pref_vol_up";
     static final String PREF_VOL_DOWN = "pref_vol_down";
 
-    private static final int MSG_START_TUTORIAL = 1;
     private static final int MSG_UPDATE_SHIFT_STATE = 2;
 
     // How many continuous deletes at which to start deleting at a higher speed.
@@ -200,8 +199,6 @@ public class LatinIME extends InputMethodService implements
     private ComposeSequence mComposeBuffer = new ComposeSequence(this);
     private ComposeSequence mDeadAccentBuffer = new DeadAccentSequence(this);
 
-    private Tutorial mTutorial;
-
     private AudioManager mAudioManager;
     // Align sound effect volume on music volume
     private final float FX_VOLUME = -1.0f;
@@ -223,19 +220,6 @@ public class LatinIME extends InputMethodService implements
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-            case MSG_START_TUTORIAL:
-                if (mTutorial == null) {
-                    if (mKeyboardSwitcher.getInputView().isShown()) {
-                        mTutorial = new Tutorial(LatinIME.this,
-                                mKeyboardSwitcher.getInputView());
-                        mTutorial.start();
-                    } else {
-                        // Try again soon if the view is not yet showing
-                        sendMessageDelayed(obtainMessage(MSG_START_TUTORIAL),
-                                100);
-                    }
-                }
-                break;
             case MSG_UPDATE_SHIFT_STATE:
                 updateShiftKeyState(getCurrentInputEditorInfo());
                 break;
@@ -564,9 +548,6 @@ public class LatinIME extends InputMethodService implements
 
         inputView.setPreviewEnabled(mPopupOn);
         inputView.setProximityCorrectionEnabled(true);
-        // If we just entered a text field, maybe it has some old text that
-        // requires correction
-        checkTutorial(attribute.privateImeOptions);
         if (TRACE)
             Debug.startMethodTracing("/data/trace/latinime");
     }
@@ -687,9 +668,6 @@ public class LatinIME extends InputMethodService implements
                     && mKeyboardSwitcher.getInputView() != null) {
                 if (mKeyboardSwitcher.getInputView().handleBack()) {
                     return true;
-                } else if (mTutorial != null) {
-                    mTutorial.close();
-                    mTutorial = null;
                 }
             }
             break;
@@ -697,10 +675,6 @@ public class LatinIME extends InputMethodService implements
         case KeyEvent.KEYCODE_DPAD_UP:
         case KeyEvent.KEYCODE_DPAD_LEFT:
         case KeyEvent.KEYCODE_DPAD_RIGHT:
-            // If tutorial is visible, don't allow dpad to work
-            if (mTutorial != null) {
-                return true;
-            }
             break;
         case KeyEvent.KEYCODE_VOLUME_UP:
             if (!mVolUpAction.equals("none") && isKeyboardVisible()) {
@@ -723,10 +697,6 @@ public class LatinIME extends InputMethodService implements
         case KeyEvent.KEYCODE_DPAD_UP:
         case KeyEvent.KEYCODE_DPAD_LEFT:
         case KeyEvent.KEYCODE_DPAD_RIGHT:
-            // If tutorial is visible, don't allow dpad to work
-            if (mTutorial != null) {
-                return true;
-            }
             LatinKeyboardView inputView = mKeyboardSwitcher.getInputView();
             // Enable shift key and DPAD to do selections
             if (inputView != null && inputView.isShown()
@@ -2111,31 +2081,6 @@ public class LatinIME extends InputMethodService implements
             }
             mAudioManager.playSoundEffect(sound, getKeyClickVolume());
         }
-    }
-
-    private void checkTutorial(String privateImeOptions) {
-        if (privateImeOptions == null)
-            return;
-        if (privateImeOptions.equals("com.android.setupwizard:ShowTutorial")) {
-            if (mTutorial == null)
-                startTutorial();
-        } else if (privateImeOptions
-                .equals("com.android.setupwizard:HideTutorial")) {
-            if (mTutorial != null) {
-                if (mTutorial.close()) {
-                    mTutorial = null;
-                }
-            }
-        }
-    }
-
-    private void startTutorial() {
-        mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_START_TUTORIAL),
-                500);
-    }
-
-    /* package */void tutorialDone() {
-        mTutorial = null;
     }
 
     /* package */boolean getPopupOn() {
