@@ -4,7 +4,7 @@
 
 This page summarizes the changes between the Hacker's Keyboard releases on
 Android Market. For non-Market pre-release versions, see the
-[Releases](https://github.com/klausw/hackerskeyboard/releases) page. The
+[Releases](https://github.com/mirabilos/KBDmir2U.apk/releases) page. The
 code-level change descriptions are available in the same area.
 
 If you notice problems or regressions in a Market release, please contact me directly by email or file a bug. I don't get notified for problems reported in Market reviews, and I can't contact the comment author or respond to them, which is especially frustrating for cases where a simple configuration change would fix things.
@@ -117,6 +117,6 @@ experiments.
     * In "Theme and label settings", check "Enable compact 5-row keyboard mode"
     * Exit and re-enter keyboard settings (known bug, the new mode isn't visible unless you do this)
     * In "Keyboard view settings", change the "Keyboard mode" to "5-row compact layout" for portrait and/or landscape.
-    * Screenshot, with number row scaling set to 80%: ![https://raw.githubusercontent.com/klausw/hackerskeyboard/master/hk-5row-en-s.png](https://raw.githubusercontent.com/klausw/hackerskeyboard/master/hk-5row-en-s.png)
+    * Screenshot, with number row scaling set to 80%: ![https://raw.githubusercontent.com/mirabilos/KBDmir2U.apk/master/hk-5row-en-s.png](https://raw.githubusercontent.com/mirabilos/KBDmir2U.apk/master/hk-5row-en-s.png)
 
   * Extension keyboards for some layouts, for example adding numbers+punctuation in 4-row mode and F1-F12 in 5-row mode. Toggle the extension with a gesture action, "swipe up" by default.

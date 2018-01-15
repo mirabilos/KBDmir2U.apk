@@ -21,18 +21,18 @@ There are three parts needed for fully supporting a new layout:
   * "alternates" definitions used to populate the long-press popup mini-keyboard contents
   * a 5-row layout, used for tablets, or in landscape mode
 
-The 4-row keyboards each have a `kbd_qwerty.xml` file defining the key configuration and characters, for example [kbd\_qwerty.xml](https://github.com/klausw/hackerskeyboard/blob/master/java/res/xml-de/kbd_qwerty.xml) for the German QWERTZ layout. If a language doesn't currently have a 4-row layout, that would need to be adapted and added.
+The 4-row keyboards each have a `kbd_qwerty.xml` file defining the key configuration and characters, for example [kbd\_qwerty.xml](https://github.com/mirabilos/KBDmir2U.apk/blob/master/java/res/xml-de/kbd_qwerty.xml) for the German QWERTZ layout. If a language doesn't currently have a 4-row layout, that would need to be adapted and added.
 
 The per-letter alternate characters shown in long-press popups are based on a language-specific `donottranslate-altchars.xml` file. This includes the digits shown in the top row of the 4-row keyboard.
 
 The 5-row keyboard layouts are configured separately from the standard Gingerbread 4-row keyboards.
 
-The core 5-row layout is defined in the [kbd\_full.xml](https://github.com/klausw/hackerskeyboard/blob/master/java/res/xml/kbd_full.xml) file, it defines key sizes and positions but not the characters shown on each key, so it should not need to be modified by language. The character mappings are defined per language in the `donottranslate-keymap.xml` file, assigning characters for each key position.
+The core 5-row layout is defined in the [kbd\_full.xml](https://github.com/mirabilos/KBDmir2U.apk/blob/master/java/res/xml/kbd_full.xml) file, it defines key sizes and positions but not the characters shown on each key, so it should not need to be modified by language. The character mappings are defined per language in the `donottranslate-keymap.xml` file, assigning characters for each key position.
 
 Examples for the language-specific mappings:
-  * English QWERTY [4-row layout](https://github.com/klausw/hackerskeyboard/blob/master/java/res/xml/kbd_qwerty.xml), [5-row keymap](https://github.com/klausw/hackerskeyboard/blob/master/java/res/values/donottranslate-keymap.xml) and [altchars](https://github.com/klausw/hackerskeyboard/blob/master/java/res/values/donottranslate-altchars.xml)
-  * German QWERTZ [4-row layout](https://github.com/klausw/hackerskeyboard/blob/master/java/res/xml-de/kbd_qwerty.xml), [keymap](https://github.com/klausw/hackerskeyboard/blob/master/java/res/values-de/donottranslate-keymap.xml) and [altchars](https://github.com/klausw/hackerskeyboard/blob/master/java/res/values-de/donottranslate-altchars.xml)
-  * Russian [4-row layout](https://github.com/klausw/hackerskeyboard/blob/master/java/res/xml-ru/kbd_qwerty.xml), [keymap](https://github.com/klausw/hackerskeyboard/blob/master/java/res/values-ru/donottranslate-keymap.xml)
+  * English QWERTY [4-row layout](https://github.com/mirabilos/KBDmir2U.apk/blob/master/java/res/xml/kbd_qwerty.xml), [5-row keymap](https://github.com/mirabilos/KBDmir2U.apk/blob/master/java/res/values/donottranslate-keymap.xml) and [altchars](https://github.com/mirabilos/KBDmir2U.apk/blob/master/java/res/values/donottranslate-altchars.xml)
+  * German QWERTZ [4-row layout](https://github.com/mirabilos/KBDmir2U.apk/blob/master/java/res/xml-de/kbd_qwerty.xml), [keymap](https://github.com/mirabilos/KBDmir2U.apk/blob/master/java/res/values-de/donottranslate-keymap.xml) and [altchars](https://github.com/mirabilos/KBDmir2U.apk/blob/master/java/res/values-de/donottranslate-altchars.xml)
+  * Russian [4-row layout](https://github.com/mirabilos/KBDmir2U.apk/blob/master/java/res/xml-ru/kbd_qwerty.xml), [keymap](https://github.com/mirabilos/KBDmir2U.apk/blob/master/java/res/values-ru/donottranslate-keymap.xml)
 
 ## Editing the keymap.xml file ##
 
