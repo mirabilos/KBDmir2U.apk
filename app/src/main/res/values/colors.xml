@@ -21,6 +21,12 @@
 //    android:color/holo_blue_light=#FF33B5E5
 -->
 <resources>
+  <!-- necessary? introduced by gradle changes
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+  -->
+
     <color name="candidate_normal">#FFFFFFFF</color>
     <color name="candidate_recommended">#FFFCAE00</color>
     <color name="candidate_other">#FFFCAE00</color>
