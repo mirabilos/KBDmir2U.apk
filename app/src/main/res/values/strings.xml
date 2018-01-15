@@ -211,10 +211,10 @@
     <!-- Voice related labels -->
 
     <!-- Label on button to stop recognition. Must be short to fit on button. -->
-    <string name="cancel">Cancel</string>
+    <!-- string name="cancel">Cancel</string -->
 
     <!-- Label on button when an error occurs -->
-    <string name="ok">OK</string>
+    <!-- string name="ok">OK</string -->
 
     <!-- IME Tutorial screen (ROMAN) --><skip />
     <!-- appears above image showing the user to click on a TextView to show the IME -->
