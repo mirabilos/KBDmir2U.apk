@@ -38,14 +38,11 @@ public class LatinIMESettings extends PreferenceActivity
         implements SharedPreferences.OnSharedPreferenceChangeListener,
         DialogInterface.OnDismissListener {
 
-    private static final String QUICK_FIXES_KEY = "quick_fixes";
-    private static final String PREDICTION_SETTINGS_KEY = "prediction_settings";
     /* package */ static final String PREF_SETTINGS_KEY = "settings_key";
     static final String INPUT_CONNECTION_INFO = "input_connection_info";    
 
     private static final String TAG = "LatinIMESettings";
 
-    private CheckBoxPreference mQuickFixes;
     private ListPreference mSettingsKeyPreference;
     private ListPreference mKeyboardModePortraitPreference;
     private ListPreference mKeyboardModeLandscapePreference;
@@ -59,7 +56,6 @@ public class LatinIMESettings extends PreferenceActivity
         // Use setFlagSecure(Context) to disable screenshots on the Activities
         //Keyboard.setFlagSecure(this); //TODO: make this a preference
         addPreferencesFromResource(R.xml.prefs);
-        mQuickFixes = (CheckBoxPreference) findPreference(QUICK_FIXES_KEY);
         mSettingsKeyPreference = (ListPreference) findPreference(PREF_SETTINGS_KEY);
         mInputConnectionInfo = (Preference) findPreference(INPUT_CONNECTION_INFO);
 
@@ -74,11 +70,6 @@ public class LatinIMESettings extends PreferenceActivity
     @Override
     protected void onResume() {
         super.onResume();
-        int autoTextSize = AutoText.getSize(getListView());
-        if (autoTextSize < 1) {
-            ((PreferenceGroup) findPreference(PREDICTION_SETTINGS_KEY))
-                    .removePreference(mQuickFixes);
-        }
         
         Log.i(TAG, "compactModeEnabled=" + LatinIME.sKeyboardSettings.compactModeEnabled);
         if (!LatinIME.sKeyboardSettings.compactModeEnabled) {

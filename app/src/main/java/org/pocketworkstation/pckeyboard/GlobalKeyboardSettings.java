@@ -41,7 +41,6 @@ public final class GlobalKeyboardSettings {
     public boolean showTouchPos = false;
     //
     // Read by LatinIME
-    public String suggestedPunctuation = "!?,.";
     public int keyboardModePortrait = 0;
     public int keyboardModeLandscape = 2;
     public boolean compactModeEnabled = true;  // always on
@@ -55,9 +54,6 @@ public final class GlobalKeyboardSettings {
     //
     // Read by LatinKeyboardBaseView
     public float labelScalePref = 1.0f;
-    //
-    // Read by CandidateView
-    public float candidateScalePref = 1.0f;
     //
     // Read by PointerTracker
     public int sendSlideKeys = 0;
@@ -99,7 +95,6 @@ public final class GlobalKeyboardSettings {
     private Map<String, StringPref> mStringPrefs = new HashMap<String, StringPref>();
     public static final int FLAG_PREF_NONE = 0;
     public static final int FLAG_PREF_NEED_RELOAD = 0x1;
-    public static final int FLAG_PREF_NEW_PUNC_LIST = 0x2;
     public static final int FLAG_PREF_RECREATE_INPUT_VIEW = 0x4;
     public static final int FLAG_PREF_RESET_KEYBOARDS = 0x8;
     public static final int FLAG_PREF_RESET_MODE_OVERRIDE = 0x10;
@@ -150,22 +145,10 @@ public final class GlobalKeyboardSettings {
             public int getFlags() { return FLAG_PREF_RESET_KEYBOARDS; }
         });
 
-        addStringPref("pref_suggested_punctuation", new StringPref() {
-            public void set(String val) { suggestedPunctuation = val; }
-            public String getDefault() { return res.getString(R.string.suggested_punctuations_default); }
-            public int getFlags() { return FLAG_PREF_NEW_PUNC_LIST; }
-        });
-
         addStringPref("pref_label_scale_v2", new StringPref() {
             public void set(String val) { labelScalePref = Float.valueOf(val); }
             public String getDefault() { return "1.0"; }
             public int getFlags() { return FLAG_PREF_RECREATE_INPUT_VIEW; }
-        });
-
-        addStringPref("pref_candidate_scale", new StringPref() {
-            public void set(String val) { candidateScalePref = Float.valueOf(val); }
-            public String getDefault() { return "1.0"; }
-            public int getFlags() { return FLAG_PREF_RESET_KEYBOARDS; }
         });
 
         addStringPref("pref_top_row_scale", new StringPref() {

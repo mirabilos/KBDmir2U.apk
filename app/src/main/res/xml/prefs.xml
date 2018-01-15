@@ -63,15 +63,6 @@
             android:persistent="true"
             />
 
-    <CheckBoxPreference
-            android:key="suggestions_in_landscape"
-            android:title="@string/title_suggestions_in_landscape"
-            android:persistent="true" 
-            android:defaultValue="@bool/default_suggestions_in_landscape"
-            android:summaryOn="@string/summary_suggestions_in_landscape_true"
-            android:summaryOff="@string/summary_suggestions_in_landscape_false"
-            />
-
     <PreferenceScreen
             android:title="@string/pref_screen_view_title"
             android:summary="Configure theming and label display">
@@ -207,52 +198,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-            android:title="@string/prediction_category"
-            android:key="prediction_settings">
-
-        <CheckBoxPreference
-            android:key="quick_fixes"
-            android:title="@string/quick_fixes"
-            android:summary="@string/quick_fixes_summary"
-            android:persistent="true"
-            android:defaultValue="@bool/default_quick_fixes"
-            />
-
-        <CheckBoxPreference
-            android:key="show_suggestions"
-            android:title="@string/show_suggestions"
-            android:summary="@string/show_suggestions_summary"
-            android:persistent="true"
-            android:defaultValue="@bool/default_suggestions"
-            />
-
-        <CheckBoxPreference
-            android:key="auto_complete"
-            android:title="@string/auto_complete"
-            android:summary="@string/auto_complete_summary"
-            android:persistent="true" 
-            android:defaultValue="@bool/enable_autocorrect"
-            android:dependency="show_suggestions"
-            />
-
-        <org.pocketworkstation.pckeyboard.AutoSummaryEditTextPreference
-            android:key="pref_suggested_punctuation"
-            android:title="@string/title_suggested_punctuation"
-            android:defaultValue="@string/suggested_punctuations"
-            />
-    </PreferenceCategory>
-
-    <PreferenceCategory
             android:title="@string/title_input_mode_settings"
             android:key="graphics_settings">
-
-    <CheckBoxPreference
-            android:key="recorrection_enabled"
-            android:title="@string/prefs_enable_recorrection"
-            android:summary="@string/prefs_enable_recorrection_summary"
-            android:persistent="true"
-            android:defaultValue="@bool/default_recorrection_enabled"
-            />
 
     <CheckBoxPreference
             android:key="fullscreen_override"

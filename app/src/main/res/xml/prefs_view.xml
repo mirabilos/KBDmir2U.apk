@@ -43,16 +43,6 @@
         <org.pocketworkstation.pckeyboard.SeekBarPreferenceString
             android:defaultValue="1.0"
             hk:minValue="0.5"
-            hk:maxValue="8.0"
-            hk:logScale="true"
-            hk:asPercent="true"
-            android:key="pref_candidate_scale"
-            android:persistent="true"
-            android:title="@string/title_candidate_scale" />
-
-        <org.pocketworkstation.pckeyboard.SeekBarPreferenceString
-            android:defaultValue="1.0"
-            hk:minValue="0.5"
             hk:maxValue="1.0"
             hk:step="0.05"
             hk:asPercent="true"
