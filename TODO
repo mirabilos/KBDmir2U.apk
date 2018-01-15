@@ -18,3 +18,22 @@ slide_keys yes(probably)
 cat altchar_settings: popup_content, long_press_duration obsolete
 
 […]
+
+
+
+
+my @std_map = (
+	['key_tlde', 'key_ae01', 'key_ae02', 'key_ae03', 'key_ae04', 'key_ae05',
+	'key_ae06', 'key_ae07', 'key_ae08', 'key_ae09', 'key_ae10', 'key_ae11',
+	'key_ae12'],
+
+	['key_ad01', 'key_ad02', 'key_ad03', 'key_ad04', 'key_ad05', 'key_ad06',
+	'key_ad07', 'key_ad08', 'key_ad09', 'key_ad10', 'key_ad11', 'key_ad12',
+	'key_bksl'],
+
+	['key_ac01', 'key_ac02', 'key_ac03', 'key_ac04', 'key_ac05', 'key_ac06',
+	'key_ac07', 'key_ac08', 'key_ac09', 'key_ac10', 'key_ac11'],
+
+	['key_lsgt', 'key_ab01', 'key_ab02', 'key_ab03', 'key_ab04', 'key_ab05',
+	'key_ab06', 'key_ab07', 'key_ab08', 'key_ab09', 'key_ab10'],
+);
