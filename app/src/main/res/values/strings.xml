@@ -29,7 +29,6 @@
     <string name="title_keyboard_view_settings">Keyboard view settings</string>
     <string name="title_keyboard_height_portrait">Keyboard height, portrait</string>
     <string name="title_keyboard_height_landscape">Keyboard height, landscape</string>
-    <string name="title_key_layout_options">Key layout options</string>
     <string name="title_key_behavior_settings">Key behavior settings</string>
     <string name="title_long_press_alternate_keys">Long-press alternate keys</string>
     <string name="title_input_mode_settings">Input mode settings</string>
@@ -98,11 +97,6 @@
     <!-- Menu item for launching Input method picker -->
     <string name="selectInputMethod">Select input method</string>
 
-    <!-- Title for input language selection screen -->
-    <string name="language_selection_title">Input languages</string>
-    <!-- Title summary for input language selection screen -->
-    <string name="language_selection_summary">Slide finger on spacebar to change language</string>
-    
     <!-- Preferences item for enabling to send user statistics to Google -->
     <string name="prefs_enable_log">Enable user feedback</string>
     <!-- Description for enabling to send user statistics to Google -->

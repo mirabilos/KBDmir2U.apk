@@ -59,51 +59,13 @@ public class LanguageSwitcher {
      * @return whether there was any change
      */
     public boolean loadLocales(SharedPreferences sp) {
-        String selectedLanguages = sp.getString(LatinIME.PREF_SELECTED_LANGUAGES, null);
-        String currentLanguage   = sp.getString(LatinIME.PREF_INPUT_LANGUAGE, null);
-        if (selectedLanguages == null || selectedLanguages.length() < 1) {
             loadDefaults();
-            if (mLocales.length == 0) {
                 return false;
-            }
-            mLocales = new Locale[0];
-            return true;
-        }
-        if (selectedLanguages.equals(mSelectedLanguages)) {
-            return false;
-        }
-        mSelectedLanguageArray = selectedLanguages.split(",");
-        mSelectedLanguages = selectedLanguages; // Cache it for comparison later
-        constructLocales();
-        mCurrentIndex = 0;
-        if (currentLanguage != null) {
-            // Find the index
-            mCurrentIndex = 0;
-            for (int i = 0; i < mLocales.length; i++) {
-                if (mSelectedLanguageArray[i].equals(currentLanguage)) {
-                    mCurrentIndex = i;
-                    break;
-                }
-            }
-            // If we didn't find the index, use the first one
-        }
-        return true;
     }
 
     private void loadDefaults() {
-        mDefaultInputLocale = mIme.getResources().getConfiguration().locale;
-        String country = mDefaultInputLocale.getCountry();
-        mDefaultInputLanguage = mDefaultInputLocale.getLanguage() +
-                (TextUtils.isEmpty(country) ? "" : "_" + country);
-    }
-
-    private void constructLocales() {
-        mLocales = new Locale[mSelectedLanguageArray.length];
-        for (int i = 0; i < mLocales.length; i++) {
-            final String lang = mSelectedLanguageArray[i];
-            mLocales[i] = new Locale(lang.substring(0, 2),
-                    lang.length() > 4 ? lang.substring(3, 5) : "");
-        }
+        mDefaultInputLanguage = "en";
+        mDefaultInputLocale = new Locale(mDefaultInputLanguage);
     }
 
     /**
@@ -111,21 +73,15 @@ public class LanguageSwitcher {
      * no specific locale was selected for input.
      */
     public String getInputLanguage() {
-        if (getLocaleCount() == 0) return mDefaultInputLanguage;
-
-        return mSelectedLanguageArray[mCurrentIndex];
+        return mDefaultInputLanguage;
     }
 
     public boolean allowDeadKeys() {
-        String lang = getInputLanguage();
-        if (lang.length() > 2) lang = lang.substring(0, 2);
-        return !InputLanguageSelection.NODEADKEY_LANGUAGES.contains(lang);        
+	return false;
     }
     
     public boolean allowAutoSpace() {
-        String lang = getInputLanguage();
-        if (lang.length() > 2) lang = lang.substring(0, 2);
-        return !InputLanguageSelection.NOAUTOSPACE_LANGUAGES.contains(lang);                
+	return false;
     }
     
     /**
@@ -142,11 +98,7 @@ public class LanguageSwitcher {
      */
     public Locale getInputLocale() {
         Locale locale;
-        if (getLocaleCount() == 0) {
             locale = mDefaultInputLocale;
-        } else {
-            locale = mLocales[mCurrentIndex];
-        }
         LatinIME.sKeyboardSettings.inputLocale = (locale != null) ? locale : Locale.getDefault();
         return locale;
     }
@@ -157,9 +109,7 @@ public class LanguageSwitcher {
      * @return
      */
     public Locale getNextInputLocale() {
-        if (getLocaleCount() == 0) return mDefaultInputLocale;
-
-        return mLocales[(mCurrentIndex + 1) % mLocales.length];
+        return mDefaultInputLocale;
     }
 
     /**
@@ -184,32 +134,19 @@ public class LanguageSwitcher {
      * @return
      */
     public Locale getPrevInputLocale() {
-        if (getLocaleCount() == 0) return mDefaultInputLocale;
-
-        return mLocales[(mCurrentIndex - 1 + mLocales.length) % mLocales.length];
+        return mDefaultInputLocale;
     }
 
     public void reset() {
-        mCurrentIndex = 0;
-        mSelectedLanguages = "";
-        loadLocales(PreferenceManager.getDefaultSharedPreferences(mIme));
     }
 
     public void next() {
-        mCurrentIndex++;
-        if (mCurrentIndex >= mLocales.length) mCurrentIndex = 0; // Wrap around
     }
 
     public void prev() {
-        mCurrentIndex--;
-        if (mCurrentIndex < 0) mCurrentIndex = mLocales.length - 1; // Wrap around
     }
 
     public void persist() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mIme);
-        Editor editor = sp.edit();
-        editor.putString(LatinIME.PREF_INPUT_LANGUAGE, getInputLanguage());
-        SharedPreferencesCompat.apply(editor);
     }
 
     static String toTitleCase(String s, Locale locale) {

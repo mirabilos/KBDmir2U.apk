@@ -77,9 +77,6 @@ public class LatinKeyboard extends Keyboard {
     private final boolean mIsAlphaFullKeyboard;
     private final boolean mIsFnFullKeyboard;
     private CharSequence m123Label;
-    private boolean mCurrentlyInSpace;
-    private SlidingLocaleDrawable mSlidingLocaleIcon;
-    private int[] mPrefLetterFrequencies;
     private int mPrefLetter;
     private int mPrefLetterX;
     private int mPrefLetterY;
@@ -496,23 +493,6 @@ public class LatinKeyboard extends Keyboard {
         return width;
     }
     
-    private void updateLocaleDrag(int diff) {
-        if (mSlidingLocaleIcon == null) {
-            final int width = getSpacePreviewWidth();
-            final int height = mSpacePreviewIcon.getIntrinsicHeight();
-            mSlidingLocaleIcon = new SlidingLocaleDrawable(mSpacePreviewIcon, width, height);
-            mSlidingLocaleIcon.setBounds(0, 0, width, height);
-            mSpaceKey.iconPreview = mSlidingLocaleIcon;
-        }
-        mSlidingLocaleIcon.setDiff(diff);
-        if (Math.abs(diff) == Integer.MAX_VALUE) {
-            mSpaceKey.iconPreview = mSpacePreviewIcon;
-        } else {
-            mSpaceKey.iconPreview = mSlidingLocaleIcon;
-        }
-        mSpaceKey.iconPreview.invalidateSelf();
-    }
-
     public int getLanguageChangeDirection() {
         if (mSpaceKey == null || mLanguageSwitcher.getLocaleCount() < 2
                 || Math.abs(mSpaceDragLastDiff) < getSpacePreviewWidth() * SPACEBAR_DRAG_THRESHOLD) {
@@ -541,24 +521,16 @@ public class LatinKeyboard extends Keyboard {
         return (mLocale != null) ? mLocale : mLanguageSwitcher.getSystemLocale();
     }
 
-    boolean isCurrentlyInSpace() {
-        return mCurrentlyInSpace;
-    }
-
-    void setPreferredLetters(int[] frequencies) {
-        mPrefLetterFrequencies = frequencies;
-        mPrefLetter = 0;
-    }
-
     void keyReleased() {
-        mCurrentlyInSpace = false;
         mSpaceDragLastDiff = 0;
         mPrefLetter = 0;
         mPrefLetterX = 0;
         mPrefLetterY = 0;
         mPrefDistance = Integer.MAX_VALUE;
         if (mSpaceKey != null) {
-            updateLocaleDrag(Integer.MAX_VALUE);
+	    //XXX mSpaceKey probably eliminate
+            mSpaceKey.iconPreview = mSpacePreviewIcon;
+            mSpaceKey.iconPreview.invalidateSelf();
         }
     }
 
@@ -582,102 +554,7 @@ public class LatinKeyboard extends Keyboard {
             if (code == KEYCODE_DELETE) x -= key.width / 6;
         } else if (code == LatinIME.ASCII_SPACE) {
             y += LatinKeyboard.sSpacebarVerticalCorrection;
-            if (mLanguageSwitcher.getLocaleCount() > 1) {
-                if (mCurrentlyInSpace) {
-                    int diff = x - mSpaceDragStartX;
-                    if (Math.abs(diff - mSpaceDragLastDiff) > 0) {
-                        updateLocaleDrag(diff);
-                    }
-                    mSpaceDragLastDiff = diff;
-                    return true;
-                } else {
-                    boolean insideSpace = key.isInsideSuper(x, y);
-                    if (insideSpace) {
-                        mCurrentlyInSpace = true;
-                        mSpaceDragStartX = x;
-                        updateLocaleDrag(0);
-                    }
-                    return insideSpace;
-                }
-            }
-        } else if (mPrefLetterFrequencies != null) {
-            // New coordinate? Reset
-            if (mPrefLetterX != x || mPrefLetterY != y) {
-                mPrefLetter = 0;
-                mPrefDistance = Integer.MAX_VALUE;
-            }
-            // Handle preferred next letter
-            final int[] pref = mPrefLetterFrequencies;
-            if (mPrefLetter > 0) {
-                if (DEBUG_PREFERRED_LETTER) {
-                    if (mPrefLetter == code && !key.isInsideSuper(x, y)) {
-                        Log.d(TAG, "CORRECTED !!!!!!");
-                    }
-                }
-                return mPrefLetter == code;
-            } else {
-                final boolean inside = key.isInsideSuper(x, y);
-                int[] nearby = getNearestKeys(x, y);
-                List<Key> nearbyKeys = getKeys();
-                if (inside) {
-                    // If it's a preferred letter
-                    if (inPrefList(code, pref)) {
-                        // Check if its frequency is much lower than a nearby key
-                        mPrefLetter = code;
-                        mPrefLetterX = x;
-                        mPrefLetterY = y;
-                        for (int i = 0; i < nearby.length; i++) {
-                            Key k = nearbyKeys.get(nearby[i]);
-                            if (k != key && inPrefList(k.codes[0], pref)) {
-                                final int dist = distanceFrom(k, x, y);
-                                if (dist < (int) (k.width * OVERLAP_PERCENTAGE_LOW_PROB) &&
-                                        (pref[k.codes[0]] > pref[mPrefLetter] * 3))  {
-                                    mPrefLetter = k.codes[0];
-                                    mPrefDistance = dist;
-                                    if (DEBUG_PREFERRED_LETTER) {
-                                        Log.d(TAG, "CORRECTED ALTHOUGH PREFERRED !!!!!!");
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-
-                        return mPrefLetter == code;
-                    }
-                }
-
-                // Get the surrounding keys and intersect with the preferred list
-                // For all in the intersection
-                //   if distance from touch point is within a reasonable distance
-                //       make this the pref letter
-                // If no pref letter
-                //   return inside;
-                // else return thiskey == prefletter;
-
-                for (int i = 0; i < nearby.length; i++) {
-                    Key k = nearbyKeys.get(nearby[i]);
-                    if (inPrefList(k.codes[0], pref)) {
-                        final int dist = distanceFrom(k, x, y);
-                        if (dist < (int) (k.width * OVERLAP_PERCENTAGE_HIGH_PROB)
-                                && dist < mPrefDistance)  {
-                            mPrefLetter = k.codes[0];
-                            mPrefLetterX = x;
-                            mPrefLetterY = y;
-                            mPrefDistance = dist;
-                        }
-                    }
-                }
-                // Didn't find any
-                if (mPrefLetter == 0) {
-                    return inside;
-                } else {
-                    return mPrefLetter == code;
-                }
-            }
         }
-
-        // Lock into the spacebar
-        if (mCurrentlyInSpace) return false;
 
         return key.isInsideSuper(x, y);
     }
@@ -697,13 +574,9 @@ public class LatinKeyboard extends Keyboard {
 
     @Override
     public int[] getNearestKeys(int x, int y) {
-        if (mCurrentlyInSpace) {
-            return mSpaceKeyIndexArray;
-        } else {
             // Avoid dead pixels at edges of the keyboard
             return super.getNearestKeys(Math.max(0, Math.min(x, getMinWidth() - 1)),
                     Math.max(0, Math.min(y, getHeight() - 1)));
-        }
     }
 
     private int indexOf(int code) {
@@ -786,126 +659,6 @@ public class LatinKeyboard extends Keyboard {
             final int xDist = this.x + width / 2 - x;
             final int yDist = this.y + (height + verticalGap) / 2 - y;
             return xDist * xDist + yDist * yDist;
-        }
-    }
-
-    /**
-     * Animation to be displayed on the spacebar preview popup when switching
-     * languages by swiping the spacebar. It draws the current, previous and
-     * next languages and moves them by the delta of touch movement on the spacebar.
-     */
-    class SlidingLocaleDrawable extends Drawable {
-
-        private final int mWidth;
-        private final int mHeight;
-        private final Drawable mBackground;
-        private final TextPaint mTextPaint;
-        private final int mMiddleX;
-        private final Drawable mLeftDrawable;
-        private final Drawable mRightDrawable;
-        private final int mThreshold;
-        private int mDiff;
-        private boolean mHitThreshold;
-        private String mCurrentLanguage;
-        private String mNextLanguage;
-        private String mPrevLanguage;
-
-        public SlidingLocaleDrawable(Drawable background, int width, int height) {
-            mBackground = background;
-            setDefaultBounds(mBackground);
-            mWidth = width;
-            mHeight = height;
-            mTextPaint = new TextPaint();
-            mTextPaint.setTextSize(getTextSizeFromTheme(android.R.style.TextAppearance_Medium, 18));
-            mTextPaint.setColor(mRes.getColor(R.color.latinkeyboard_transparent));
-            mTextPaint.setTextAlign(Align.CENTER);
-            mTextPaint.setAlpha(OPACITY_FULLY_OPAQUE);
-            mTextPaint.setAntiAlias(true);
-            mMiddleX = (mWidth - mBackground.getIntrinsicWidth()) / 2;
-            mLeftDrawable =
-                    mRes.getDrawable(R.drawable.sym_keyboard_feedback_language_arrows_left);
-            mRightDrawable =
-                    mRes.getDrawable(R.drawable.sym_keyboard_feedback_language_arrows_right);
-            mThreshold = ViewConfiguration.get(mContext).getScaledTouchSlop();
-        }
-
-        private void setDiff(int diff) {
-            if (diff == Integer.MAX_VALUE) {
-                mHitThreshold = false;
-                mCurrentLanguage = null;
-                return;
-            }
-            mDiff = diff;
-            if (mDiff > mWidth) mDiff = mWidth;
-            if (mDiff < -mWidth) mDiff = -mWidth;
-            if (Math.abs(mDiff) > mThreshold) mHitThreshold = true;
-            invalidateSelf();
-        }
-
-        private String getLanguageName(Locale locale) {
-            return LanguageSwitcher.toTitleCase(locale.getDisplayLanguage(locale), locale);
-        }
-
-        @Override
-        public void draw(Canvas canvas) {
-            canvas.save();
-            if (mHitThreshold) {
-                Paint paint = mTextPaint;
-                final int width = mWidth;
-                final int height = mHeight;
-                final int diff = mDiff;
-                final Drawable lArrow = mLeftDrawable;
-                final Drawable rArrow = mRightDrawable;
-                canvas.clipRect(0, 0, width, height);
-                if (mCurrentLanguage == null) {
-                    final LanguageSwitcher languageSwitcher = mLanguageSwitcher;
-                    mCurrentLanguage = getLanguageName(languageSwitcher.getInputLocale());
-                    mNextLanguage = getLanguageName(languageSwitcher.getNextInputLocale());
-                    mPrevLanguage = getLanguageName(languageSwitcher.getPrevInputLocale());
-                }
-                // Draw language text with shadow
-                final float baseline = mHeight * SPACEBAR_LANGUAGE_BASELINE - paint.descent();
-                paint.setColor(mRes.getColor(R.color.latinkeyboard_feedback_language_text));
-                canvas.drawText(mCurrentLanguage, width / 2 + diff, baseline, paint);
-                canvas.drawText(mNextLanguage, diff - width / 2, baseline, paint);
-                canvas.drawText(mPrevLanguage, diff + width + width / 2, baseline, paint);
-
-                setDefaultBounds(lArrow);
-                rArrow.setBounds(width - rArrow.getIntrinsicWidth(), 0, width,
-                        rArrow.getIntrinsicHeight());
-                lArrow.draw(canvas);
-                rArrow.draw(canvas);
-            }
-            if (mBackground != null) {
-                canvas.translate(mMiddleX, 0);
-                mBackground.draw(canvas);
-            }
-            canvas.restore();
-        }
-
-        @Override
-        public int getOpacity() {
-            return PixelFormat.TRANSLUCENT;
-        }
-
-        @Override
-        public void setAlpha(int alpha) {
-            // Ignore
-        }
-
-        @Override
-        public void setColorFilter(ColorFilter cf) {
-            // Ignore
-        }
-
-        @Override
-        public int getIntrinsicWidth() {
-            return mWidth;
-        }
-
-        @Override
-        public int getIntrinsicHeight() {
-            return mHeight;
         }
     }
 }

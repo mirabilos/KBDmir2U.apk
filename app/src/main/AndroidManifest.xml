@@ -53,15 +53,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="InputLanguageSelection"
-                android:label="@string/language_selection_title">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="de.mirsolutions.android.mirkbd.INPUT_LANGUAGE_SELECTION"/>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="PrefScreenActions"
                 android:label="@string/pref_screen_actions_title">
             <intent-filter>

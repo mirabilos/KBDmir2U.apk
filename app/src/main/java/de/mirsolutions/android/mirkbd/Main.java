@@ -64,13 +64,6 @@ public class Main extends Activity {
         
         final Activity that = this;
 
-        final Button setup4 = (Button) findViewById(R.id.main_setup_btn_input_lang);
-        setup4.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivityForResult(new Intent(that, InputLanguageSelection.class), 0);
-            }
-        });
-
         final Button setup5 = (Button) findViewById(R.id.main_setup_btn_settings);
         setup5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

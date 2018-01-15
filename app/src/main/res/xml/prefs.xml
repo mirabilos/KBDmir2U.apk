@@ -54,18 +54,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-            android:title="@string/title_key_layout_options"
-            android:key="layout_settings">
-
-    <PreferenceScreen
-            android:title="@string/language_selection_title"
-            android:summary="@string/language_selection_summary">
-        <intent
-                android:action="de.mirsolutions.android.mirkbd.INPUT_LANGUAGE_SELECTION"/>
-    </PreferenceScreen>
-    </PreferenceCategory>
-
-    <PreferenceCategory
             android:title="@string/title_key_behavior_settings"
             android:key="key_settings">
 
