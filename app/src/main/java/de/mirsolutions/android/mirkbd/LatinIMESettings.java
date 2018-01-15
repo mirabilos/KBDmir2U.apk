@@ -44,8 +44,6 @@ public class LatinIMESettings extends PreferenceActivity
     private static final String TAG = "LatinIMESettings";
 
     private ListPreference mSettingsKeyPreference;
-    private ListPreference mKeyboardModePortraitPreference;
-    private ListPreference mKeyboardModeLandscapePreference;
     private Preference mInputConnectionInfo;
 
     private boolean mOkClicked = false;
@@ -59,10 +57,6 @@ public class LatinIMESettings extends PreferenceActivity
         mSettingsKeyPreference = (ListPreference) findPreference(PREF_SETTINGS_KEY);
         mInputConnectionInfo = (Preference) findPreference(INPUT_CONNECTION_INFO);
 
-        // TODO(klausw): remove these when no longer needed
-        mKeyboardModePortraitPreference = (ListPreference) findPreference("pref_keyboard_mode_portrait");
-        mKeyboardModeLandscapePreference = (ListPreference) findPreference("pref_keyboard_mode_landscape");
-        
         SharedPreferences prefs = getPreferenceManager().getSharedPreferences();
         prefs.registerOnSharedPreferenceChangeListener(this);
     }
@@ -70,22 +64,6 @@ public class LatinIMESettings extends PreferenceActivity
     @Override
     protected void onResume() {
         super.onResume();
-        
-        Log.i(TAG, "compactModeEnabled=" + LatinIME.sKeyboardSettings.compactModeEnabled);
-        if (!LatinIME.sKeyboardSettings.compactModeEnabled) {
-            CharSequence[] oldEntries = mKeyboardModePortraitPreference.getEntries();
-            CharSequence[] oldValues = mKeyboardModePortraitPreference.getEntryValues();
-            
-            if (oldEntries.length > 2) {
-                CharSequence[] newEntries = new CharSequence[] { oldEntries[0], oldEntries[2] };
-                CharSequence[] newValues = new CharSequence[] { oldValues[0], oldValues[2] };
-                mKeyboardModePortraitPreference.setEntries(newEntries);
-                mKeyboardModePortraitPreference.setEntryValues(newValues);
-                mKeyboardModeLandscapePreference.setEntries(newEntries);
-                mKeyboardModeLandscapePreference.setEntryValues(newValues);
-            }
-        }
-        
         updateSummaries();
     }
 

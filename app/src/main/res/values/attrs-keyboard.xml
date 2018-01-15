@@ -45,7 +45,6 @@
         <!-- Mode of the keyboard. If the mode doesn't match the
              requested keyboard mode, the row will be skipped. -->
         <attr name="keyboardMode" format="reference" />
-        <attr name="extension" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="Keyboard_Key">

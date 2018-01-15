@@ -45,24 +45,6 @@
             android:persistent="true"
             />
 
-    <de.mirsolutions.android.mirkbd.AutoSummaryListPreference
-            android:key="pref_keyboard_mode_portrait"
-            android:title="@string/title_keyboard_mode_portrait"
-            android:entryValues="@array/keyboard_mode_values"
-            android:entries="@array/keyboard_mode_entries"
-            android:defaultValue="@string/default_keyboard_mode_portrait"
-            android:persistent="true"
-            />
-
-    <de.mirsolutions.android.mirkbd.AutoSummaryListPreference
-            android:key="pref_keyboard_mode_landscape"
-            android:title="@string/title_keyboard_mode_landscape"
-            android:entryValues="@array/keyboard_mode_values"
-            android:entries="@array/keyboard_mode_entries"
-            android:defaultValue="@string/default_keyboard_mode_landscape"
-            android:persistent="true"
-            />
-
     <PreferenceScreen
             android:title="@string/pref_screen_view_title"
             android:summary="Configure theming and label display">

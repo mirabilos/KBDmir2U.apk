@@ -41,9 +41,6 @@ public final class GlobalKeyboardSettings {
     public boolean showTouchPos = false;
     //
     // Read by LatinIME
-    public int keyboardModePortrait = 0;
-    public int keyboardModeLandscape = 2;
-    public boolean compactModeEnabled = true;  // always on
     public int chordingCtrlKey = 0;
     public int chordingAltKey = 0;
     public int chordingMetaKey = 0;
@@ -59,10 +56,6 @@ public final class GlobalKeyboardSettings {
     public int sendSlideKeys = 0;
     
     /* Updated by LatinIME */
-    //
-    // Read by KeyboardSwitcher
-    public int keyboardMode = 0;
-    public boolean useExtension = false;
     //
     // Read by LatinKeyboardView and KeyboardSwitcher
     public float keyboardHeightPercent = 40.0f; // percent of screen height
@@ -114,18 +107,6 @@ public final class GlobalKeyboardSettings {
 
     public void initPrefs(SharedPreferences prefs, Resources resources) {
         final Resources res = resources;
-
-        addStringPref("pref_keyboard_mode_portrait", new StringPref() {
-            public void set(String val) { keyboardModePortrait = Integer.valueOf(val); }
-            public String getDefault() { return res.getString(R.string.default_keyboard_mode_portrait); }
-            public int getFlags() { return FLAG_PREF_RESET_KEYBOARDS | FLAG_PREF_RESET_MODE_OVERRIDE; }
-        });
-
-        addStringPref("pref_keyboard_mode_landscape", new StringPref() {
-            public void set(String val) { keyboardModeLandscape = Integer.valueOf(val); }
-            public String getDefault() { return res.getString(R.string.default_keyboard_mode_landscape); }
-            public int getFlags() { return FLAG_PREF_RESET_KEYBOARDS | FLAG_PREF_RESET_MODE_OVERRIDE; }
-        });
 
         addStringPref("pref_slide_keys_int", new StringPref() {
             public void set(String val) { sendSlideKeys = Integer.valueOf(val); }

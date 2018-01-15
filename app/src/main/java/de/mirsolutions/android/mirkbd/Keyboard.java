@@ -153,15 +153,9 @@ public class Keyboard {
     private int mDisplayHeight;
     private int mKeyboardHeight;
 
-    /** Keyboard mode, or zero, if none.  */
-    private int mKeyboardMode;
-    
-    private boolean mUseExtension;
-
     public int mLayoutRows;
     public int mLayoutColumns;
     public int mRowCount = 1;
-    public int mExtensionRowCount = 0;
 
     // Variables for pre-computing nearest keys.
     private int mCellWidth;
@@ -194,8 +188,6 @@ public class Keyboard {
         /** The keyboard mode for this row */
         public int mode;
         
-        public boolean extension;
-
         private Keyboard parent;
 
         public Row(Keyboard parent) {
@@ -223,13 +215,10 @@ public class Keyboard {
                     R.styleable.Keyboard_Row);
             mode = a.getResourceId(R.styleable.Keyboard_Row_keyboardMode,
                     0);
-            extension = a.getBoolean(R.styleable.Keyboard_Row_extension, false);
 
             if (parent.mLayoutRows >= 5) {
-                boolean isTop = (extension || parent.mRowCount - parent.mExtensionRowCount <= 0);
                 float topScale = LatinIME.sKeyboardSettings.topRowScale;
-                float scale = isTop ? topScale : 1.0f + (1.0f - topScale) / (parent.mLayoutRows - 1);
-                defaultHeight = Math.round(defaultHeight * scale);
+                defaultHeight = Math.round(defaultHeight * topScale);
             }
             a.recycle();
         }
@@ -835,8 +824,6 @@ public class Keyboard {
         //Log.i("PCKeyboard", "mDefaultHeight=" + mDefaultHeight + "(arg=" + defaultHeight + ")" + " kbHeight=" + mKeyboardHeight + " displayHeight="+mDisplayHeight+")");
         mKeys = new ArrayList<Key>();
         mModifierKeys = new ArrayList<Key>();
-        mKeyboardMode = modeId;
-        mUseExtension = LatinIME.sKeyboardSettings.useExtension;
         loadKeyboard(context, context.getResources().getXml(xmlLayoutResId));
         setEdgeFlags();
         fixAltChars(LatinIME.sKeyboardSettings.inputLocale);
@@ -1176,14 +1163,7 @@ public class Keyboard {
                         inRow = true;
                         x = 0;
                         currentRow = createRowFromXml(res, parser);
-                        skipRow = currentRow.mode != 0 && currentRow.mode != mKeyboardMode;
-                        if (currentRow.extension) {
-                            if (mUseExtension) {
-                                ++mExtensionRowCount;
-                            } else {
-                                skipRow = true;
-                            }
-                        }
+                        skipRow = currentRow.mode != 0 && currentRow.mode != 2;
                         if (skipRow) {
                             skipToEndOfRow(parser);
                             inRow = false;
@@ -1328,7 +1308,7 @@ public class Keyboard {
         return "Keyboard(" + mLayoutColumns + "x" + mLayoutRows +
             " keys=" + mKeys.size() +
             " rowCount=" + mRowCount +
-            " mode=" + mKeyboardMode +
+            " mode=2" +
             " size=" + mTotalWidth + "x" + mTotalHeight +
             ")";
 

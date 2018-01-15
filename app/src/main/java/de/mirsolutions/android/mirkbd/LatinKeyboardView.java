@@ -91,30 +91,19 @@ public class LatinKeyboardView extends LatinKeyboardBaseView {
 
     private Keyboard mPhoneKeyboard;
 
-    /** Whether the extension of this keyboard is visible */
-    private boolean mExtensionVisible;
-    /** The view that is shown as an extension of this keyboard view */
-    private LatinKeyboardView mExtension;
-    /** The popup window that contains the extension of this keyboard */
-    private PopupWindow mExtensionPopup;
-    /** Whether this view is an extension of another keyboard */
-    private boolean mIsExtensionType;
     private boolean mFirstEvent;
 
     /** Whether we've started dropping move events because we found a big jump */
     private boolean mDroppingEvents;
     /**
-     * Whether multi-touch disambiguation needs to be disabled for any reason. There are 2 reasons
-     * for this to happen - (1) if a real multi-touch event has occured and (2) we've opened an 
-     * extension keyboard.
+     * Whether multi-touch disambiguation needs to be disabled for any reason. Reason
+     * for this to happen - if a real multi-touch event has occured
      */
     private boolean mDisableDisambiguation;
     /** The distance threshold at which we start treating the touch session as a multi-touch */
     private int mJumpThresholdSquare = Integer.MAX_VALUE;
     /** The y coordinate of the last row */
     private int mLastRowY;
-    private int mExtensionLayoutResId = 0;
-    private LatinKeyboard mExtensionKeyboard;
 
     public LatinKeyboardView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -186,10 +175,6 @@ public class LatinKeyboardView extends LatinKeyboardBaseView {
         mPhoneKeyboard = phoneKeyboard;
     }
 
-    public void setExtensionLayoutResId (int id) {
-        mExtensionLayoutResId = id;
-    }
-    
     @Override
     public void setPreviewEnabled(boolean previewEnabled) {
         if (getKeyboard() == mPhoneKeyboard) {
@@ -214,8 +199,6 @@ public class LatinKeyboardView extends LatinKeyboardBaseView {
         // Get Y coordinate of the last row based on the row count, assuming equal height
         int numRows = newKeyboard.mRowCount;
         mLastRowY = (newKeyboard.getHeight() * (numRows - 1)) / numRows;
-        mExtensionKeyboard = ((LatinKeyboard) newKeyboard).getExtension();
-        if (mExtensionKeyboard != null && mExtension != null) mExtension.setKeyboard(mExtensionKeyboard);
         setKeyboardLocal(newKeyboard);
     }
 
@@ -357,11 +340,10 @@ public class LatinKeyboardView extends LatinKeyboardBaseView {
             invalidate();
         }
 
-        // If an extension keyboard is visible or this is an extension keyboard, don't look
-        // for sudden jumps. Otherwise, if there was a sudden jump, return without processing the
+        // If there was a sudden jump, return without processing the
         // actual motion event.
-        if (!mExtensionVisible && !mIsExtensionType
-                && handleSuddenJump(me)) return true;
+        if (handleSuddenJump(me))
+	    return true;
         // Reset any bounding box controls in the keyboard
         if (me.getAction() == MotionEvent.ACTION_DOWN) {
             keyboard.keyReleased();
@@ -379,168 +361,7 @@ public class LatinKeyboardView extends LatinKeyboardBaseView {
             }
         }
 
-        // If we don't have an extension keyboard, don't go any further.
-        if (keyboard.getExtension() == null) {
             return super.onTouchEvent(me);
-        }
-        // If the motion event is above the keyboard and it's not an UP event coming
-        // even before the first MOVE event into the extension area
-        if (me.getY() < 0 && (mExtensionVisible || me.getAction() != MotionEvent.ACTION_UP)) {
-            if (mExtensionVisible) {
-                int action = me.getAction();
-                if (mFirstEvent) action = MotionEvent.ACTION_DOWN;
-                mFirstEvent = false;
-                MotionEvent translated = MotionEvent.obtain(me.getEventTime(), me.getEventTime(),
-                        action,
-                        me.getX(), me.getY() + mExtension.getHeight(), me.getMetaState());
-                if (me.getActionIndex() > 0)
-                    return true;  // ignore second touches to avoid "pointerIndex out of range"
-                boolean result = mExtension.onTouchEvent(translated);
-                translated.recycle();
-                if (me.getAction() == MotionEvent.ACTION_UP
-                        || me.getAction() == MotionEvent.ACTION_CANCEL) {
-                    closeExtension();
-                }
-                return result;
-            } else {
-                if (swipeUp()) {
-                    return true;
-                } else if (openExtension()) {
-                    MotionEvent cancel = MotionEvent.obtain(me.getDownTime(), me.getEventTime(),
-                            MotionEvent.ACTION_CANCEL, me.getX() - 100, me.getY() - 100, 0);
-                    super.onTouchEvent(cancel);
-                    cancel.recycle();
-                    if (mExtension.getHeight() > 0) {
-                        MotionEvent translated = MotionEvent.obtain(me.getEventTime(),
-                                me.getEventTime(),
-                                MotionEvent.ACTION_DOWN,
-                                me.getX(), me.getY() + mExtension.getHeight(),
-                                me.getMetaState());
-                        mExtension.onTouchEvent(translated);
-                        translated.recycle();
-                    } else {
-                        mFirstEvent = true;
-                    }
-                    // Stop processing multi-touch errors
-                    mDisableDisambiguation  = true;
-                }
-                return true;
-            }
-        } else if (mExtensionVisible) {
-            closeExtension();
-            // Send a down event into the main keyboard first
-            MotionEvent down = MotionEvent.obtain(me.getEventTime(), me.getEventTime(),
-                    MotionEvent.ACTION_DOWN,
-                    me.getX(), me.getY(), me.getMetaState());
-            super.onTouchEvent(down, true);
-            down.recycle();
-            // Send the actual event
-            return super.onTouchEvent(me);
-        } else {
-            return super.onTouchEvent(me);
-        }
-    }
-
-    private void setExtensionType(boolean isExtensionType) {
-        mIsExtensionType = isExtensionType;
-    }
-
-    private boolean openExtension() {
-        // If the current keyboard is not visible, or if the mini keyboard is active, don't show the popup
-        if (!isShown() || popupKeyboardIsShowing()) {
-            return false;
-        }
-        PointerTracker.clearSlideKeys();
-        if (((LatinKeyboard) getKeyboard()).getExtension() == null) return false;
-        makePopupWindow();
-        mExtensionVisible = true;
-        return true;
-    }
-
-    private void makePopupWindow() {
-        dismissPopupKeyboard();
-        if (mExtensionPopup == null) {
-            int[] windowLocation = new int[2];
-            mExtensionPopup = new PopupWindow(getContext());
-            mExtensionPopup.setBackgroundDrawable(null);
-            LayoutInflater li = (LayoutInflater) getContext().getSystemService(
-                    Context.LAYOUT_INFLATER_SERVICE);
-            mExtension = (LatinKeyboardView) li.inflate(mExtensionLayoutResId == 0 ?
-                    R.layout.input_trans : mExtensionLayoutResId, null);
-            Keyboard keyboard = mExtensionKeyboard;
-            mExtension.setKeyboard(keyboard);
-            mExtension.setExtensionType(true);
-            mExtension.setPadding(0, 0, 0, 0);
-            mExtension.setOnKeyboardActionListener(
-                    new ExtensionKeyboardListener(getOnKeyboardActionListener()));
-            mExtension.setPopupParent(this);
-            mExtension.setPopupOffset(0, -windowLocation[1]);
-            mExtensionPopup.setContentView(mExtension);
-            mExtensionPopup.setWidth(getWidth());
-            mExtensionPopup.setHeight(keyboard.getHeight());
-            mExtensionPopup.setAnimationStyle(-1);
-            getLocationInWindow(windowLocation);
-            // TODO: Fix the "- 30". 
-            mExtension.setPopupOffset(0, -windowLocation[1] - 30);
-            mExtensionPopup.showAtLocation(this, 0, 0, -keyboard.getHeight()
-                    + windowLocation[1] + this.getPaddingTop());
-        } else {
-            mExtension.setVisibility(VISIBLE);
-        }
-        mExtension.setShiftState(getShiftState()); // propagate shift state
-    }
-
-    @Override
-    public void closing() {
-        super.closing();
-        if (mExtensionPopup != null && mExtensionPopup.isShowing()) {
-            mExtensionPopup.dismiss();
-            mExtensionPopup = null;
-        }
-    }
-
-    private void closeExtension() {
-        mExtension.closing();
-        mExtension.setVisibility(INVISIBLE);
-        mExtensionVisible = false;
-    }
-
-    private static class ExtensionKeyboardListener implements OnKeyboardActionListener {
-        private OnKeyboardActionListener mTarget;
-        ExtensionKeyboardListener(OnKeyboardActionListener target) {
-            mTarget = target;
-        }
-        public void onKey(int primaryCode, int[] keyCodes, int x, int y) {
-            mTarget.onKey(primaryCode, keyCodes, x, y);
-        }
-        public void onPress(int primaryCode) {
-            mTarget.onPress(primaryCode);
-        }
-        public void onRelease(int primaryCode) {
-            mTarget.onRelease(primaryCode);
-        }
-        public void onText(CharSequence text) {
-            mTarget.onText(text);
-        }
-        public void onCancel() {
-            mTarget.onCancel();
-        }
-        public boolean swipeDown() {
-            // Don't pass through
-            return true;
-        }
-        public boolean swipeLeft() {
-            // Don't pass through
-            return true;
-        }
-        public boolean swipeRight() {
-            // Don't pass through
-            return true;
-        }
-        public boolean swipeUp() {
-            // Don't pass through
-            return true;
-        }
     }
 
     /****************************  INSTRUMENTATION  *******************************/

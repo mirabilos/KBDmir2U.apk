@@ -85,13 +85,9 @@ public class LatinKeyboard extends Keyboard {
     private int mPrefLetterY;
     private int mPrefDistance;
 
-    private int mExtensionResId;
-
     // TODO: remove this attribute when either Keyboard.mDefaultVerticalGap or Key.parent becomes
     // non-private.
     private final int mVerticalGap;
-
-    private LatinKeyboard mExtensionKeyboard;
 
     private static final float SPACEBAR_DRAG_THRESHOLD = 0.51f;
     private static final float OVERLAP_PERCENTAGE_LOW_PROB = 0.70f;
@@ -141,7 +137,7 @@ public class LatinKeyboard extends Keyboard {
                 R.dimen.spacebar_vertical_correction);
         mIsAlphaKeyboard = xmlLayoutResId == R.xml.kbd_qwerty;
         mIsAlphaFullKeyboard = xmlLayoutResId == R.xml.kbd_full;
-        mIsFnFullKeyboard = xmlLayoutResId == R.xml.kbd_full_fn || xmlLayoutResId == R.xml.kbd_compact_fn;
+        mIsFnFullKeyboard = xmlLayoutResId == R.xml.kbd_full_fn;
         // The index of space key is available only after Keyboard constructor has finished.
         mSpaceKeyIndexArray = new int[] { indexOf(LatinIME.ASCII_SPACE) };
         // TODO remove this initialization after cleanup
@@ -246,14 +242,6 @@ public class LatinKeyboard extends Keyboard {
 
     /* package */ boolean isAlphaKeyboard() {
         return mIsAlphaKeyboard;
-    }
-
-    public void setExtension(LatinKeyboard extKeyboard) {
-        mExtensionKeyboard = extKeyboard;
-    }
-
-    public LatinKeyboard getExtension() {
-        return mExtensionKeyboard;
     }
 
     public void updateSymbolIcons(boolean isAutoCompletion) {

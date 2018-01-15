@@ -172,9 +172,6 @@ public class LatinIME extends InputMethodService implements
     
     private int mHeightPortrait;
     private int mHeightLandscape;
-    private int mNumKeyboardModes = 3;
-    private int mKeyboardModeOverridePortrait;
-    private int mKeyboardModeOverrideLandscape;
     private int mOrientation;
     // Keep track of the last selection range to decide if we need to show word
     // alternatives
@@ -296,26 +293,10 @@ public class LatinIME extends InputMethodService implements
         setNotification(mKeyboardNotification);
     }
 
-    private int getKeyboardModeNum(int origMode, int override) {
-        if (mNumKeyboardModes == 2 && origMode == 2) origMode = 1; // skip "compact". FIXME!
-        int num = (origMode + override) % mNumKeyboardModes;
-        if (mNumKeyboardModes == 2 && num == 1) num = 2; // skip "compact". FIXME!
-        return num;
-    }
-    
     private void updateKeyboardOptions() {
         //Log.i(TAG, "setFullKeyboardOptions " + fullInPortrait + " " + heightPercentPortrait + " " + heightPercentLandscape);
-        boolean isPortrait = isPortrait();
-        int kbMode;
-        mNumKeyboardModes = sKeyboardSettings.compactModeEnabled ? 3 : 2; // FIXME!
-        if (isPortrait) {
-            kbMode = getKeyboardModeNum(sKeyboardSettings.keyboardModePortrait, mKeyboardModeOverridePortrait);
-        } else {
-            kbMode = getKeyboardModeNum(sKeyboardSettings.keyboardModeLandscape, mKeyboardModeOverrideLandscape);
-        }
         // Convert overall keyboard height to per-row percentage
-        int screenHeightPercent = isPortrait ? mHeightPortrait : mHeightLandscape;
-        LatinIME.sKeyboardSettings.keyboardMode = kbMode;
+        int screenHeightPercent = isPortrait() ? mHeightPortrait : mHeightLandscape;
         LatinIME.sKeyboardSettings.keyboardHeightPercent = (float) screenHeightPercent;
     }
     
@@ -497,9 +478,6 @@ public class LatinIME extends InputMethodService implements
         mModMeta = false;
         mModFn = false;
         mEnteredText = null;
-        mKeyboardModeOverridePortrait = 0;
-        mKeyboardModeOverrideLandscape = 0;
-        sKeyboardSettings.useExtension = false;
 
         switch (attribute.inputType & EditorInfo.TYPE_MASK_CLASS) {
         case EditorInfo.TYPE_CLASS_NUMBER:
@@ -1760,10 +1738,6 @@ public class LatinIME extends InputMethodService implements
         if (sKeyboardSettings.hasFlag(GlobalKeyboardSettings.FLAG_PREF_RECREATE_INPUT_VIEW)) {
             mKeyboardSwitcher.recreateInputView();
         }
-        if (sKeyboardSettings.hasFlag(GlobalKeyboardSettings.FLAG_PREF_RESET_MODE_OVERRIDE)) {
-            mKeyboardModeOverrideLandscape = 0;
-            mKeyboardModeOverridePortrait = 0;
-        }
         if (sKeyboardSettings.hasFlag(GlobalKeyboardSettings.FLAG_PREF_RESET_KEYBOARDS)) {
             toggleLanguage(true, true);
         }
@@ -1853,16 +1827,6 @@ public class LatinIME extends InputMethodService implements
                     mKeyboardSwitcher.getInputView().startPlaying(text.toString());
                 }
             }
-        } else if (action.equals("full_mode")) {
-            if (isPortrait()) {
-                mKeyboardModeOverridePortrait = (mKeyboardModeOverridePortrait + 1) % mNumKeyboardModes;
-            } else {
-                mKeyboardModeOverrideLandscape = (mKeyboardModeOverrideLandscape + 1) % mNumKeyboardModes;
-            }
-            toggleLanguage(true, true);
-        } else if (action.equals("extension")) {
-            sKeyboardSettings.useExtension = !sKeyboardSettings.useExtension;
-            reloadKeyboards();
         } else if (action.equals("height_up")) {
             if (isPortrait()) {
                 mHeightPortrait += 5;

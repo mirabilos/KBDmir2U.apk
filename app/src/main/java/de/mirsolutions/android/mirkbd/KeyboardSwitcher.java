@@ -76,8 +76,6 @@ public class KeyboardSwitcher implements
     private static final int KBD_QWERTY = R.xml.kbd_qwerty;
     private static final int KBD_FULL = R.xml.kbd_full;
     private static final int KBD_FULL_FN = R.xml.kbd_full_fn;
-    private static final int KBD_COMPACT = R.xml.kbd_compact;
-    private static final int KBD_COMPACT_FN = R.xml.kbd_compact_fn;
 
     private LatinKeyboardView mInputView;
     private static final int[] ALPHABET_MODES = { KEYBOARDMODE_NORMAL,
@@ -100,7 +98,6 @@ public class KeyboardSwitcher implements
     /** One of the MODE_XXX values */
     private int mImeOptions;
     private boolean mIsSymbols;
-    private int mFullMode;
     /**
      * mIsAutoCompletionActive indicates that auto completed word will be input
      * instead of what user actually typed.
@@ -171,26 +168,14 @@ public class KeyboardSwitcher implements
     }
 
     private KeyboardId makeSymbolsId() {
-        if (mFullMode == 1) {
-            return new KeyboardId(KBD_COMPACT_FN, KEYBOARDMODE_SYMBOLS, true);
-        } else if (mFullMode == 2) {
             return new KeyboardId(KBD_FULL_FN, KEYBOARDMODE_SYMBOLS, true);
-        }
-        return new KeyboardId(KBD_SYMBOLS,
-                mHasSettingsKey ? KEYBOARDMODE_SYMBOLS_WITH_SETTINGS_KEY
-                        : KEYBOARDMODE_SYMBOLS, false);
     }
 
     private KeyboardId makeSymbolsShiftedId() {
-        if (mFullMode > 0)
             return null;
-        return new KeyboardId(KBD_SYMBOLS_SHIFT,
-                mHasSettingsKey ? KEYBOARDMODE_SYMBOLS_WITH_SETTINGS_KEY
-                        : KEYBOARDMODE_SYMBOLS, false);
     }
 
     public void makeKeyboards(boolean forceCreate) {
-        mFullMode = LatinIME.sKeyboardSettings.keyboardMode;
         mSymbolsId = makeSymbolsId();
         mSymbolsShiftedId = makeSymbolsShiftedId();
 
@@ -220,7 +205,6 @@ public class KeyboardSwitcher implements
         /** A KEYBOARDMODE_XXX value */
         public final boolean mEnableShiftLock;
         public final float mKeyboardHeightPercent;
-        public final boolean mUsingExtension;
 
         private final int mHashCode;
 
@@ -229,7 +213,6 @@ public class KeyboardSwitcher implements
             this.mKeyboardMode = mode;
             this.mEnableShiftLock = enableShiftLock;
             this.mKeyboardHeightPercent = LatinIME.sKeyboardSettings.keyboardHeightPercent;
-            this.mUsingExtension = LatinIME.sKeyboardSettings.useExtension;
 
             this.mHashCode = Arrays.hashCode(new Object[] { xml, mode,
                     enableShiftLock });
@@ -244,7 +227,6 @@ public class KeyboardSwitcher implements
             return other != null
                     && other.mXml == this.mXml
                     && other.mKeyboardMode == this.mKeyboardMode
-                    && other.mUsingExtension == this.mUsingExtension
                     && other.mEnableShiftLock == this.mEnableShiftLock;
         }
 
@@ -305,13 +287,6 @@ public class KeyboardSwitcher implements
             keyboard = new LatinKeyboard(mInputMethodService, id.mXml,
                     id.mKeyboardMode, id.mKeyboardHeightPercent);
             keyboard.setLanguageSwitcher(mLanguageSwitcher, mIsAutoCompletionActive);
-//            if (isFullMode()) {
-//                keyboard.setExtension(new LatinKeyboard(mInputMethodService,
-//                        R.xml.kbd_extension_full, 0, id.mRowHeightPercent));
-//            } else if (isAlphabetMode()) { // TODO: not in full keyboard mode? Per-mode extension kbd?
-//                keyboard.setExtension(new LatinKeyboard(mInputMethodService,
-//                        R.xml.kbd_extension, 0, id.mRowHeightPercent));
-//            }
 
             if (id.mEnableShiftLock) {
                 keyboard.enableShiftLock();
@@ -324,22 +299,16 @@ public class KeyboardSwitcher implements
         return keyboard;
     }
 
-    public boolean isFullMode() {
-        return mFullMode > 0;
-    }
-
     private KeyboardId getKeyboardId(int mode, int imeOptions, boolean isSymbols) {
-        if (mFullMode > 0) {
             switch (mode) {
             case MODE_TEXT:
             case MODE_URL:
             case MODE_EMAIL:
             case MODE_IM:
             case MODE_WEB:
-                return new KeyboardId(mFullMode == 1 ? KBD_COMPACT : KBD_FULL,
+                return new KeyboardId(KBD_FULL,
                         KEYBOARDMODE_NORMAL, true);
             }
-        }
         // TODO: generalize for any KeyboardId
         int keyboardRowsResId = KBD_QWERTY;
         if (isSymbols) {
@@ -396,7 +365,7 @@ public class KeyboardSwitcher implements
             return false;
         }
         int currentMode = mCurrentId.mKeyboardMode;
-        if (mFullMode > 0 && currentMode == KEYBOARDMODE_NORMAL)
+        if (currentMode == KEYBOARDMODE_NORMAL)
             return true;
         for (Integer mode : ALPHABET_MODES) {
             if (currentMode == mode) {
@@ -444,34 +413,12 @@ public class KeyboardSwitcher implements
     }
     
     public void toggleShift() {
-        //Log.i(TAG, "toggleShift isAlphabetMode=" + isAlphabetMode() + " mSettings.fullMode=" + mSettings.fullMode);
+        //Log.i(TAG, "toggleShift isAlphabetMode=" + isAlphabetMode());
         if (isAlphabetMode())
             return;
-        if (mFullMode > 0) {
-            boolean shifted = mInputView.isShiftAll();
-            mInputView.setShiftState(shifted ? Keyboard.SHIFT_OFF : Keyboard.SHIFT_ON);
-            return;
-        }
-        if (mCurrentId.equals(mSymbolsId)
-                || !mCurrentId.equals(mSymbolsShiftedId)) {
-            LatinKeyboard symbolsShiftedKeyboard = getKeyboard(mSymbolsShiftedId);
-            mCurrentId = mSymbolsShiftedId;
-            mInputView.setKeyboard(symbolsShiftedKeyboard);
-            // Symbol shifted keyboard has a ALT_SYM key that has a caps lock style indicator.
-            // To enable the indicator, we need to set the shift state appropriately.
-            symbolsShiftedKeyboard.enableShiftLock();
-            symbolsShiftedKeyboard.setShiftState(Keyboard.SHIFT_LOCKED);
-            symbolsShiftedKeyboard.setImeOptions(mInputMethodService
-                    .getResources(), mMode, mImeOptions);
-        } else {
-            LatinKeyboard symbolsKeyboard = getKeyboard(mSymbolsId);
-            mCurrentId = mSymbolsId;
-            mInputView.setKeyboard(symbolsKeyboard);
-            symbolsKeyboard.enableShiftLock();
-            symbolsKeyboard.setShiftState(Keyboard.SHIFT_OFF);
-            symbolsKeyboard.setImeOptions(mInputMethodService.getResources(),
-                    mMode, mImeOptions);
-        }
+        boolean shifted = mInputView.isShiftAll();
+        mInputView.setShiftState(shifted ? Keyboard.SHIFT_OFF : Keyboard.SHIFT_ON);
+        return;
     }
 
     public void onCancelInput() {
@@ -608,7 +555,6 @@ public class KeyboardSwitcher implements
                             mLayoutId + "," + newLayout, e);
                 }
             }
-            mInputView.setExtensionLayoutResId(THEMES[newLayout]);
             mInputView.setOnKeyboardActionListener(mInputMethodService);
             mInputView.setPadding(0, 0, 0, 0);
             mLayoutId = newLayout;
